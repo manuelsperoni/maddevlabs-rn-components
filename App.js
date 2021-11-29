@@ -13,24 +13,36 @@ export default function App() {
       }}
     >
       <MadScrollSelector
+        /*limits*/
         lowerBound={0}
         upperBound={100}
-        bigTickHeigth={70}
-        tipIndicatorHeight={100}
-        smallTickHeigth={35}
-        tickColor={'#4A5568'}
-        tipIndicatorColor={'#D8B6E3'}
+        multipleBigSegment={10}
         udm={'kg'}
+        /*Appeareance*/
+        bigSegmentHeight={70}
+        smallSegmentHeight={35}
+        segmentColor={'#4A5568'}
+        segmentThikness={4}
+        spacing={15}
+        mainTipWidth={20}
+        mainTipHeight={100}
+        mainTipColor={'#F6973F'}
       />
       <MadScrollSelector
-        lowerBound={100}
-        upperBound={200}
-        bigTickHeigth={70}
-        tipIndicatorHeight={100}
-        smallTickHeigth={35}
-        tickColor={'#4A5568'}
-        tipIndicatorColor={'#D8B6E3'}
+        /*limits*/
+        lowerBound={0}
+        upperBound={100}
+        multipleBigSegment={10}
         udm={'kg'}
+        /*Appeareance*/
+        bigSegmentHeight={70}
+        smallSegmentHeight={35}
+        segmentColor={'#4A5568'}
+        segmentThikness={2}
+        spacing={26}
+        mainTipWidth={40}
+        mainTipHeight={100}
+        mainTipColor={'#D8B6E3'}
       />
     </SafeAreaView>
   );

@@ -25,14 +25,19 @@ function roundUp(numToRound, multiple) {
 }
 
 export default function MadScrollSelector(props) {
-  let bigTickHeigth = props.bigTickHeigth;
-  let tipIndicatorHeight = props.tipIndicatorHeight;
-  let smallTickHeigth = props.smallTickHeigth;
-  let tickColor = props.tickColor;
-  let tipIndicatorColor = props.tipIndicatorColor;
-  let udm = props.udm;
-  let lowerBound = props.lowerBound;
-  let upperBound = props.upperBound + 1;
+  const bigSegmentHeight = props.bigSegmentHeight;
+  const mainTipHeight = props.mainTipHeight;
+  const smallSegmentHeight = props.smallSegmentHeight;
+  const segmentColor = props.segmentColor;
+  const mainTipColor = props.mainTipColor;
+  const udm = props.udm;
+  const lowerBound = props.lowerBound;
+  const upperBound = props.upperBound + 1;
+  const spacing = props.spacing;
+  const segmentThikness = props.segmentThikness;
+  const computedSegmentDistance = segmentThikness + spacing;
+  const multipleBigSegment = props.multipleBigSegment;
+  const mainTipWidth = props.mainTipWidth;
 
   const style = {
     container: {
@@ -40,56 +45,63 @@ export default function MadScrollSelector(props) {
       alignItems: 'center',
     },
     smallSegment: {
-      width: 4,
-      height: smallTickHeigth,
-      backgroundColor: tickColor,
+      width: segmentThikness,
+      height: smallSegmentHeight,
+      backgroundColor: segmentColor,
       borderRadius: 3,
-      marginRight: 16,
+      marginRight: spacing,
     },
     bigSegment: {
-      width: 4,
-      height: bigTickHeigth,
-      backgroundColor: tickColor,
+      width: segmentThikness,
+      height: bigSegmentHeight,
+      backgroundColor: segmentColor,
       borderRadius: 3,
-      marginRight: 16,
+      marginRight: spacing,
     },
     measureValue: {
       fontSize: 30,
       margin: 30,
       color: 'white',
     },
-    fixStartEnd: {
-      width: Dimensions.get('window').width / 2 - 2,
-      height: bigTickHeigth,
+    fixStart: {
+      width: Dimensions.get('window').width / 2 - segmentThikness / 2,
+      height: bigSegmentHeight,
+    },
+    fixEnd: {
+      width: Dimensions.get('window').width / 2 - segmentThikness / 2 - spacing,
+      height: bigSegmentHeight,
     },
     mainTip: {
       position: 'absolute',
       top: 0,
-      left: Dimensions.get('window').width / 2 - 10,
-      width: 20,
-      height: tipIndicatorHeight,
-      borderColor: tipIndicatorColor,
-      borderWidth: 4,
+      left: Dimensions.get('window').width / 2 - mainTipWidth / 2,
+      width: mainTipWidth,
+      height: mainTipHeight,
+      borderColor: mainTipColor,
+      borderWidth: 2,
       borderRadius: 10,
+      // backgroundColor: mainTipColor,
+      zIndex: 10,
     },
     scrollWrap: {
-      height: bigTickHeigth,
+      height: bigSegmentHeight,
       width: Dimensions.get('window').width,
       padding: 0,
       margin: 0,
+      zIndex: 100,
     },
     scrollSelector: {
       justifyContents: 'center',
       flexDirection: 'column',
       alignItems: 'center',
-      heigth: bigTickHeigth,
+      heigth: bigSegmentHeight,
       width: Dimensions.get('window').width,
     },
     externalWrap: {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      height: tipIndicatorHeight,
+      height: mainTipHeight,
     },
   };
 
@@ -105,12 +117,15 @@ export default function MadScrollSelector(props) {
   const translationY = useSharedValue(0);
 
   const updateMeasure = () => {
-    setMeasure(parseInt(translationY.value / 20) + lowerBound);
+    setMeasure(
+      parseInt(translationY.value / computedSegmentDistance) + lowerBound
+    );
   };
 
   const scrollToNearestItem = (value) => {
     'worklet';
-    let trasX = Math.round(value / 20) * 20;
+    let trasX =
+      Math.round(value / computedSegmentDistance) * computedSegmentDistance;
     scrollTo(animatedRef, trasX, 0, false);
   };
 
@@ -143,9 +158,9 @@ export default function MadScrollSelector(props) {
               onScroll={scrollHandler}
               scrollEventThrottle={16}
             >
-              <View style={style.fixStartEnd}></View>
+              <View style={style.fixStart}></View>
               {segmentArray.map((element, index) => {
-                if (index % 10 == 0)
+                if (index % multipleBigSegment == 0)
                   return (
                     <>
                       <View key={index}>{bigSegment}</View>
@@ -153,7 +168,7 @@ export default function MadScrollSelector(props) {
                   );
                 else return <>{smallSegment}</>;
               })}
-              <View style={style.fixStartEnd}></View>
+              <View style={style.fixEnd}></View>
             </Animated.ScrollView>
           </View>
           <View style={style.mainTip}></View>
