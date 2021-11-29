@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import { runOnJS } from 'react-native-reanimated';
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function roundUp(numToRound, multiple) {
   let roundDown = Math.round(numToRound);
@@ -32,12 +32,16 @@ export default function MadScrollSelector(props) {
   const mainTipColor = props.mainTipColor;
   const udm = props.udm;
   const lowerBound = props.lowerBound;
-  const upperBound = props.upperBound + 1;
+  const upperBound = props.upperBound;
   const spacing = props.spacing;
   const segmentThikness = props.segmentThikness;
   const computedSegmentDistance = segmentThikness + spacing;
   const multipleBigSegment = props.multipleBigSegment;
   const mainTipWidth = props.mainTipWidth;
+  const scale = props.scale;
+  const startValue = props.startValue;
+  const outlined = props.outlined;
+  const filled = props.filled;
 
   const style = {
     container: {
@@ -78,9 +82,9 @@ export default function MadScrollSelector(props) {
       width: mainTipWidth,
       height: mainTipHeight,
       borderColor: mainTipColor,
-      borderWidth: 2,
+      borderWidth: outlined ? 2 : 0,
       borderRadius: 10,
-      // backgroundColor: mainTipColor,
+      backgroundColor: filled ? mainTipColor : 'transparent',
       zIndex: 10,
     },
     scrollWrap: {
@@ -105,20 +109,30 @@ export default function MadScrollSelector(props) {
     },
   };
 
-  const nSegment = upperBound - lowerBound;
+  const nSegment = (upperBound - lowerBound) / scale;
   const smallSegment = <View style={style.smallSegment}></View>;
   const bigSegment = <View style={style.bigSegment}></View>;
   const segmentArray = new Array();
-  for (let index = 0; index < nSegment; index++) {
+  for (let index = 0; index < nSegment + 1; index++) {
     segmentArray.push({});
   }
   const [measure, setMeasure] = useState(lowerBound);
   const animatedRef = useAnimatedRef();
+  useEffect(() => {
+    animatedRef.current.scrollTo({
+      x: ((startValue - lowerBound) / scale) * computedSegmentDistance,
+      y: 0,
+    });
+  }, []);
+
   const translationY = useSharedValue(0);
 
   const updateMeasure = () => {
     setMeasure(
-      parseInt(translationY.value / computedSegmentDistance) + lowerBound
+      (
+        Math.round(translationY.value / computedSegmentDistance) * scale +
+        lowerBound
+      ).toFixed(1)
     );
   };
 

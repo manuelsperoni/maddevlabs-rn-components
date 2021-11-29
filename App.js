@@ -14,10 +14,12 @@ export default function App() {
     >
       <MadScrollSelector
         /*limits*/
-        lowerBound={0}
+        lowerBound={40}
         upperBound={100}
         multipleBigSegment={10}
         udm={'kg'}
+        scale={0.1}
+        startValue={40}
         /*Appeareance*/
         bigSegmentHeight={70}
         smallSegmentHeight={35}
@@ -27,13 +29,16 @@ export default function App() {
         mainTipWidth={20}
         mainTipHeight={100}
         mainTipColor={'#F6973F'}
+        filled
       />
       <MadScrollSelector
         /*limits*/
-        lowerBound={0}
+        lowerBound={40}
         upperBound={100}
         multipleBigSegment={10}
         udm={'kg'}
+        scale={1}
+        startValue={100}
         /*Appeareance*/
         bigSegmentHeight={70}
         smallSegmentHeight={35}
@@ -43,6 +48,7 @@ export default function App() {
         mainTipWidth={40}
         mainTipHeight={100}
         mainTipColor={'#D8B6E3'}
+        outlined
       />
     </SafeAreaView>
   );
