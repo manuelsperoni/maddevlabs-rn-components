@@ -1,6 +1,15 @@
 import MadScrollSelector from './madScrollSelector';
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { Dimensions, SafeAreaView, ScrollView, View, Text } from 'react-native';
+
+import Animated, {
+  useAnimatedScrollHandler,
+  useSharedValue,
+  useAnimatedStyle,
+  interpolate,
+} from 'react-native-reanimated';
+import Home from './home';
+import Carousel from './carousel';
 export default function App() {
   return (
     <SafeAreaView
@@ -9,18 +18,16 @@ export default function App() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#1A202C',
+        backgroundColor: '#171923',
       }}
     >
-      <MadScrollSelector
-        /*limits*/
+      {/* <MadScrollSelector
         lowerBound={40}
         upperBound={100}
         multipleBigSegment={10}
         udm={'kg'}
         scale={0.1}
         startValue={40}
-        /*Appeareance*/
         bigSegmentHeight={70}
         smallSegmentHeight={35}
         segmentColor={'#4A5568'}
@@ -30,16 +37,14 @@ export default function App() {
         mainTipHeight={100}
         mainTipColor={'#F6973F'}
         filled
-      />
+      /> */}
       <MadScrollSelector
-        /*limits*/
         lowerBound={40}
         upperBound={100}
         multipleBigSegment={10}
         udm={'kg'}
         scale={1}
         startValue={100}
-        /*Appeareance*/
         bigSegmentHeight={70}
         smallSegmentHeight={35}
         segmentColor={'#4A5568'}
@@ -50,6 +55,9 @@ export default function App() {
         mainTipColor={'#D8B6E3'}
         outlined
       />
+
+      {/* <Home /> */}
+      {/* <Carousel /> */}
     </SafeAreaView>
   );
 }
