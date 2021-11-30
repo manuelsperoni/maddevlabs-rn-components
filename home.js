@@ -1,5 +1,12 @@
 import React from 'react';
-import { Dimensions, SafeAreaView, ScrollView, View, Text } from 'react-native';
+import {
+  Dimensions,
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  Image,
+} from 'react-native';
 
 import Animated, {
   useAnimatedScrollHandler,
@@ -7,6 +14,7 @@ import Animated, {
   useAnimatedStyle,
   interpolate,
 } from 'react-native-reanimated';
+
 export default function Home() {
   const translationY = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler({
@@ -17,12 +25,15 @@ export default function Home() {
   });
 
   // Dummy data for test purpose
-  const dummyData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const dummyData = [1, 2, 3, 4];
 
   // Header component
   const header = (
     <View style={style.header}>
-      <Text style={{ color: 'white' }}>Hello i am the header!</Text>
+      <Image
+        style={{ width: 50, height: 50 }}
+        source={require('./assets/logo.png')}
+      />
     </View>
   );
   // Card style
@@ -30,7 +41,11 @@ export default function Home() {
 
   return (
     <View style={style.wrap}>
-      <Animated.ScrollView onScroll={scrollHandler} scrollEventThrottle={16}>
+      <Animated.ScrollView
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}
+      >
         {dummyData.map((el, index) => {
           let a = useAnimatedStyle(() => {
             return {

@@ -140,7 +140,7 @@ export default function MadScrollSelector(props) {
     'worklet';
     let trasX =
       Math.round(value / computedSegmentDistance) * computedSegmentDistance;
-    scrollTo(animatedRef, trasX, 0, false);
+    scrollTo(animatedRef, trasX, 0, true);
   };
 
   const scrollHandler = useAnimatedScrollHandler({
@@ -150,10 +150,6 @@ export default function MadScrollSelector(props) {
     },
     onMomentumEnd: (event) => {
       scrollToNearestItem(event.contentOffset.x);
-    },
-    onBeginDrag: (event) => {
-      scrollToNearestItem(event.contentOffset.x);
-      console.log('ENDDRAG');
     },
   });
 

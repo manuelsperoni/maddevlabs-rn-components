@@ -43,21 +43,21 @@ export default function App() {
         upperBound={100}
         multipleBigSegment={10}
         udm={'kg'}
-        scale={1}
-        startValue={100}
-        bigSegmentHeight={70}
-        smallSegmentHeight={35}
+        scale={0.1}
+        startValue={60}
+        bigSegmentHeight={30}
+        smallSegmentHeight={15}
         segmentColor={'#4A5568'}
         segmentThikness={2}
         spacing={26}
-        mainTipWidth={40}
-        mainTipHeight={100}
+        mainTipWidth={20}
+        mainTipHeight={50}
         mainTipColor={'#D8B6E3'}
         outlined
       />
 
-      {/* <Home /> */}
-      {/* <Carousel /> */}
+      <Home />
+      <Carousel />
     </SafeAreaView>
   );
 }
