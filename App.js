@@ -1,4 +1,3 @@
-import MadScrollSelector from './madScrollSelector';
 import React from 'react';
 import { Dimensions, SafeAreaView, ScrollView, View, Text } from 'react-native';
 
@@ -8,9 +7,14 @@ import Animated, {
   useAnimatedStyle,
   interpolate,
 } from 'react-native-reanimated';
-import Home from './home';
-import Carousel from './carousel';
+import Home from './components/home';
+import Carousel from './components/carousel';
+import MadScrollSelector from './components/madScrollSelector';
+import ImageComparison from './components/imageComparison';
+
 export default function App() {
+  const before = require('./assets/before.png');
+  const after = require('./assets/after.png');
   return (
     <SafeAreaView
       style={{
@@ -38,7 +42,7 @@ export default function App() {
         mainTipColor={'#F6973F'}
         filled
       /> */}
-      <MadScrollSelector
+      {/* <MadScrollSelector
         lowerBound={40}
         upperBound={100}
         multipleBigSegment={10}
@@ -54,10 +58,17 @@ export default function App() {
         mainTipHeight={50}
         mainTipColor={'#D8B6E3'}
         outlined
-      />
+      /> */}
 
-      <Home />
-      <Carousel />
+      {/* <Home /> */}
+      {/* <Carousel /> */}
+      <ImageComparison
+        before={before}
+        after={after}
+        color={'#D8B6E3'}
+        width={300}
+        height={400}
+      />
     </SafeAreaView>
   );
 }

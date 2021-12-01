@@ -25,14 +25,14 @@ export default function Home() {
   });
 
   // Dummy data for test purpose
-  const dummyData = [1, 2, 3, 4];
+  const dummyData = [1, 2, 3, 4, 5, 6, 7, 8];
 
   // Header component
   const header = (
     <View style={style.header}>
       <Image
         style={{ width: 50, height: 50 }}
-        source={require('./assets/logo.png')}
+        source={require('../assets/logo.png')}
       />
     </View>
   );

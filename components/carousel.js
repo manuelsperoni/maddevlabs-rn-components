@@ -21,7 +21,7 @@ const imageWidth = Dimensions.get('window').width - 100;
 const spacing = 10;
 const imageDistance = imageWidth + spacing;
 const screenWidth = Dimensions.get('window').width;
-const imageTest = require('./assets/test.png');
+const imageTest = require('../assets/test.png');
 console.log(imageWidth, imageDistance);
 
 export default function Carousel() {
@@ -94,17 +94,18 @@ export default function Carousel() {
                     : 1,
                 },
               ],
-              //   transform: [
-              //     {
-              //       translateY: isInView
-              //         ? interpolate(
-              //             distRemainLeft,
-              //             [0, imageDistance * 2.5],
-              //             [0, 0]
-              //           )
-              //         : 1,
-              //     },
-              //   ],
+
+              transform: [
+                {
+                  translateY: isInView
+                    ? interpolate(
+                        distRemainLeft,
+                        [0, imageDistance * 2.5],
+                        [0, 100]
+                      )
+                    : 1,
+                },
+              ],
 
               opacity: isInView
                 ? interpolate(distRemainLeft, [0, imageDistance * 1.2], [1, 0])
@@ -130,7 +131,7 @@ const style = {
   },
 
   image: {
-    height: 150,
+    height: 350,
     width: imageWidth,
     margin: 0,
     // backgroundColor: 'yellow',
