@@ -7,15 +7,19 @@ import ImageComparison from './components/imageComparison';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Chart from './components/chart';
+import { useState } from 'react';
+import { Button } from 'react-native';
 const Tab = createMaterialTopTabNavigator();
 
 export default function App() {
   const before = require('./assets/before.png');
   const after = require('./assets/after.png');
-  const y = [];
-  for (let index = 0; index < 20; index++) {
+  let y = [];
+  for (let index = 0; index < 10; index++) {
     y.push(Math.floor(Math.random() * 200));
   }
+
+  const [randomData, setRandomData] = useState(y);
 
   const Comparison_page = () => (
     <View
@@ -132,7 +136,21 @@ export default function App() {
         backgroundColor: '#1A202C',
       }}
     >
-      <Chart
+      <View style={{ margin: 10 }}>
+        <Button
+          color="#D8B6E3"
+          margin={30}
+          title="Generate random data"
+          onPress={() => {
+            let y = [];
+            for (let index = 0; index < 10; index++) {
+              y.push(Math.floor(Math.random() * 200));
+            }
+            setRandomData(y);
+          }}
+        />
+      </View>
+      {/* <Chart
         height={Dimensions.get('window').height / 7}
         width={Dimensions.get('window').width}
         data={y}
@@ -142,15 +160,19 @@ export default function App() {
         strokeWidth={1}
         opacityIn
         scaleIn
-        nVerticalLine={5}
-        verticalSpacing={150}
-        nHorizontalLine={5}
-        horizontalSpacing={150}
+        gridSpacing={150}
         gridColor={'#4A5568'}
         position={'center'}
-      />
+        gridVisible
+        focusData={[
+          { value: 0, label: 'Start', align: 'left', color: '#4A5568' },
+          { value: 100, label: 'Actual', align: 'left', color: '#4BBD4F' },
+          { value: 200, label: 'End', align: 'right', color: '#4A5568' },
+        ]}
+      /> */}
+
       <Chart
-        height={Dimensions.get('window').height / 7}
+        height={Dimensions.get('window').height / 3}
         width={Dimensions.get('window').width}
         data={y}
         maxDisplayedData={30}
@@ -159,14 +181,32 @@ export default function App() {
         strokeWidth={1}
         opacityIn
         scaleIn
-        nVerticalLine={15}
-        verticalSpacing={50}
-        nHorizontalLine={15}
-        horizontalSpacing={50}
+        gridSpacing={30}
         gridColor={'#4A5568'}
         position={'center'}
+        gridVisible
+        focusData={[
+          {
+            value: Math.random() * 200,
+            label: 'Start',
+            align: 'left',
+            color: '#4A5568',
+          },
+          {
+            value: Math.random() * 200,
+            label: 'Actual',
+            align: 'left',
+            color: '#D8B6E3',
+          },
+          {
+            value: Math.random() * 200,
+            label: 'End',
+            align: 'right',
+            color: '#4A5568',
+          },
+        ]}
       />
-      <Chart
+      {/* <Chart
         height={Dimensions.get('window').height / 7}
         width={Dimensions.get('window').width}
         data={y}
@@ -176,13 +216,16 @@ export default function App() {
         strokeWidth={1}
         opacityIn
         scaleIn
-        nVerticalLine={150}
-        verticalSpacing={10}
-        nHorizontalLine={150}
-        horizontalSpacing={10}
+        gridSpacing={10}
         gridColor={'#4A5568'}
         position={'center'}
-      />
+        gridVisible
+        focusData={[
+          { value: 0, label: 'Start', align: 'left', color: '#4A5568' },
+          { value: 100, label: 'Actual', align: 'left', color: '#6FBCD4' },
+          { value: 200, label: 'End', align: 'right', color: '#4A5568' },
+        ]}
+      /> */}
     </View>
   );
 
@@ -190,8 +233,8 @@ export default function App() {
     <NavigationContainer>
       <View style={{ flex: 1, backgroundColor: '#171923' }}>
         <Tab.Navigator
-          swipeEnabled={false}
           screenOptions={{
+            swipeEnabled: true,
             tabBarStyle: {
               backgroundColor: '#1A202C',
               borderTopStartRadius: 30,

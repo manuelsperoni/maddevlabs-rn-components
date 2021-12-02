@@ -22,7 +22,6 @@ const spacing = 10;
 const imageDistance = imageWidth + spacing;
 const screenWidth = Dimensions.get('window').width;
 const imageTest = require('../assets/test.png');
-console.log(imageWidth, imageDistance);
 
 export default function Carousel() {
   const translationX = useSharedValue(0);
@@ -73,12 +72,7 @@ export default function Carousel() {
                 actualPosX + imageWidth / 2 < screenWidth) ||
               (actualPosX - imageWidth / 2 < screenWidth &&
                 actualPosX - imageWidth / 2 > 0);
-            console.log(
-              index,
-              ' ',
-              actualPosX + imageWidth / 2 + ' isInView',
-              isInView
-            );
+
             const leftIndex = Math.floor(translationX.value / imageDistance);
             const distRemainLeft = Math.abs(actualPosX - screenWidth / 2);
 
