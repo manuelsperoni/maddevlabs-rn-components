@@ -133,24 +133,7 @@ export default function App() {
       }}
     >
       <Chart
-        height={Dimensions.get('window').height / 10}
-        width={Dimensions.get('window').width}
-        data={y}
-        maxDisplayedData={30}
-        fill={'#A34B60'}
-        stroke={'#D01642'}
-        strokeWidth={1}
-        opacityIn
-        scaleIn
-        nVerticalLine={5}
-        verticalSpacing={150}
-        nHorizontalLine={5}
-        horizontalSpacing={150}
-        gridColor={'#4A5568'}
-        position={'center'}
-      />
-      <Chart
-        height={Dimensions.get('window').height / 10}
+        height={Dimensions.get('window').height / 7}
         width={Dimensions.get('window').width}
         data={y}
         maxDisplayedData={30}
@@ -167,7 +150,7 @@ export default function App() {
         position={'center'}
       />
       <Chart
-        height={Dimensions.get('window').height / 10}
+        height={Dimensions.get('window').height / 7}
         width={Dimensions.get('window').width}
         data={y}
         maxDisplayedData={30}
@@ -176,15 +159,15 @@ export default function App() {
         strokeWidth={1}
         opacityIn
         scaleIn
-        nVerticalLine={5}
-        verticalSpacing={150}
-        nHorizontalLine={5}
-        horizontalSpacing={150}
+        nVerticalLine={15}
+        verticalSpacing={50}
+        nHorizontalLine={15}
+        horizontalSpacing={50}
         gridColor={'#4A5568'}
         position={'center'}
       />
       <Chart
-        height={Dimensions.get('window').height / 10}
+        height={Dimensions.get('window').height / 7}
         width={Dimensions.get('window').width}
         data={y}
         maxDisplayedData={30}
@@ -193,10 +176,10 @@ export default function App() {
         strokeWidth={1}
         opacityIn
         scaleIn
-        nVerticalLine={5}
-        verticalSpacing={150}
-        nHorizontalLine={5}
-        horizontalSpacing={150}
+        nVerticalLine={150}
+        verticalSpacing={10}
+        nHorizontalLine={150}
+        horizontalSpacing={10}
         gridColor={'#4A5568'}
         position={'center'}
       />

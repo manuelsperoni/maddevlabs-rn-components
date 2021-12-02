@@ -149,7 +149,7 @@ export default function Chart(props) {
         borderStyle: 'dashed',
         borderRadius: 0.5,
         width: width,
-        opacity: 0.5,
+        opacity: 0.3,
       }}
     ></View>
   ));
@@ -164,7 +164,7 @@ export default function Chart(props) {
         borderStyle: 'dashed',
         borderRadius: 0.5,
         height: '100%',
-        opacity: 0.5,
+        opacity: 0.3,
       }}
     ></View>
   ));
