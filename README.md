@@ -2,8 +2,8 @@
 This is a simple playground to test some custom components
 
 ## Included component 
-- Simple Chart - chart.js
-<img src="screenshot/Screenshot_1638468539.png" width="200" />
+- Simple Chart/Grid - chart.js/Grid.js
+<img src="screenshot/Screenshot_1638475244.png" width="200" />
 - Collapslable home - home.js
 <img src="screenshot/Screenshot_1638468588.png" width="200" />
 - Gallery Carousel - carousel.js
