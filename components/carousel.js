@@ -50,7 +50,7 @@ export default function Carousel() {
   const card = (
     <View style={style.card}>
       <Image source={imageTest} style={style.image}></Image>
-      <Text style={{ padding: 20, color: 'white', fontSize: 30 }}> 55Kg</Text>
+      <Text style={{ padding: 20, color: 'white', fontSize: 30 }}> Image </Text>
     </View>
   );
 

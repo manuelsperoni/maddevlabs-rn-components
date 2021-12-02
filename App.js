@@ -12,6 +12,10 @@ const Tab = createMaterialTopTabNavigator();
 export default function App() {
   const before = require('./assets/before.png');
   const after = require('./assets/after.png');
+  const y = [];
+  for (let index = 0; index < 20; index++) {
+    y.push(Math.floor(Math.random() * 200));
+  }
 
   const Comparison_page = () => (
     <View
@@ -44,6 +48,23 @@ export default function App() {
       <ScrollNumberPicker
         lowerBound={40}
         upperBound={100}
+        multipleBigSegment={20}
+        udm={'kg'}
+        scale={1}
+        startValue={60}
+        bigSegmentHeight={30}
+        smallSegmentHeight={15}
+        segmentColor={'#4A5568'}
+        segmentThikness={1}
+        spacing={26}
+        mainTipWidth={20}
+        mainTipHeight={80}
+        mainTipColor={'#D01642'}
+        filled
+      />
+      <ScrollNumberPicker
+        lowerBound={40}
+        upperBound={100}
         multipleBigSegment={10}
         udm={'kg'}
         scale={1}
@@ -56,6 +77,23 @@ export default function App() {
         mainTipWidth={20}
         mainTipHeight={80}
         mainTipColor={'#D8B6E3'}
+        outlined
+      />
+      <ScrollNumberPicker
+        lowerBound={40}
+        upperBound={100}
+        multipleBigSegment={10}
+        udm={'kg'}
+        scale={1}
+        startValue={60}
+        bigSegmentHeight={50}
+        smallSegmentHeight={35}
+        segmentColor={'#4A5568'}
+        segmentThikness={2}
+        spacing={10}
+        mainTipWidth={5}
+        mainTipHeight={50}
+        mainTipColor={'#18637B'}
         outlined
       />
     </View>
@@ -94,7 +132,74 @@ export default function App() {
         backgroundColor: '#1A202C',
       }}
     >
-      <Chart />
+      <Chart
+        height={Dimensions.get('window').height / 10}
+        width={Dimensions.get('window').width}
+        data={y}
+        maxDisplayedData={30}
+        fill={'#A34B60'}
+        stroke={'#D01642'}
+        strokeWidth={1}
+        opacityIn
+        scaleIn
+        nVerticalLine={5}
+        verticalSpacing={150}
+        nHorizontalLine={5}
+        horizontalSpacing={150}
+        gridColor={'#4A5568'}
+        position={'center'}
+      />
+      <Chart
+        height={Dimensions.get('window').height / 10}
+        width={Dimensions.get('window').width}
+        data={y}
+        maxDisplayedData={30}
+        fill={'#4A794C'}
+        stroke={'#4BBD4F'}
+        strokeWidth={1}
+        opacityIn
+        scaleIn
+        nVerticalLine={5}
+        verticalSpacing={150}
+        nHorizontalLine={5}
+        horizontalSpacing={150}
+        gridColor={'#4A5568'}
+        position={'center'}
+      />
+      <Chart
+        height={Dimensions.get('window').height / 10}
+        width={Dimensions.get('window').width}
+        data={y}
+        maxDisplayedData={30}
+        fill={'#6C617B'}
+        stroke={'#D8B6E3'}
+        strokeWidth={1}
+        opacityIn
+        scaleIn
+        nVerticalLine={5}
+        verticalSpacing={150}
+        nHorizontalLine={5}
+        horizontalSpacing={150}
+        gridColor={'#4A5568'}
+        position={'center'}
+      />
+      <Chart
+        height={Dimensions.get('window').height / 10}
+        width={Dimensions.get('window').width}
+        data={y}
+        maxDisplayedData={30}
+        fill={'#18637B'}
+        stroke={'#6FBCD4'}
+        strokeWidth={1}
+        opacityIn
+        scaleIn
+        nVerticalLine={5}
+        verticalSpacing={150}
+        nHorizontalLine={5}
+        horizontalSpacing={150}
+        gridColor={'#4A5568'}
+        position={'center'}
+      />
     </View>
   );
 
