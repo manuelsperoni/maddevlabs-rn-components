@@ -12,8 +12,6 @@ import Animated, {
   color,
 } from 'react-native-reanimated';
 import { useEffect } from 'react';
-import { runOnJS } from 'react-native-reanimated';
-import { ScrollView } from 'react-native-gesture-handler';
 import { useState } from 'react';
 
 export default function Chart(props) {

@@ -53,7 +53,7 @@ export default function App() {
         lowerBound={40}
         upperBound={100}
         multipleBigSegment={20}
-        udm={'kg'}
+        udm={''}
         scale={1}
         startValue={60}
         bigSegmentHeight={30}
@@ -63,14 +63,14 @@ export default function App() {
         spacing={26}
         mainTipWidth={20}
         mainTipHeight={80}
-        mainTipColor={'#D01642'}
+        mainTipColor={'#D8B6E3'}
         filled
       />
       <ScrollNumberPicker
         lowerBound={40}
         upperBound={100}
         multipleBigSegment={10}
-        udm={'kg'}
+        udm={''}
         scale={1}
         startValue={60}
         bigSegmentHeight={50}
@@ -87,7 +87,7 @@ export default function App() {
         lowerBound={40}
         upperBound={100}
         multipleBigSegment={10}
-        udm={'kg'}
+        udm={''}
         scale={1}
         startValue={60}
         bigSegmentHeight={50}
@@ -97,7 +97,7 @@ export default function App() {
         spacing={10}
         mainTipWidth={5}
         mainTipHeight={50}
-        mainTipColor={'#18637B'}
+        mainTipColor={'#D8B6E3'}
         outlined
       />
     </View>
@@ -150,30 +150,10 @@ export default function App() {
           }}
         />
       </View>
-      {/* <Chart
-        height={Dimensions.get('window').height / 7}
-        width={Dimensions.get('window').width}
-        data={y}
-        maxDisplayedData={30}
-        fill={'#4A794C'}
-        stroke={'#4BBD4F'}
-        strokeWidth={1}
-        opacityIn
-        scaleIn
-        gridSpacing={150}
-        gridColor={'#4A5568'}
-        position={'center'}
-        gridVisible
-        focusData={[
-          { value: 0, label: 'Start', align: 'left', color: '#4A5568' },
-          { value: 100, label: 'Actual', align: 'left', color: '#4BBD4F' },
-          { value: 200, label: 'End', align: 'right', color: '#4A5568' },
-        ]}
-      /> */}
 
       <Chart
         maxValue={200}
-        height={Dimensions.get('window').height / 3}
+        height={Dimensions.get('window').height / 7}
         width={Dimensions.get('window').width}
         data={y}
         maxDisplayedData={30}
@@ -182,7 +162,7 @@ export default function App() {
         strokeWidth={1}
         opacityIn
         scaleIn
-        gridSpacing={30}
+        gridSpacing={150}
         gridColor={'#4A5568'}
         position={'center'}
         gridVisible
@@ -207,13 +187,50 @@ export default function App() {
           },
         ]}
       />
-      {/* <Chart
+      <Chart
+        maxValue={200}
         height={Dimensions.get('window').height / 7}
         width={Dimensions.get('window').width}
         data={y}
         maxDisplayedData={30}
-        fill={'#18637B'}
-        stroke={'#6FBCD4'}
+        fill={'#6C617B'}
+        stroke={'#D8B6E3'}
+        strokeWidth={1}
+        opacityIn
+        scaleIn
+        gridSpacing={50}
+        gridColor={'#4A5568'}
+        position={'center'}
+        gridVisible
+        focusData={[
+          {
+            value: Math.random() * 200,
+            label: 'Start',
+            align: 'left',
+            color: '#4A5568',
+          },
+          {
+            value: Math.random() * 200,
+            label: 'Actual',
+            align: 'left',
+            color: '#D8B6E3',
+          },
+          {
+            value: Math.random() * 200,
+            label: 'End',
+            align: 'right',
+            color: '#4A5568',
+          },
+        ]}
+      />
+      <Chart
+        maxValue={200}
+        height={Dimensions.get('window').height / 7}
+        width={Dimensions.get('window').width}
+        data={y}
+        maxDisplayedData={30}
+        fill={'#6C617B'}
+        stroke={'#D8B6E3'}
         strokeWidth={1}
         opacityIn
         scaleIn
@@ -222,11 +239,26 @@ export default function App() {
         position={'center'}
         gridVisible
         focusData={[
-          { value: 0, label: 'Start', align: 'left', color: '#4A5568' },
-          { value: 100, label: 'Actual', align: 'left', color: '#6FBCD4' },
-          { value: 200, label: 'End', align: 'right', color: '#4A5568' },
+          {
+            value: Math.random() * 200,
+            label: 'Start',
+            align: 'left',
+            color: '#4A5568',
+          },
+          {
+            value: Math.random() * 200,
+            label: 'Actual',
+            align: 'left',
+            color: '#D8B6E3',
+          },
+          {
+            value: Math.random() * 200,
+            label: 'End',
+            align: 'right',
+            color: '#4A5568',
+          },
         ]}
-      /> */}
+      />
     </View>
   );
 
