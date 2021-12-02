@@ -19,11 +19,11 @@ export default function Grid(props) {
           position: 'absolute',
           top: index * spacing,
           borderColor: color,
-          borderWidth: 1,
-          borderStyle: 'dashed',
+          borderWidth: 0.1,
+          borderStyle: 'solid',
           borderRadius: 0.5,
           width: viewWidth,
-          opacity: 0.3,
+          opacity: 1,
         }}
       ></View>
     )
@@ -37,11 +37,11 @@ export default function Grid(props) {
           position: 'absolute',
           left: index * spacing,
           borderColor: color,
-          borderWidth: 1,
-          borderStyle: 'dashed',
+          borderWidth: 0.1,
+          borderStyle: 'solid',
           borderRadius: 0.5,
           height: viewHeight,
-          opacity: 0.3,
+          opacity: 1,
         }}
       ></View>
     )

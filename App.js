@@ -155,13 +155,13 @@ export default function App() {
       <Grid position="center" spacing={100} color={'#4A5568'}>
         <Chart
           maxValue={200}
-          height={Dimensions.get('window').height / 7}
+          height={Dimensions.get('window').height / 3}
           width={Dimensions.get('window').width}
           data={y}
           maxDisplayedData={30}
           fill={'#6C617B'}
           stroke={'#D8B6E3'}
-          strokeWidth={1}
+          strokeWidth={2}
           opacityIn
           scaleIn
           focusData={[
