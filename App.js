@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Chart from './components/chart';
 import { useState } from 'react';
 import { Button } from 'react-native';
+import Grid from './components/grid';
 const Tab = createMaterialTopTabNavigator();
 
 export default function App() {
@@ -151,114 +152,40 @@ export default function App() {
         />
       </View>
 
-      <Chart
-        maxValue={200}
-        height={Dimensions.get('window').height / 7}
-        width={Dimensions.get('window').width}
-        data={y}
-        maxDisplayedData={30}
-        fill={'#6C617B'}
-        stroke={'#D8B6E3'}
-        strokeWidth={1}
-        opacityIn
-        scaleIn
-        gridSpacing={150}
-        gridColor={'#4A5568'}
-        position={'center'}
-        gridVisible
-        focusData={[
-          {
-            value: Math.random() * 200,
-            label: 'Start',
-            align: 'left',
-            color: '#4A5568',
-          },
-          {
-            value: Math.random() * 200,
-            label: 'Actual',
-            align: 'left',
-            color: '#D8B6E3',
-          },
-          {
-            value: Math.random() * 200,
-            label: 'End',
-            align: 'right',
-            color: '#4A5568',
-          },
-        ]}
-      />
-      <Chart
-        maxValue={200}
-        height={Dimensions.get('window').height / 7}
-        width={Dimensions.get('window').width}
-        data={y}
-        maxDisplayedData={30}
-        fill={'#6C617B'}
-        stroke={'#D8B6E3'}
-        strokeWidth={1}
-        opacityIn
-        scaleIn
-        gridSpacing={50}
-        gridColor={'#4A5568'}
-        position={'center'}
-        gridVisible
-        focusData={[
-          {
-            value: Math.random() * 200,
-            label: 'Start',
-            align: 'left',
-            color: '#4A5568',
-          },
-          {
-            value: Math.random() * 200,
-            label: 'Actual',
-            align: 'left',
-            color: '#D8B6E3',
-          },
-          {
-            value: Math.random() * 200,
-            label: 'End',
-            align: 'right',
-            color: '#4A5568',
-          },
-        ]}
-      />
-      <Chart
-        maxValue={200}
-        height={Dimensions.get('window').height / 7}
-        width={Dimensions.get('window').width}
-        data={y}
-        maxDisplayedData={30}
-        fill={'#6C617B'}
-        stroke={'#D8B6E3'}
-        strokeWidth={1}
-        opacityIn
-        scaleIn
-        gridSpacing={10}
-        gridColor={'#4A5568'}
-        position={'center'}
-        gridVisible
-        focusData={[
-          {
-            value: Math.random() * 200,
-            label: 'Start',
-            align: 'left',
-            color: '#4A5568',
-          },
-          {
-            value: Math.random() * 200,
-            label: 'Actual',
-            align: 'left',
-            color: '#D8B6E3',
-          },
-          {
-            value: Math.random() * 200,
-            label: 'End',
-            align: 'right',
-            color: '#4A5568',
-          },
-        ]}
-      />
+      <Grid position="center" spacing={100} color={'#4A5568'}>
+        <Chart
+          maxValue={200}
+          height={Dimensions.get('window').height / 7}
+          width={Dimensions.get('window').width}
+          data={y}
+          maxDisplayedData={30}
+          fill={'#6C617B'}
+          stroke={'#D8B6E3'}
+          strokeWidth={1}
+          opacityIn
+          scaleIn
+          focusData={[
+            {
+              value: Math.random() * 200,
+              label: 'Start',
+              align: 'left',
+              color: '#4A5568',
+            },
+            {
+              value: Math.random() * 200,
+              label: 'Actual',
+              align: 'left',
+              color: '#D8B6E3',
+            },
+            {
+              value: Math.random() * 200,
+              label: 'End',
+              align: 'right',
+              color: '#4A5568',
+            },
+          ]}
+        />
+      </Grid>
     </View>
   );
 
