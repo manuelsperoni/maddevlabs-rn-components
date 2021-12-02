@@ -30,6 +30,7 @@ export default function Chart(props) {
   const gridVisible = props.gridVisible;
   const position = props.position;
   const focusData = props.focusData;
+  const maxValue = props.maxValue;
   const peackSmothness = 2;
 
   const [viewWidth, setViewWidth] = useState(0);
@@ -47,7 +48,7 @@ export default function Chart(props) {
   });
 
   // invert y axis and scale to view heigth
-  let maxValue = Math.max(...y);
+  // let maxValue = Math.max(...y);
   y.forEach((elem, index) => {
     y[index] = (y[index] / maxValue) * height;
   });
@@ -221,8 +222,9 @@ export default function Chart(props) {
         flex: 1,
         flexDirection: 'column',
         justifyContent: position,
+
         alignItems: 'center',
-        overflow: 'hidden',
+        // overflow: 'hidden',
       }}
       onLayout={(event) => {
         let { x, y, height, width } = event.nativeEvent.layout;

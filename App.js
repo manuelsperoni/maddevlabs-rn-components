@@ -172,6 +172,7 @@ export default function App() {
       /> */}
 
       <Chart
+        maxValue={200}
         height={Dimensions.get('window').height / 3}
         width={Dimensions.get('window').width}
         data={y}
