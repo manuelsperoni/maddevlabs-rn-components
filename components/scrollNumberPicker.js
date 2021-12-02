@@ -24,7 +24,7 @@ function roundUp(numToRound, multiple) {
   return roundDown;
 }
 
-export default function MadScrollSelector(props) {
+export default function ScrollNumberPicker(props) {
   const bigSegmentHeight = props.bigSegmentHeight;
   const mainTipHeight = props.mainTipHeight;
   const smallSegmentHeight = props.smallSegmentHeight;
@@ -171,12 +171,8 @@ export default function MadScrollSelector(props) {
               <View style={style.fixStart}></View>
               {segmentArray.map((element, index) => {
                 if (index % multipleBigSegment == 0)
-                  return (
-                    <>
-                      <View key={index}>{bigSegment}</View>
-                    </>
-                  );
-                else return <>{smallSegment}</>;
+                  return <View key={index}>{bigSegment}</View>;
+                else return <View key={index}>{smallSegment}</View>;
               })}
               <View style={style.fixEnd}></View>
             </Animated.ScrollView>

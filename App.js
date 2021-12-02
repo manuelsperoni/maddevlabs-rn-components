@@ -6,6 +6,7 @@ import ScrollNumberPicker from './components/scrollNumberPicker';
 import ImageComparison from './components/imageComparison';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import Chart from './components/chart';
 const Tab = createMaterialTopTabNavigator();
 
 export default function App() {
@@ -84,6 +85,18 @@ export default function App() {
       <Carousel />
     </View>
   );
+  const Chart_page = () => (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#1A202C',
+      }}
+    >
+      <Chart />
+    </View>
+  );
 
   return (
     <NavigationContainer>
@@ -109,7 +122,7 @@ export default function App() {
             borderRadius: 30,
           }}
         >
-          {/* <Tab.Screen name="Home" component={HomeScreen} /> */}
+          <Tab.Screen name="Chart" component={Chart_page} />
           <Tab.Screen name="Home" component={Home_page} />
           <Tab.Screen name="Carousel" component={Carousel_page} />
           <Tab.Screen name="Comparison" component={Comparison_page} />
