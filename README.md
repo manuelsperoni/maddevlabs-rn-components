@@ -1,5 +1,5 @@
 # react-native-mad-component-playground
-This is a simple playground to test some custom component
+This is a simple playground to test some custom components
 
 ## Included component 
 - Simple Chart - chart.js
