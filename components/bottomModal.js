@@ -18,11 +18,12 @@ export default function BottomoModal(props) {
   const radius = props.radius;
   const headerColor = props.headerColor;
   const bodyColor = props.bodyColor;
-  const bodyHeight = props.bodyHeight;
+  // const bodyHeight = props.bodyHeight;
   const state = props.state;
   const translateYBody = useSharedValue(0);
   const translateYHeader = useSharedValue(0);
   const backOpacity = useSharedValue(0);
+  const [bodyHeight, setBodyHeigth] = useState(0);
 
   //   let header;
   //   let body;
@@ -30,21 +31,9 @@ export default function BottomoModal(props) {
   //     console.log(element.type.displayName);
   //   });
 
-  if (state == 'open') {
+  if (state != 'close') {
     open();
-    console.log('opening...');
-  } else {
-    close();
-    console.log('closing...');
-  }
-
-  useEffect(() => {
-    console.log('########## MOUTED COMPONENT');
-
-    return () => {
-      console.log('########## UNMOUNTING COMPONENT');
-    };
-  }, []);
+  } else close();
 
   const bodyAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -66,15 +55,15 @@ export default function BottomoModal(props) {
 
   function open() {
     translateYBody.value = withDelay(
-      100,
-      withSpring(-(headerHeight + bodyHeight)),
+      0,
+      withTiming(-(headerHeight + bodyHeight)),
       {
         duration: 200,
       }
     );
     translateYHeader.value = withDelay(
-      0,
-      withSpring(-(headerHeight + bodyHeight), {
+      200,
+      withTiming(-(headerHeight + bodyHeight), {
         duration: 200,
       })
     );
@@ -85,11 +74,11 @@ export default function BottomoModal(props) {
   }
 
   function close() {
-    translateYBody.value = withDelay(0, withSpring(0), {
-      duration: 300,
+    translateYBody.value = withDelay(200, withTiming(0), {
+      duration: 200,
     });
-    translateYHeader.value = withDelay(50, withSpring(0), {
-      duration: 300,
+    translateYHeader.value = withDelay(50, withTiming(0), {
+      duration: 200,
     });
     backOpacity.value = withTiming(0, {
       duration: 100,
@@ -104,7 +93,6 @@ export default function BottomoModal(props) {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: 'red',
         height: headerHeight,
       }}
     >
@@ -116,11 +104,11 @@ export default function BottomoModal(props) {
           flex: 1,
         }}
       ></View>
-      <TouchableOpacity onPress={() => close()}>
+      <TouchableOpacity onPress={() => props.onClose('close')}>
         <View
           style={{
             padding: 5,
-            // backgroundColor: bodyColor,
+            backgroundColor: bodyColor,
             marginRight: 10,
             borderRadius: 100,
           }}
@@ -145,10 +133,8 @@ export default function BottomoModal(props) {
         left: 0,
         right: 0,
         top: 0,
-        height: 300,
-        borderRadius: 40,
-
-        backgroundColor: 'red',
+        bottom: 0,
+        backgroundColor: bodyColor,
       }}
     >
       {/* Back */}
@@ -181,22 +167,6 @@ export default function BottomoModal(props) {
           ]}
         ></AnimatedTouchable> */}
       </Animated.View>
-      {/* <View style={{ position: 'absolute', zIndex: 10000 }}>
-        <Button
-          color="#D8B6E3"
-          title="Open"
-          onPress={() => {
-            open();
-          }}
-        />
-        <Button
-          color="#D8B6E3"
-          title="Open"
-          onPress={() => {
-            close();
-          }}
-        />
-      </View> */}
 
       {/* HEADER */}
       <Animated.View
@@ -220,15 +190,14 @@ export default function BottomoModal(props) {
       {/* BODY */}
       <Animated.View
         onLayout={(event) => {
-          //   let { x, y, height, width } = event.nativeEvent.layout;
-          //   setBodyHeigth(height);
+          let { x, y, height, width } = event.nativeEvent.layout;
+          setBodyHeigth(height);
         }}
         style={[
           {
             position: 'absolute',
             zIndex: 30,
             backgroundColor: bodyColor,
-            height: bodyHeight,
             bottom: -(headerHeight + bodyHeight),
             left: 0,
             right: 0,

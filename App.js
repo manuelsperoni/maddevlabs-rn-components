@@ -24,7 +24,7 @@ export default function App() {
     y.push(Math.floor(Math.random() * 200));
   }
   const [randomData, setRandomData] = useState(y);
-  const [modalState, setModalState] = useState('closed');
+  const [modalState, setModalState] = useState('close');
 
   console.log('changeState');
 
@@ -116,14 +116,7 @@ export default function App() {
         color="#D8B6E3"
         title="Open"
         onPress={() => {
-          setModalState('open');
-        }}
-      />
-      <Button
-        color="#D8B6E3"
-        title="Close"
-        onPress={() => {
-          setModalState('close');
+          setModalState(Math.random());
         }}
       />
 
@@ -135,7 +128,10 @@ export default function App() {
           headerHeight={60}
           bodyHeight={200}
           state={modalState}
+          onClose={setModalState}
         >
+          <Text style={{ color: 'white' }}>Hello i'am a custom Modal</Text>
+          <Text style={{ color: 'white' }}>Hello i'am a custom Modal</Text>
           <Text style={{ color: 'white' }}>Hello i'am a custom Modal</Text>
         </BottomoModal>
       </View>
