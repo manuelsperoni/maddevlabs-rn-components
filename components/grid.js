@@ -9,8 +9,6 @@ export default function Grid(props) {
   const [viewWidth, setViewWidth] = useState(0);
   const [viewHeight, setViewHeight] = useState(0);
 
-  console.log('################ REFERSH GRID ##############################');
-
   const horizontalLineView = [...Array(Math.round(viewHeight / spacing))].map(
     (elem, index) => (
       <View

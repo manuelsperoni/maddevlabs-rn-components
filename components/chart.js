@@ -11,7 +11,7 @@ import Animated, {
   withTiming,
   color,
 } from 'react-native-reanimated';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Chart(props) {
   const height = props.height;
@@ -24,11 +24,7 @@ export default function Chart(props) {
   const focusData = props.focusData;
   const maxValue = props.maxValue;
   const peackSmothness = 2;
-
-  useEffect(() => {
-    animatedYscale.value = withTiming(1, { duration: 500 });
-    opacity.value = withTiming(1, { duration: 500 });
-  }, []);
+  const [newData, setNewData] = useState([...rawData]);
 
   /* MAIN CHART PROCESSING*/
   //naive data downsampling , if data less than max take every data otherwise sample every nth elem
@@ -94,6 +90,15 @@ export default function Chart(props) {
   const animatedXscale = useSharedValue(initialXscale);
   const animatedYscale = useSharedValue(!props.scaleIn);
   const opacity = useSharedValue(!props.opacityIn);
+
+  useEffect(() => {
+    // reset scale
+    animatedYscale.value = 0;
+    opacity.value = 0;
+    // start animation
+    animatedYscale.value = withTiming(1, { duration: 500 });
+    opacity.value = withTiming(1, { duration: 500 });
+  }, [rawData]);
 
   const animatedFillChart = useAnimatedProps(() => {
     // compute coefficent for bezier control point

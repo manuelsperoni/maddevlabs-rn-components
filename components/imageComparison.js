@@ -8,12 +8,9 @@ import { useState } from 'react';
 import { withSpring } from 'react-native-reanimated';
 
 export default function imageComparison(props) {
-  const percShown = 20;
-  const visibleDistance = (Dimensions.get('window').width * percShown) / 100;
   const startingPosition = 0;
   const x = useSharedValue(startingPosition);
   const [barXPos, setBarXPos] = useState(props.width / 2);
-  const screenWidth = Dimensions.get('window').width;
 
   const eventHandler = useAnimatedGestureHandler({
     onStart: (event, ctx) => {
@@ -23,6 +20,11 @@ export default function imageComparison(props) {
       console.log(event.absoluteX);
       x.value = ctx.startX + event.translationX;
       runOnJS(setBarXPos)(x.value + props.width / 2); // x value between 0 and imageWidth
+    },
+
+    onEnd: () => {
+      if (x.value > props.width / 2) x.value = withSpring(props.width / 2);
+      if (x.value < -props.width / 2) x.value = withSpring(-props.width / 2);
     },
   });
 

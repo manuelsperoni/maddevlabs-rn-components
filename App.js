@@ -11,6 +11,9 @@ import { useState } from 'react';
 import { Button } from 'react-native';
 import Grid from './components/grid';
 import BottomoModal from './components/bottomModal';
+import { Actionsheet } from 'native-base';
+import { useDisclose } from 'native-base';
+import { NativeBaseProvider } from 'native-base';
 const Tab = createMaterialTopTabNavigator();
 
 export default function App() {
@@ -20,8 +23,10 @@ export default function App() {
   for (let index = 0; index < 10; index++) {
     y.push(Math.floor(Math.random() * 200));
   }
-
   const [randomData, setRandomData] = useState(y);
+  const [modalState, setModalState] = useState('closed');
+
+  console.log('changeState');
 
   const Comparison_page = () => (
     <View
@@ -104,16 +109,37 @@ export default function App() {
       />
     </View>
   );
+  const { isOpen, onOpen, onClose } = useDisclose();
   const BottomoModal_page = () => (
-    <BottomoModal
-      radius={20}
-      headerColor={'#171923'}
-      bodyColor={'#1A202C'}
-      headerHeight={60}
-      bodyHeight={200}
-    >
-      <Text style={{ color: 'white' }}>Hello i'am a custom Modal</Text>
-    </BottomoModal>
+    <>
+      <Button
+        color="#D8B6E3"
+        title="Open"
+        onPress={() => {
+          setModalState('open');
+        }}
+      />
+      <Button
+        color="#D8B6E3"
+        title="Close"
+        onPress={() => {
+          setModalState('close');
+        }}
+      />
+
+      <View style={{ flex: 1 }}>
+        <BottomoModal
+          radius={20}
+          headerColor={'#171923'}
+          bodyColor={'#1A202C'}
+          headerHeight={60}
+          bodyHeight={200}
+          state={modalState}
+        >
+          <Text style={{ color: 'white' }}>Hello i'am a custom Modal</Text>
+        </BottomoModal>
+      </View>
+    </>
   );
 
   const Home_page = () => (
@@ -269,38 +295,101 @@ export default function App() {
     </View>
   );
 
+  const [showChart, setShowChart] = useState([
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
   return (
-    <NavigationContainer>
-      <View style={{ flex: 1, backgroundColor: '#171923' }}>
-        <Tab.Navigator
-          screenOptions={{
-            swipeEnabled: true,
-            tabBarStyle: {
-              backgroundColor: '#1A202C',
-              borderTopStartRadius: 30,
-              borderTopEndRadius: 30,
-            },
-            // tabBarLabelStyle: {
-            //   color: 'white',
-            // },
-            tabBarActiveTintColor: '#D8B6E3',
-            tabBarInactiveTintColor: '#4A5568',
-            tabBarIndicatorStyle: { backgroundColor: '#D8B6E3' },
-          }}
-          style={{
-            marginTop: 50,
+    <NativeBaseProvider>
+      {/* <NavigationContainer>
+        <View style={{ flex: 1, backgroundColor: '#171923' }}>
+          <Tab.Navigator
+            presentation={'modal'}
+            screenOptions={{
+              // unmountOnBlur: true,
+              swipeEnabled: true,
+              tabBarStyle: {
+                backgroundColor: '#1A202C',
+                borderTopStartRadius: 30,
+                borderTopEndRadius: 30,
+              },
+              // tabBarLabelStyle: {
+              //   color: 'white',
+              // },
+              tabBarActiveTintColor: '#D8B6E3',
+              tabBarInactiveTintColor: '#4A5568',
+              tabBarIndicatorStyle: { backgroundColor: '#D8B6E3' },
+            }}
+            style={{
+              marginTop: 50,
 
-            borderRadius: 30,
-          }}
-        >
-          <Tab.Screen name="Modal" component={BottomoModal_page} />
-          <Tab.Screen name="Chart" component={Chart_page} />
-          <Tab.Screen name="Home" component={Home_page} />
-          <Tab.Screen name="Carousel" component={Carousel_page} />
-          <Tab.Screen name="Comparison" component={Comparison_page} />
-          <Tab.Screen name="Scroller" component={Scroller_page} />
-        </Tab.Navigator>
+              borderRadius: 30,
+            }}
+          >
+            <Tab.Screen name="Modal" component={BottomoModal_page} />
+            <Tab.Screen name="Chart" component={Chart_page} />
+            <Tab.Screen name="Home" component={Home_page} />
+            <Tab.Screen name="Carousel" component={Carousel_page} />
+            <Tab.Screen name="Comparison" component={Comparison_page} />
+            <Tab.Screen name="Scroller" component={Scroller_page} />
+          </Tab.Navigator>
+        </View>
+      </NavigationContainer> */}
+      <View
+        style={{
+          paddingVertical: 40,
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          backgroundColor: '#171923',
+        }}
+      >
+        <Button
+          title="Chart"
+          onPress={() =>
+            setShowChart([true, false, false, false, false, false])
+          }
+        />
+        <Button
+          title="Modal"
+          onPress={() =>
+            setShowChart([false, true, false, false, false, false])
+          }
+        />
+        <Button
+          title="Home"
+          onPress={() =>
+            setShowChart([false, false, true, false, false, false])
+          }
+        />
+        <Button
+          title="Comparison"
+          onPress={() =>
+            setShowChart([false, false, false, true, false, false])
+          }
+        />
+        <Button
+          title="Carousel"
+          onPress={() =>
+            setShowChart([false, false, false, false, true, false])
+          }
+        />
+        <Button
+          title="Scroller"
+          onPress={() =>
+            setShowChart([false, false, false, false, false, true])
+          }
+        />
       </View>
-    </NavigationContainer>
+      {showChart[0] && Chart_page()}
+      {showChart[1] && BottomoModal_page()}
+      {showChart[2] && Home_page()}
+      {showChart[3] && Comparison_page()}
+      {showChart[4] && Carousel_page()}
+      {showChart[5] && Scroller_page()}
+    </NativeBaseProvider>
   );
 }

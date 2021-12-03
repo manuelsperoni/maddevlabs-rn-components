@@ -7,8 +7,10 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { unmountComponentAtNode } from 'react-dom';
+import { Actionsheet } from 'native-base';
 
 const CLOSE_ICON = require('../assets/close.png');
 export default function BottomoModal(props) {
@@ -17,15 +19,32 @@ export default function BottomoModal(props) {
   const headerColor = props.headerColor;
   const bodyColor = props.bodyColor;
   const bodyHeight = props.bodyHeight;
+  const state = props.state;
+  const translateYBody = useSharedValue(0);
+  const translateYHeader = useSharedValue(0);
+  const backOpacity = useSharedValue(0);
+
   //   let header;
   //   let body;
   //   props.children.forEach((element) => {
   //     console.log(element.type.displayName);
   //   });
 
-  const translateYBody = useSharedValue(0);
-  const translateYHeader = useSharedValue(0);
-  const backOpacity = useSharedValue(0);
+  if (state == 'open') {
+    open();
+    console.log('opening...');
+  } else {
+    close();
+    console.log('closing...');
+  }
+
+  useEffect(() => {
+    console.log('########## MOUTED COMPONENT');
+
+    return () => {
+      console.log('########## UNMOUNTING COMPONENT');
+    };
+  }, []);
 
   const bodyAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -47,35 +66,37 @@ export default function BottomoModal(props) {
 
   function open() {
     translateYBody.value = withDelay(
-      0,
-      withTiming(-(headerHeight + bodyHeight)),
+      100,
+      withSpring(-(headerHeight + bodyHeight)),
       {
-        duration: 300,
+        duration: 200,
       }
     );
     translateYHeader.value = withDelay(
-      70,
-      withTiming(-(headerHeight + bodyHeight), {
-        duration: 300,
+      0,
+      withSpring(-(headerHeight + bodyHeight), {
+        duration: 200,
       })
     );
 
     backOpacity.value = withTiming(0.5, {
-      duration: 50,
+      duration: 100,
     });
   }
 
   function close() {
-    translateYBody.value = withDelay(70, withTiming(0), {
+    translateYBody.value = withDelay(0, withSpring(0), {
       duration: 300,
     });
-    translateYHeader.value = withTiming(0, {
+    translateYHeader.value = withDelay(50, withSpring(0), {
       duration: 300,
     });
     backOpacity.value = withTiming(0, {
-      duration: 50,
+      duration: 100,
     });
   }
+
+  const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
   const header = (
     <View
@@ -124,28 +145,13 @@ export default function BottomoModal(props) {
         left: 0,
         right: 0,
         top: 0,
-        bottom: 0,
-        backgroundColor: bodyColor,
+        height: 300,
+        borderRadius: 40,
+
+        backgroundColor: 'red',
       }}
     >
-      <View
-        style={{
-          position: 'absolute',
-          top: 0,
-          zIndex: 10000,
-          left: 0,
-          right: 0,
-        }}
-      >
-        <Button color="#D8B6E3" title="Open" onPress={() => open()} />
-        <Button
-          color="#D8B6E3"
-          title="Close"
-          onPress={() => {
-            close();
-          }}
-        />
-      </View>
+      {/* Back */}
       <Animated.View
         style={[
           {
@@ -159,7 +165,38 @@ export default function BottomoModal(props) {
           },
           backStyle,
         ]}
-      ></Animated.View>
+      >
+        {/* <AnimatedTouchable
+          onPress={() => close()}
+          style={[
+            {
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              backgroundColor: 'red',
+              zIndex: 10,
+            },
+          ]}
+        ></AnimatedTouchable> */}
+      </Animated.View>
+      {/* <View style={{ position: 'absolute', zIndex: 10000 }}>
+        <Button
+          color="#D8B6E3"
+          title="Open"
+          onPress={() => {
+            open();
+          }}
+        />
+        <Button
+          color="#D8B6E3"
+          title="Open"
+          onPress={() => {
+            close();
+          }}
+        />
+      </View> */}
 
       {/* HEADER */}
       <Animated.View
