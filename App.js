@@ -10,6 +10,7 @@ import Chart from './components/chart';
 import { useState } from 'react';
 import { Button } from 'react-native';
 import Grid from './components/grid';
+import BottomoModal from './components/bottomModal';
 const Tab = createMaterialTopTabNavigator();
 
 export default function App() {
@@ -102,6 +103,17 @@ export default function App() {
         outlined
       />
     </View>
+  );
+  const BottomoModal_page = () => (
+    <BottomoModal
+      radius={20}
+      headerColor={'#171923'}
+      bodyColor={'#1A202C'}
+      headerHeight={60}
+      bodyHeight={200}
+    >
+      <Text style={{ color: 'white' }}>Hello i'am a custom Modal</Text>
+    </BottomoModal>
   );
 
   const Home_page = () => (
@@ -281,6 +293,7 @@ export default function App() {
             borderRadius: 30,
           }}
         >
+          <Tab.Screen name="Modal" component={BottomoModal_page} />
           <Tab.Screen name="Chart" component={Chart_page} />
           <Tab.Screen name="Home" component={Home_page} />
           <Tab.Screen name="Carousel" component={Carousel_page} />
