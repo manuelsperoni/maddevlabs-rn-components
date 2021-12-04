@@ -31,9 +31,9 @@ export default function BottomoModal(props) {
   //     console.log(element.type.displayName);
   //   });
 
-  if (state != 'close') {
-    open();
-  } else close();
+  if (state === 'close') {
+    close();
+  } else open();
 
   const bodyAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -87,6 +87,9 @@ export default function BottomoModal(props) {
 
   const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
+  const headerContent = props.children[0];
+  const bodyContent = props.children[1];
+
   const header = (
     <View
       style={{
@@ -94,34 +97,38 @@ export default function BottomoModal(props) {
         justifyContent: 'center',
         alignItems: 'center',
         height: headerHeight,
+        // backgroundColor: 'yellow',
+        padding: 10,
       }}
     >
       <View
         style={{
           flexDirection: 'row',
-          justifyContent: 'center',
+          justifyContent: 'space-between',
           alignItems: 'center',
           flex: 1,
         }}
-      ></View>
-      <TouchableOpacity onPress={() => props.onClose('close')}>
-        <View
-          style={{
-            padding: 5,
-            backgroundColor: bodyColor,
-            marginRight: 10,
-            borderRadius: 100,
-          }}
-        >
-          <Image
-            source={CLOSE_ICON}
+      >
+        {headerContent}
+        <TouchableOpacity onPress={() => props.onClose('close')}>
+          <View
             style={{
-              width: 20,
-              height: 20,
+              padding: 5,
+              backgroundColor: bodyColor,
+              marginLeft: 10,
+              borderRadius: 100,
             }}
-          />
-        </View>
-      </TouchableOpacity>
+          >
+            <Image
+              source={CLOSE_ICON}
+              style={{
+                width: 20,
+                height: 20,
+              }}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 
@@ -201,14 +208,15 @@ export default function BottomoModal(props) {
             bottom: -(headerHeight + bodyHeight),
             left: 0,
             right: 0,
-            borderRadius: radius,
+            borderTopLeftRadius: radius,
+            borderTopRightRadius: radius,
             padding: 20,
             // backgroundColor: 'red',
           },
           bodyAnimatedStyle,
         ]}
       >
-        {props.children}
+        {bodyContent}
       </Animated.View>
     </View>
   );

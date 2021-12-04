@@ -14,7 +14,10 @@ import BottomoModal from './components/bottomModal';
 import { Actionsheet } from 'native-base';
 import { useDisclose } from 'native-base';
 import { NativeBaseProvider } from 'native-base';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Image } from 'react-native';
 const Tab = createMaterialTopTabNavigator();
+const BIN_ICON = require('./assets/bin.png');
 
 export default function App() {
   const before = require('./assets/before.png');
@@ -130,9 +133,90 @@ export default function App() {
           state={modalState}
           onClose={setModalState}
         >
-          <Text style={{ color: 'white' }}>Hello i'am a custom Modal</Text>
-          <Text style={{ color: 'white' }}>Hello i'am a custom Modal</Text>
-          <Text style={{ color: 'white' }}>Hello i'am a custom Modal</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <TouchableOpacity>
+              <View
+                style={{
+                  padding: 5,
+                  marginLeft: 10,
+                  borderRadius: 100,
+                }}
+              >
+                <Image
+                  source={BIN_ICON}
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View
+                style={{
+                  padding: 5,
+                  marginLeft: 10,
+                  borderRadius: 100,
+                }}
+              >
+                <Image
+                  source={BIN_ICON}
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View
+                style={{
+                  padding: 5,
+                  marginLeft: 10,
+                  borderRadius: 100,
+                }}
+              >
+                <Image
+                  source={BIN_ICON}
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View
+                style={{
+                  padding: 5,
+                  marginLeft: 10,
+                  borderRadius: 100,
+                }}
+              >
+                <Image
+                  source={BIN_ICON}
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              height: Dimensions.get('window').height / 2 - 80,
+            }}
+          >
+            <Text style={{ color: 'white' }}>Body</Text>
+          </View>
         </BottomoModal>
       </View>
     </>
