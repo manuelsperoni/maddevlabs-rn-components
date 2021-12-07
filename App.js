@@ -24,7 +24,9 @@ import { Image } from 'react-native';
 import { Dialog } from './components/dialog';
 import { Alert } from './components/alert';
 import { Card } from './components/card';
-
+import { Header, HeaderButton, HeaderButtonsList } from './components/header';
+import { CButton, CButtonIcon } from './components/cButton';
+import { PinchableImage } from './components/pinchableImage';
 const Tab = createMaterialTopTabNavigator();
 const BIN_ICON = require('./assets/bin.png');
 const IMAGE_TEST = require('./assets/test.png');
@@ -219,7 +221,7 @@ export default function App() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#1A202C',
+        backgroundColor: '#171923',
       }}
     >
       <View style={{ margin: 10 }}>
@@ -271,7 +273,7 @@ export default function App() {
           ]}
         />
       </Grid>
-      <Grid position="center" spacing={50} color={'#4A5568'}>
+      {/* <Grid position="center" spacing={50} color={'#4A5568'}>
         <Chart
           maxValue={200}
           height={Dimensions.get('window').height / 7}
@@ -304,8 +306,8 @@ export default function App() {
             },
           ]}
         />
-      </Grid>
-      <Grid position="center" spacing={10} color={'#4A5568'}>
+      </Grid> */}
+      {/* <Grid position="center" spacing={10} color={'#4A5568'}>
         <Chart
           maxValue={200}
           height={Dimensions.get('window').height / 7}
@@ -338,7 +340,7 @@ export default function App() {
             },
           ]}
         />
-      </Grid>
+      </Grid> */}
     </View>
   );
   const Dialog_page = () => (
@@ -454,7 +456,150 @@ export default function App() {
       </ScrollView>
     </View>
   );
+
+  const Header_page = () => (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#1A202C',
+      }}
+    >
+      <Header title={'Header title '} height={80} font={{ color: 'white' }}>
+        <HeaderButtonsList>
+          <HeaderButton
+            icon={BIN_ICON}
+            onPress={() => console.log('pressed')}
+          />
+          <HeaderButton
+            icon={BIN_ICON}
+            onPress={() => console.log('pressed')}
+          />
+        </HeaderButtonsList>
+      </Header>
+    </View>
+  );
+
+  const Pinchable_page = () => (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#1A202C',
+      }}
+    >
+      <PinchableImage
+        image={AFTER_IMAGE}
+        width={Dimensions.get('window').width}
+        height={(Dimensions.get('window').width * 4) / 3}
+      />
+    </View>
+  );
+
+  const Buttons_page = () => (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#1A202C',
+      }}
+    >
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        <CButton title={'Clickme'} outlined color={'#D8B6E3'} s margin={5} />
+        <CButton title={'Clickme'} outlined color={'#D8B6E3'} m margin={5} />
+        <CButton title={'Clickme'} outlined color={'#D8B6E3'} l margin={5} />
+      </View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        <CButton title={'Clickme'} filled color={'#D8B6E3'} s margin={5} />
+        <CButton title={'Clickme'} filled color={'#D8B6E3'} m margin={5} />
+        <CButton title={'Clickme'} filled color={'#D8B6E3'} l margin={5} />
+      </View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        <CButton title={'Clickme'} ghost color={'#D8B6E3'} s margin={5} />
+        <CButton title={'Clickme'} ghost color={'#D8B6E3'} m margin={5} />
+        <CButton title={'Clickme'} ghost color={'#D8B6E3'} l margin={5} />
+      </View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        <CButtonIcon
+          title={'Clickme'}
+          icon={BIN_ICON}
+          outlined
+          color={'#D8B6E3'}
+          s
+          margin={5}
+        />
+        <CButtonIcon
+          title={'Clickme'}
+          icon={BIN_ICON}
+          outlined
+          color={'#D8B6E3'}
+          m
+          margin={5}
+        />
+        <CButtonIcon
+          title={'Clickme'}
+          icon={BIN_ICON}
+          outlined
+          color={'#D8B6E3'}
+          l
+          margin={5}
+        />
+      </View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        <CButtonIcon
+          title={'Clickme'}
+          icon={BIN_ICON}
+          filled
+          color={'#D8B6E3'}
+          s
+          margin={5}
+        />
+        <CButtonIcon
+          title={'Clickme'}
+          icon={BIN_ICON}
+          filled
+          color={'#D8B6E3'}
+          m
+          margin={5}
+        />
+        <CButtonIcon
+          title={'Clickme'}
+          icon={BIN_ICON}
+          filled
+          color={'#D8B6E3'}
+          l
+          margin={5}
+        />
+      </View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        <CButtonIcon
+          title={'Clickme'}
+          icon={BIN_ICON}
+          ghost
+          color={'#D8B6E3'}
+          s
+          margin={5}
+        />
+        <CButtonIcon
+          title={'Clickme'}
+          icon={BIN_ICON}
+          ghost
+          color={'#D8B6E3'}
+          m
+          margin={5}
+        />
+        <CButtonIcon
+          title={'Clickme'}
+          icon={BIN_ICON}
+          ghost
+          color={'#D8B6E3'}
+          l
+          margin={5}
+        />
+      </View>
+    </View>
+  );
   const [showChart, setShowChart] = useState([
+    false,
+    false,
+    false,
     false,
     false,
     false,
@@ -522,6 +667,9 @@ export default function App() {
               false,
               false,
               false,
+              false,
+              false,
+              false,
             ])
           }
         />
@@ -531,6 +679,9 @@ export default function App() {
             setShowChart([
               false,
               true,
+              false,
+              false,
+              false,
               false,
               false,
               false,
@@ -554,6 +705,9 @@ export default function App() {
               false,
               false,
               false,
+              false,
+              false,
+              false,
             ])
           }
         />
@@ -565,6 +719,9 @@ export default function App() {
               false,
               false,
               true,
+              false,
+              false,
+              false,
               false,
               false,
               false,
@@ -586,6 +743,9 @@ export default function App() {
               false,
               false,
               false,
+              false,
+              false,
+              false,
             ])
           }
         />
@@ -599,6 +759,9 @@ export default function App() {
               false,
               false,
               true,
+              false,
+              false,
+              false,
               false,
               false,
               false,
@@ -618,6 +781,9 @@ export default function App() {
               true,
               false,
               false,
+              false,
+              false,
+              false,
             ])
           }
         />
@@ -634,6 +800,8 @@ export default function App() {
               false,
               true,
               false,
+              false,
+              false,
             ])
           }
         />
@@ -641,6 +809,65 @@ export default function App() {
           title="Card"
           onPress={() =>
             setShowChart([
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+            ])
+          }
+        />
+        <Button
+          title="Header"
+          onPress={() =>
+            setShowChart([
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+            ])
+          }
+        />
+        <Button
+          title="Buttons"
+          onPress={() =>
+            setShowChart([
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+            ])
+          }
+        />
+        <Button
+          title="Pinchable"
+          onPress={() =>
+            setShowChart([
+              false,
+              false,
+              false,
               false,
               false,
               false,
@@ -663,6 +890,9 @@ export default function App() {
       {showChart[6] && Dialog_page()}
       {showChart[7] && Alert_page()}
       {showChart[8] && Card_page()}
+      {showChart[9] && Header_page()}
+      {showChart[10] && Buttons_page()}
+      {showChart[11] && Pinchable_page()}
     </NativeBaseProvider>
   );
 }

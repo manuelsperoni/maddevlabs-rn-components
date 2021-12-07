@@ -126,6 +126,13 @@ export default function ScrollNumberPicker(props) {
   }, []);
 
   const translationY = useSharedValue(0);
+  const move = useSharedValue(10);
+
+  let moveStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: move.value }],
+    };
+  });
 
   const updateMeasure = () => {
     setMeasure(
@@ -147,6 +154,7 @@ export default function ScrollNumberPicker(props) {
     onScroll: (event) => {
       translationY.value = event.contentOffset.x;
       runOnJS(updateMeasure)();
+      // if (event.contentOffset.x > 30) move.value = -move.value;
     },
     onMomentumEnd: (event) => {
       scrollToNearestItem(event.contentOffset.x);
@@ -155,9 +163,9 @@ export default function ScrollNumberPicker(props) {
 
   return (
     <View style={style.container}>
-      <Text style={style.measureValue}>
+      <Animated.Text style={[moveStyle, style.measureValue]}>
         {measure} {udm}
-      </Text>
+      </Animated.Text>
       <View style={style.scrollSelector}>
         <View style={style.externalWrap}>
           <View style={style.scrollWrap}>
