@@ -10,16 +10,31 @@ import Chart from './components/chart';
 import { useState } from 'react';
 import { Button } from 'react-native';
 import Grid from './components/grid';
-import BottomoModal from './components/bottomModal';
+import {
+  BottomoModal,
+  BottomModalButtonsList,
+  BottomModalButton,
+  BottomModalBody,
+} from './components/bottomModal';
 import { Actionsheet } from 'native-base';
 import { useDisclose } from 'native-base';
 import { NativeBaseProvider } from 'native-base';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Image } from 'react-native';
+import { Dialog } from './components/dialog';
+import { Alert } from './components/alert';
+import { Card } from './components/card';
+
 const Tab = createMaterialTopTabNavigator();
 const BIN_ICON = require('./assets/bin.png');
+const IMAGE_TEST = require('./assets/test.png');
+const BEFORE_IMAGE = require('./assets/before.png');
+const AFTER_IMAGE = require('./assets/after.png');
+const BODY = require('./assets/body.png');
 
 export default function App() {
+  /* Some dummy data for the componments demo*/
+
   const before = require('./assets/before.png');
   const after = require('./assets/after.png');
   let y = [];
@@ -28,8 +43,7 @@ export default function App() {
   }
   const [randomData, setRandomData] = useState(y);
   const [modalState, setModalState] = useState('close');
-
-  console.log('changeState');
+  const [dialogState, setDialogState] = useState('close');
 
   const Comparison_page = () => (
     <View
@@ -43,7 +57,7 @@ export default function App() {
       <ImageComparison
         before={before}
         after={after}
-        color={'#D8B6E3'}
+        pickerColor={'#D8B6E3'}
         width={300}
         height={400}
       />
@@ -64,13 +78,13 @@ export default function App() {
         upperBound={100}
         multipleBigSegment={20}
         udm={''}
-        scale={1}
+        scale={0.1}
         startValue={60}
         bigSegmentHeight={30}
         smallSegmentHeight={15}
         segmentColor={'#4A5568'}
         segmentThikness={1}
-        spacing={26}
+        spacing={10}
         mainTipWidth={20}
         mainTipHeight={80}
         mainTipColor={'#D8B6E3'}
@@ -114,7 +128,11 @@ export default function App() {
   );
   const { isOpen, onOpen, onClose } = useDisclose();
   const BottomoModal_page = () => (
-    <>
+    <View
+      style={{
+        flex: 1,
+      }}
+    >
       <Button
         color="#D8B6E3"
         title="Open"
@@ -126,100 +144,49 @@ export default function App() {
       <View style={{ flex: 1 }}>
         <BottomoModal
           radius={20}
-          headerColor={'#171923'}
-          bodyColor={'#1A202C'}
+          headerBgColor={'#171923'}
+          bodyBgColor={'#1A202C'}
           headerHeight={60}
           bodyHeight={200}
           state={modalState}
           onClose={setModalState}
         >
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <TouchableOpacity>
-              <View
-                style={{
-                  padding: 5,
-                  marginLeft: 10,
-                  borderRadius: 100,
-                }}
-              >
-                <Image
-                  source={BIN_ICON}
-                  style={{
-                    width: 20,
-                    height: 20,
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View
-                style={{
-                  padding: 5,
-                  marginLeft: 10,
-                  borderRadius: 100,
-                }}
-              >
-                <Image
-                  source={BIN_ICON}
-                  style={{
-                    width: 20,
-                    height: 20,
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View
-                style={{
-                  padding: 5,
-                  marginLeft: 10,
-                  borderRadius: 100,
-                }}
-              >
-                <Image
-                  source={BIN_ICON}
-                  style={{
-                    width: 20,
-                    height: 20,
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View
-                style={{
-                  padding: 5,
-                  marginLeft: 10,
-                  borderRadius: 100,
-                }}
-              >
-                <Image
-                  source={BIN_ICON}
-                  style={{
-                    width: 20,
-                    height: 20,
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              height: Dimensions.get('window').height / 2 - 80,
-            }}
-          >
-            <Text style={{ color: 'white' }}>Body</Text>
-          </View>
+          <BottomModalButtonsList headerHeight={60}>
+            <BottomModalButton
+              icon={BIN_ICON}
+              onPress={() => console.log('pressed')}
+            />
+            <BottomModalButton
+              icon={BIN_ICON}
+              onPress={() => console.log('pressed')}
+            />
+            <BottomModalButton
+              icon={BIN_ICON}
+              onPress={() => console.log('pressed')}
+            />
+          </BottomModalButtonsList>
+          <BottomModalBody>
+            <ScrollNumberPicker
+              lowerBound={40}
+              upperBound={100}
+              multipleBigSegment={20}
+              udm={''}
+              scale={1}
+              startValue={60}
+              bigSegmentHeight={30}
+              smallSegmentHeight={15}
+              segmentColor={'#4A5568'}
+              segmentThikness={1}
+              spacing={26}
+              mainTipWidth={20}
+              mainTipHeight={80}
+              mainTipColor={'#D8B6E3'}
+              filled
+            />
+          </BottomModalBody>
         </BottomoModal>
       </View>
-    </>
+    </View>
   );
 
   const Home_page = () => (
@@ -270,7 +237,7 @@ export default function App() {
         />
       </View>
 
-      <Grid position="center" spacing={100} color={'#4A5568'}>
+      <Grid position="center" spacing={100} gridColor={'#4A5568'}>
         <Chart
           maxValue={200}
           height={Dimensions.get('window').height / 7}
@@ -374,14 +341,129 @@ export default function App() {
       </Grid>
     </View>
   );
+  const Dialog_page = () => (
+    <View
+      style={{
+        flex: 1,
+      }}
+    >
+      <Button
+        color="#D8B6E3"
+        title="Open"
+        onPress={() => {
+          setDialogState(true);
+        }}
+      />
+      <View
+        style={{
+          flex: 1,
+        }}
+      >
+        <Dialog
+          bg={'#1A202C'}
+          message="Are you sure to confirm something ?"
+          state={dialogState}
+          onClose={setDialogState}
+          onConfirm={() => {}}
+          onDeny={() => {}}
+          confirmLabel={'Yes'}
+          denyLabel={'No'}
+          font={{ family: 'Arial', size: 20, color: 'white' }}
+        />
+      </View>
+    </View>
+  );
 
+  const Alert_page = () => (
+    <View
+      style={{
+        flex: 1,
+      }}
+    >
+      <Button
+        color="#D8B6E3"
+        title="Open"
+        onPress={() => {
+          setDialogState(true);
+        }}
+      />
+      <View
+        style={{
+          flex: 1,
+        }}
+      >
+        <Alert
+          bg={'#EA7D7D'}
+          title="Ops, something went wrong! "
+          message="#Generic errror code 101 "
+          state={dialogState}
+          onClose={setDialogState}
+          font={{ family: 'Arial', size: 20, color: 'white' }}
+        />
+      </View>
+    </View>
+  );
+
+  const Card_page = () => (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#1A202C',
+      }}
+    >
+      <ScrollView>
+        <Card
+          startImage={BEFORE_IMAGE}
+          endImage={AFTER_IMAGE}
+          progress={10}
+          title={'Shred summer'}
+          data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
+          margin={20}
+          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
+          font={{ family: 'Arial', size: 20, color: 'white' }}
+          onPress={() => {}}
+          dayLeft={10}
+          cDate={'12/12/2021'}
+        />
+        <Card
+          startImage={BEFORE_IMAGE}
+          endImage={AFTER_IMAGE}
+          progress={10}
+          title={'Shred summer'}
+          data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
+          margin={20}
+          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
+          font={{ family: 'Arial', size: 20, color: 'white' }}
+          onPress={() => {}}
+          dayLeft={10}
+          cDate={'12/12/2021'}
+        />
+        <Card
+          startImage={BEFORE_IMAGE}
+          endImage={AFTER_IMAGE}
+          progress={100}
+          title={'Shred summer'}
+          data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
+          margin={20}
+          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
+          font={{ family: 'Arial', size: 20, color: 'white' }}
+          onPress={() => {}}
+          dayLeft={0}
+          cDate={'12/12/2021'}
+        />
+      </ScrollView>
+    </View>
+  );
   const [showChart, setShowChart] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
     true,
-    false,
-    false,
-    false,
-    false,
-    false,
   ]);
   return (
     <NativeBaseProvider>
@@ -430,37 +512,145 @@ export default function App() {
         <Button
           title="Chart"
           onPress={() =>
-            setShowChart([true, false, false, false, false, false])
+            setShowChart([
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+            ])
           }
         />
         <Button
           title="Modal"
           onPress={() =>
-            setShowChart([false, true, false, false, false, false])
+            setShowChart([
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+            ])
           }
         />
         <Button
           title="Home"
           onPress={() =>
-            setShowChart([false, false, true, false, false, false])
+            setShowChart([
+              false,
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+            ])
           }
         />
         <Button
           title="Comparison"
           onPress={() =>
-            setShowChart([false, false, false, true, false, false])
+            setShowChart([
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+            ])
           }
         />
         <Button
           title="Carousel"
           onPress={() =>
-            setShowChart([false, false, false, false, true, false])
+            setShowChart([
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
+            ])
           }
         />
         <Button
           title="Scroller"
           onPress={() =>
-            setShowChart([false, false, false, false, false, true])
+            setShowChart([
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+              false,
+            ])
+          }
+        />
+        <Button
+          title="Dialog"
+          onPress={() =>
+            setShowChart([
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+            ])
+          }
+        />
+        <Button
+          title="Alert"
+          onPress={() =>
+            setShowChart([
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+            ])
+          }
+        />
+        <Button
+          title="Card"
+          onPress={() =>
+            setShowChart([
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+            ])
           }
         />
       </View>
@@ -470,6 +660,9 @@ export default function App() {
       {showChart[3] && Comparison_page()}
       {showChart[4] && Carousel_page()}
       {showChart[5] && Scroller_page()}
+      {showChart[6] && Dialog_page()}
+      {showChart[7] && Alert_page()}
+      {showChart[8] && Card_page()}
     </NativeBaseProvider>
   );
 }

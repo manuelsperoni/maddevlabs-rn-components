@@ -44,47 +44,49 @@ export default function Chart(props) {
 
   let initialXscale = width / (y.length - 1);
 
-  /* FOCUS POINT PROCESSING*/
-  const focusPointLine = [...focusData].map((elem, index) => {
-    let scaledValue = (elem.value / maxValue) * height;
-    return (
-      <View
-        key={index}
-        style={{
-          position: 'absolute',
-          top: height - scaledValue,
-          width: width,
-          zIndex: 100,
-        }}
-      >
-        <Dash
-          style={{ width: width, height: 1 }}
-          dashColor={elem.color}
-          dashThickness={1}
-          dashGap={3}
-        />
-        <Text
-          style={[
-            {
-              position: 'absolute',
-              top: 7,
-              color: 'white',
-              paddingVertical: 3,
-              paddingHorizontal: 7,
-              backgroundColor: elem.color,
-              borderRadius: 10,
-              fontSize: 12,
-              opacity: 1,
-            },
-            elem.align == 'left' ? { left: 7 } : { right: 7 },
-          ]}
+  let focusPointLine = <></>;
+  if (focusData.length > 0) {
+    /* FOCUS POINT PROCESSING*/
+    focusPointLine = [...focusData].map((elem, index) => {
+      let scaledValue = (elem.value / maxValue) * height;
+      return (
+        <View
+          key={index}
+          style={{
+            position: 'absolute',
+            top: height - scaledValue,
+            width: width,
+            zIndex: 100,
+          }}
         >
-          {elem.label}
-        </Text>
-      </View>
-    );
-  });
-
+          <Dash
+            style={{ width: width, height: 1 }}
+            dashColor={elem.color}
+            dashThickness={1}
+            dashGap={3}
+          />
+          <Text
+            style={[
+              {
+                position: 'absolute',
+                top: 7,
+                color: 'white',
+                paddingVertical: 3,
+                paddingHorizontal: 7,
+                backgroundColor: elem.color,
+                borderRadius: 10,
+                fontSize: 12,
+                opacity: 1,
+              },
+              elem.align == 'left' ? { left: 7 } : { right: 7 },
+            ]}
+          >
+            {elem.label}
+          </Text>
+        </View>
+      );
+    });
+  }
   // animated shared value
   const animatedXscale = useSharedValue(initialXscale);
   const animatedYscale = useSharedValue(!props.scaleIn);

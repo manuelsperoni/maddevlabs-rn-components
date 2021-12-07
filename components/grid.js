@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 export default function Grid(props) {
   const spacing = props.spacing;
-  const color = props.color;
+  const gridColor = props.gridColor;
   const position = props.position;
   const [viewWidth, setViewWidth] = useState(0);
   const [viewHeight, setViewHeight] = useState(0);
@@ -16,7 +16,7 @@ export default function Grid(props) {
         style={{
           position: 'absolute',
           top: index * spacing,
-          borderColor: color,
+          bordergridColor: gridColor,
           borderWidth: 0.1,
           borderStyle: 'solid',
           borderRadius: 0.5,
@@ -34,7 +34,7 @@ export default function Grid(props) {
         style={{
           position: 'absolute',
           left: index * spacing,
-          borderColor: color,
+          bordergridColor: gridColor,
           borderWidth: 0.1,
           borderStyle: 'solid',
           borderRadius: 0.5,

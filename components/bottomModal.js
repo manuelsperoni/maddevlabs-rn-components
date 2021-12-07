@@ -9,27 +9,19 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { unmountComponentAtNode } from 'react-dom';
-import { Actionsheet } from 'native-base';
 
 const CLOSE_ICON = require('../assets/close.png');
-export default function BottomoModal(props) {
+export function BottomoModal(props) {
   const headerHeight = props.headerHeight;
   const radius = props.radius;
-  const headerColor = props.headerColor;
-  const bodyColor = props.bodyColor;
+  const headerBgColor = props.headerBgColor;
+  const bodyBgColor = props.bodyBgColor;
   // const bodyHeight = props.bodyHeight;
   const state = props.state;
   const translateYBody = useSharedValue(0);
   const translateYHeader = useSharedValue(0);
   const backOpacity = useSharedValue(0);
   const [bodyHeight, setBodyHeigth] = useState(0);
-
-  //   let header;
-  //   let body;
-  //   props.children.forEach((element) => {
-  //     console.log(element.type.displayName);
-  //   });
 
   if (state === 'close') {
     close();
@@ -87,9 +79,6 @@ export default function BottomoModal(props) {
 
   const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
-  const headerContent = props.children[0];
-  const bodyContent = props.children[1];
-
   const header = (
     <View
       style={{
@@ -97,7 +86,6 @@ export default function BottomoModal(props) {
         justifyContent: 'center',
         alignItems: 'center',
         height: headerHeight,
-        // backgroundColor: 'yellow',
         padding: 10,
       }}
     >
@@ -109,12 +97,20 @@ export default function BottomoModal(props) {
           flex: 1,
         }}
       >
-        {headerContent}
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          {props.children[0] /* all the buttons */}
+        </View>
         <TouchableOpacity onPress={() => props.onClose('close')}>
           <View
             style={{
               padding: 5,
-              backgroundColor: bodyColor,
+              // backgroundColor: bodyBgColor,
               marginLeft: 10,
               borderRadius: 100,
             }}
@@ -141,7 +137,6 @@ export default function BottomoModal(props) {
         right: 0,
         top: 0,
         bottom: 0,
-        backgroundColor: bodyColor,
       }}
     >
       {/* Back */}
@@ -181,7 +176,7 @@ export default function BottomoModal(props) {
           {
             position: 'absolute',
             zIndex: 20,
-            backgroundColor: headerColor,
+            backgroundColor: headerBgColor,
             height: bodyHeight + headerHeight,
             bottom: -(headerHeight + bodyHeight),
             left: 0,
@@ -204,7 +199,7 @@ export default function BottomoModal(props) {
           {
             position: 'absolute',
             zIndex: 30,
-            backgroundColor: bodyColor,
+            backgroundColor: bodyBgColor,
             bottom: -(headerHeight + bodyHeight),
             left: 0,
             right: 0,
@@ -216,8 +211,38 @@ export default function BottomoModal(props) {
           bodyAnimatedStyle,
         ]}
       >
-        {bodyContent}
+        {props.children[1]}
       </Animated.View>
     </View>
+  );
+}
+
+export function BottomModalButtonsList(props) {
+  return props.children;
+}
+
+export function BottomModalBody(props) {
+  return props.children;
+}
+
+export function BottomModalButton(props) {
+  return (
+    <TouchableOpacity onPress={() => props.onPress()}>
+      <View
+        style={{
+          padding: 5,
+          marginLeft: 10,
+          borderRadius: 100,
+        }}
+      >
+        <Image
+          source={props.icon}
+          style={{
+            width: 20,
+            height: 20,
+          }}
+        />
+      </View>
+    </TouchableOpacity>
   );
 }
