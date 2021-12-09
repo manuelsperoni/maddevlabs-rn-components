@@ -131,7 +131,7 @@ export function Dialog(props) {
             fontFamily: font.family,
             paddingBottom: 20,
             marginRight: 30,
-            
+            marginLeft: 20,
           }}
         >
           {message}

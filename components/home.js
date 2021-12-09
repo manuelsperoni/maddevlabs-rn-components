@@ -15,7 +15,7 @@ import Animated, {
   interpolate,
 } from 'react-native-reanimated';
 
-export default function Home() {
+export default function Home(props) {
   const translationY = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (event) => {
@@ -23,9 +23,6 @@ export default function Home() {
       console.log('translationY:', translationY.value);
     },
   });
-
-  // Dummy data for test purpose
-  const dummyData = [1, 2, 3, 4, 5, 6, 7, 8];
 
   // Header component
   const header = (
@@ -38,6 +35,22 @@ export default function Home() {
   );
   // Card style
   const card = <View style={style.card}></View>;
+  const headerStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateY: translationY.value
+        },
+      ],
+      transform: [
+        {
+          scale: interpolate(translationY.value, [0, 50], [1, 0])
+
+        },
+      ], opacity: interpolate(translationY.value, [0, 20], [1, 0])
+
+    };
+  });
 
   return (
     <View style={style.wrap}>
@@ -46,34 +59,13 @@ export default function Home() {
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
       >
-        {dummyData.map((el, index) => {
-          let a = useAnimatedStyle(() => {
-            return {
-              transform: [
-                {
-                  translateY: index === 0 ? translationY.value : 0,
-                },
-              ],
-              transform: [
-                {
-                  scale:
-                    index === 0
-                      ? interpolate(translationY.value, [0, 50], [1, 0])
-                      : 1,
-                },
-              ],
-              opacity:
-                index === 0
-                  ? interpolate(translationY.value, [0, 20], [1, 0])
-                  : 1,
-            };
-          });
-          return (
-            <Animated.View style={a} key={index}>
-              {index == 0 ? header : card}
-            </Animated.View>
-          );
-        })}
+
+        <Animated.View style={headerStyle}>
+          {header}
+        </Animated.View>
+        {props.children}
+
+
       </Animated.ScrollView>
     </View>
   );

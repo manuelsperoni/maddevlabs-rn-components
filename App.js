@@ -24,26 +24,51 @@ import { Card } from './components/card';
 import { Header, HeaderButton, HeaderButtonsList } from './components/header';
 import { CButton, CButtonIcon } from './components/cButton';
 import { PinchableImage } from './components/pinchableImage';
+import { Main } from './components/main';
+import { SettingItem } from './components/settingsItem';
+import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 const BIN_ICON = require('./assets/bin.png');
 const BEFORE_IMAGE = require('./assets/before.png');
 const AFTER_IMAGE = require('./assets/after.png');
 const BODY = require('./assets/body.png');
+const LANG = require('./assets/iconLang.png');
 
 const APP_THEME = {
-  p :{
+  p: {
     c100: "#D8B6E3",
     c200: "#6C617B",
     c300: "yellow",
   },
-  s :{
+  s: {
     c100: "#4A5568",
     c200: "#1A202C",
-    c300:"#171923",
+    c300: "#171923",
   },
-  w : "white",
+  w: "white",
   b: "black",
   g: "green",
-  r:'red'
+  r: 'red',
+  color: {
+    primary100: "#D8B6E3",
+    primary200: "#6C617B",
+    primary300: "yellow",
+    secondary100: "#4A5568",
+    secondary200: "#1A202C",
+    secondary300: "#171923",
+    white: "white",
+    black: "black",
+    green: "green",
+    red: 'red',
+  },
+  font: {
+    xxs: 10,
+    xs: 12,
+    sm: 14,
+    md: 16,
+    lg: 18,
+    xl: 20,
+    family: "Roboto"
+  }
 }
 
 export default function App() {
@@ -88,7 +113,7 @@ export default function App() {
         backgroundColor: APP_THEME.s.c300,
       }}
     >
-     
+
       <ScrollNumberPicker
         lowerBound={40}
         upperBound={100}
@@ -108,7 +133,7 @@ export default function App() {
         theme={APP_THEME}
 
       />
-    
+
     </View>
   );
   const { isOpen, onOpen, onClose } = useDisclose();
@@ -119,13 +144,10 @@ export default function App() {
         backgroundColor: APP_THEME.s.c300,
       }}
     >
-      <Button
-        color="#D8B6E3"
-        title="Open"
-        onPress={() => {
-          setModalState(Math.random());
-        }}
-      />
+
+      <CButton title={'Open'} outlined s margin={5} theme={APP_THEME} onPress={() => {
+        setModalState("open");
+      }} />
 
       <View style={{ flex: 1 }}>
         <BottomoModal
@@ -136,8 +158,7 @@ export default function App() {
           bodyHeight={200}
           state={modalState}
           onClose={setModalState}
-        theme={APP_THEME}
-
+          theme={APP_THEME}
         >
           <BottomModalButtonsList headerHeight={60}>
             <BottomModalButton
@@ -170,7 +191,7 @@ export default function App() {
               mainTipHeight={80}
               mainTipColor={'#D8B6E3'}
               filled
-        theme={APP_THEME}
+              theme={APP_THEME}
 
             />
           </BottomModalBody>
@@ -188,8 +209,96 @@ export default function App() {
         backgroundColor: APP_THEME.s.c300,
       }}
     >
-       
-      <Home  theme={APP_THEME} />
+
+      <Home theme={APP_THEME} >
+        <Card
+          theme={APP_THEME}
+          startImage={BEFORE_IMAGE}
+          endImage={AFTER_IMAGE}
+          progress={10}
+          title={'Shred summer'}
+          data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
+          margin={20}
+          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
+          font={{ family: 'Arial', size: 20, color: 'white' }}
+          onPress={() => { }}
+          dayLeft={10}
+          cDate={'12/12/2021'}
+        />
+        <Card
+          theme={APP_THEME}
+          startImage={BEFORE_IMAGE}
+          endImage={AFTER_IMAGE}
+          progress={10}
+          title={'Shred summer'}
+          data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
+          margin={20}
+          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
+          font={{ family: 'Arial', size: 20, color: 'white' }}
+          onPress={() => { }}
+          dayLeft={10}
+          cDate={'12/12/2021'}
+        />
+        <Card
+          theme={APP_THEME}
+          startImage={BEFORE_IMAGE}
+          endImage={AFTER_IMAGE}
+          progress={100}
+          title={'Shred summer'}
+          data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
+          margin={20}
+          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
+          font={{ family: 'Arial', size: 20, color: 'white' }}
+          onPress={() => { }}
+          dayLeft={0}
+          cDate={'12/12/2021'}
+        />
+        <Card
+          theme={APP_THEME}
+          startImage={BEFORE_IMAGE}
+          endImage={AFTER_IMAGE}
+          progress={10}
+          title={'Shred summer'}
+          data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
+          margin={20}
+          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
+          font={{ family: 'Arial', size: 20, color: 'white' }}
+          onPress={() => { }}
+          dayLeft={10}
+          cDate={'12/12/2021'}
+        />
+        <Card
+          theme={APP_THEME}
+          startImage={BEFORE_IMAGE}
+          endImage={AFTER_IMAGE}
+          progress={10}
+          title={'Shred summer'}
+          data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
+          margin={20}
+          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
+          font={{ family: 'Arial', size: 20, color: 'white' }}
+          onPress={() => { }}
+          dayLeft={10}
+          cDate={'12/12/2021'}
+        />
+        <Card
+          theme={APP_THEME}
+          startImage={BEFORE_IMAGE}
+          endImage={AFTER_IMAGE}
+          progress={100}
+          title={'Shred summer'}
+          data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
+          margin={20}
+          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
+          font={{ family: 'Arial', size: 20, color: 'white' }}
+          onPress={() => { }}
+          dayLeft={0}
+          cDate={'12/12/2021'}
+        />
+
+
+
+      </Home>
     </View>
   );
   const Carousel_page = () => (
@@ -201,7 +310,7 @@ export default function App() {
         backgroundColor: APP_THEME.s.c300,
       }}
     >
-      <Carousel  theme={APP_THEME}/>
+      <Carousel theme={APP_THEME} />
     </View>
   );
   const Chart_page = () => (
@@ -210,22 +319,23 @@ export default function App() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: APP_THEME.s.c300,      }}
+        backgroundColor: APP_THEME.s.c300,
+      }}
     >
-    
-<View>
-<CButton title={'Generete random data'} outlined  m margin={15}  theme={APP_THEME} disabled={false}  onPress={() => {
-            let y = [];
-            for (let index = 0; index < 10; index++) {
-              y.push(Math.floor(Math.random() * 200));
-            }
-            setRandomData(y);
-          }}/>
+
+      <View>
+        <CButton title={'Generete random data'} outlined m margin={15} theme={APP_THEME} disabled={false} onPress={() => {
+          let y = [];
+          for (let index = 0; index < 10; index++) {
+            y.push(Math.floor(Math.random() * 200));
+          }
+          setRandomData(y);
+        }} />
       </View>
 
-      <Grid position="center" spacing={100} gridColor={'#4A5568'}  theme={APP_THEME}>
+      <Grid position="center" spacing={100} gridColor={'#4A5568'} theme={APP_THEME}>
         <Chart
-         theme={APP_THEME}
+          theme={APP_THEME}
           maxValue={200}
           height={Dimensions.get('window').height / 7}
           width={Dimensions.get('window').width}
@@ -335,11 +445,11 @@ export default function App() {
         backgroundColor: APP_THEME.s.c300,
       }}
     >
-     
 
-<CButton title={'Open'} outlined  s margin={5}  theme={APP_THEME} onPress={() => {
-          setDialogState(true);
-        }}/>         
+
+      <CButton title={'Open'} outlined s margin={5} theme={APP_THEME} onPress={() => {
+        setDialogState(true);
+      }} />
 
       <View
         style={{
@@ -347,13 +457,13 @@ export default function App() {
         }}
       >
         <Dialog
-         theme={APP_THEME}
+          theme={APP_THEME}
           bg={'#1A202C'}
           message="Are you sure to confirm something ?"
           state={dialogState}
           onClose={setDialogState}
-          onConfirm={() => {}}
-          onDeny={() => {}}
+          onConfirm={() => { }}
+          onDeny={() => { }}
           confirmLabel={'Yes'}
           denyLabel={'No'}
           font={{ family: 'Arial', size: 20, color: 'white' }}
@@ -369,16 +479,16 @@ export default function App() {
         backgroundColor: APP_THEME.s.c300,
       }}
     >
-     <CButton title={'Open'} outlined  s margin={5}  theme={APP_THEME} onPress={() => {
-          setDialogState(true);
-        }}/>     
+      <CButton title={'Open'} outlined s margin={5} theme={APP_THEME} onPress={() => {
+        setDialogState(true);
+      }} />
       <View
         style={{
           flex: 1,
         }}
       >
         <Alert
-         theme={APP_THEME}
+          theme={APP_THEME}
           bg={'#EA7D7D'}
           title="Ops, something went wrong! "
           message="#Generic errror code 101 "
@@ -399,7 +509,7 @@ export default function App() {
     >
       <ScrollView>
         <Card
-         theme={APP_THEME}
+          theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
           progress={10}
@@ -408,12 +518,12 @@ export default function App() {
           margin={20}
           color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
           font={{ family: 'Arial', size: 20, color: 'white' }}
-          onPress={() => {}}
+          onPress={() => { }}
           dayLeft={10}
           cDate={'12/12/2021'}
         />
         <Card
-         theme={APP_THEME}
+          theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
           progress={10}
@@ -422,12 +532,12 @@ export default function App() {
           margin={20}
           color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
           font={{ family: 'Arial', size: 20, color: 'white' }}
-          onPress={() => {}}
+          onPress={() => { }}
           dayLeft={10}
           cDate={'12/12/2021'}
         />
         <Card
-         theme={APP_THEME}
+          theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
           progress={100}
@@ -436,7 +546,7 @@ export default function App() {
           margin={20}
           color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
           font={{ family: 'Arial', size: 20, color: 'white' }}
-          onPress={() => {}}
+          onPress={() => { }}
           dayLeft={0}
           cDate={'12/12/2021'}
         />
@@ -476,7 +586,7 @@ export default function App() {
       }}
     >
       <PinchableImage
-       theme={APP_THEME}
+        theme={APP_THEME}
         image={BODY}
         width={Dimensions.get('window').width}
         height={(Dimensions.get('window').width * 4) / 3}
@@ -492,25 +602,25 @@ export default function App() {
       }}
     >
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-        <CButton title={'Clickme'} outlined  s margin={5}  theme={APP_THEME} disabled={true}/>
-        <CButton title={'Clickme'} outlined  m margin={5}  theme={APP_THEME} disabled={true}/>
-        <CButton title={'Clickme'} outlined  l margin={5}  theme={APP_THEME} disabled={false}/>
+        <CButton title={'Clickme'} outlined s margin={5} theme={APP_THEME} disabled={true} />
+        <CButton title={'Clickme'} outlined m margin={5} theme={APP_THEME} disabled={true} />
+        <CButton title={'Clickme'} outlined l margin={5} theme={APP_THEME} disabled={false} />
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-        <CButton title={'Clickme'} filled s margin={5}  theme={APP_THEME} disabled={false}/>
-        <CButton title={'Clickme'} filled  m margin={5}  theme={APP_THEME} disabled={false}/>
-        <CButton title={'Clickme'} filled  l margin={5}  theme={APP_THEME} disabled={false}/>
+        <CButton title={'Clickme'} filled s margin={5} theme={APP_THEME} disabled={false} />
+        <CButton title={'Clickme'} filled m margin={5} theme={APP_THEME} disabled={false} />
+        <CButton title={'Clickme'} filled l margin={5} theme={APP_THEME} disabled={false} />
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-        <CButton title={'Clickme'} ghost  s margin={5}  theme={APP_THEME} disabled={false}/>
-        <CButton title={'Clickme'} ghost  m margin={5}  theme={APP_THEME} disabled={false}/>
-        <CButton title={'Clickme'} ghost  l margin={5}  theme={APP_THEME} disabled={false}/>
+        <CButton title={'Clickme'} ghost s margin={5} theme={APP_THEME} disabled={false} />
+        <CButton title={'Clickme'} ghost m margin={5} theme={APP_THEME} disabled={false} />
+        <CButton title={'Clickme'} ghost l margin={5} theme={APP_THEME} disabled={false} />
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         <CButtonIcon
           title={'Clickme'}
           icon={BIN_ICON}
-          outlined          
+          outlined
           s
           margin={5}
           theme={APP_THEME}
@@ -518,7 +628,7 @@ export default function App() {
         <CButtonIcon
           title={'Clickme'}
           icon={BIN_ICON}
-          outlined         
+          outlined
           m
           margin={5}
           theme={APP_THEME}
@@ -527,7 +637,7 @@ export default function App() {
           title={'Clickme'}
           icon={BIN_ICON}
           outlined
-         
+
           l
           margin={5}
           theme={APP_THEME}
@@ -589,8 +699,28 @@ export default function App() {
     </View>
   );
 
+  const Main_page = () =>
+  (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: APP_THEME.s.c300,
+      }}
+    >
+      <Main theme={APP_THEME} >
+        <SettingItem icon={LANG} theme={APP_THEME} title={"Setting title"} value={"Value"} />
+        <SettingItem icon={LANG} theme={APP_THEME} title={"Setting title"} value={"Value"} />
+        <SettingItem icon={LANG} theme={APP_THEME} title={"Setting title"} value={"Value"} />
+        <SettingItem icon={LANG} theme={APP_THEME} title={"Setting title"} value={"Value"} />
+      </Main>
+    </View>
+  );
+
+
+
+
   const [component, setComponent] = useState("1")
-  
+
   return (
     <NativeBaseProvider>
       {/* <NavigationContainer>
@@ -635,32 +765,34 @@ export default function App() {
           backgroundColor: '#171923',
         }}
       >
-         <CButton title={'Chart'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(1)}/>
-         <CButton title={'BottomoModal'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(2)}/>
-         <CButton title={'Home'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(3)}/>
-         <CButton title={'B&A'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(4)}/>
-         <CButton title={'Carousel'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(5)}/>
-         <CButton title={'Scroller'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(6)}/>
-         <CButton title={'Dialog'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(7)}/>
-         <CButton title={'Alert'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(8)}/>
-         <CButton title={'Card'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(9)}/>
-         <CButton title={'Header'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(10)}/>
-         <CButton title={'Buttons'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(11)}/>
-         <CButton title={'Pinchable'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(12)}/>         
-      
+        <CButton title={'Chart'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(1)} />
+        <CButton title={'BottomoModal'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(2)} />
+        <CButton title={'Home'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(3)} />
+        <CButton title={'B&A'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(4)} />
+        <CButton title={'Carousel'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(5)} />
+        <CButton title={'Scroller'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(6)} />
+        <CButton title={'Dialog'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(7)} />
+        <CButton title={'Alert'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(8)} />
+        <CButton title={'Card'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(9)} />
+        <CButton title={'Header'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(10)} />
+        <CButton title={'Buttons'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(11)} />
+        <CButton title={'Pinchable'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(12)} />
+        <CButton title={'Main/SettingItem'} outlined s margin={5} theme={APP_THEME} onPress={() => setComponent(13)} />
+
       </View>
-      {component==1 && Chart_page()}
-      {component==2 && BottomoModal_page()}
-      {component==3 && Home_page()}
-      {component==4 && Comparison_page()}
-      {component==5 && Carousel_page()}
-      {component==6 && Scroller_page()}
-      {component==7 && Dialog_page()}
-      {component==8 && Alert_page()}
-      {component==9 && Card_page()}
-      {component==10 && Header_page()}
-      {component==11 && Buttons_page()}
-      {component==12 && Pinchable_page()}
+      {component == 1 && Chart_page()}
+      {component == 2 && BottomoModal_page()}
+      {component == 3 && Home_page()}
+      {component == 4 && Comparison_page()}
+      {component == 5 && Carousel_page()}
+      {component == 6 && Scroller_page()}
+      {component == 7 && Dialog_page()}
+      {component == 8 && Alert_page()}
+      {component == 9 && Card_page()}
+      {component == 10 && Header_page()}
+      {component == 11 && Buttons_page()}
+      {component == 12 && Pinchable_page()}
+      {component == 13 && Main_page()}
     </NativeBaseProvider>
   );
 }

@@ -13,7 +13,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const CLOSE_ICON = require('../assets/close.png');
 export function BottomoModal(props) {
   const headerHeight = props.headerHeight;
-  const radius = props.radius; 
+  const radius = props.radius;
   const state = props.state;
   const translateYBody = useSharedValue(0);
   const translateYHeader = useSharedValue(0);
