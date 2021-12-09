@@ -27,7 +27,7 @@ import { PinchableImage } from './components/pinchableImage';
 import { Main } from './components/main';
 import { SettingItem } from './components/settingsItem';
 import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
-const BIN_ICON = require('./assets/bin.png');
+const DEMO_ICON = require('./assets/demoIcon.png');
 const BEFORE_IMAGE = require('./assets/before.png');
 const AFTER_IMAGE = require('./assets/after.png');
 const BODY = require('./assets/body.png');
@@ -162,38 +162,23 @@ export default function App() {
         >
           <BottomModalButtonsList headerHeight={60}>
             <BottomModalButton
-              icon={BIN_ICON}
+              icon={DEMO_ICON}
               onPress={() => console.log('pressed')}
             />
             <BottomModalButton
-              icon={BIN_ICON}
+              icon={DEMO_ICON}
               onPress={() => console.log('pressed')}
             />
             <BottomModalButton
-              icon={BIN_ICON}
+              icon={DEMO_ICON}
               onPress={() => console.log('pressed')}
             />
           </BottomModalButtonsList>
           <BottomModalBody>
-            <ScrollNumberPicker
-              lowerBound={40}
-              upperBound={100}
-              multipleBigSegment={20}
-              udm={''}
-              scale={1}
-              startValue={60}
-              bigSegmentHeight={30}
-              smallSegmentHeight={15}
-              segmentColor={'#4A5568'}
-              segmentThikness={1}
-              spacing={26}
-              mainTipWidth={20}
-              mainTipHeight={80}
-              mainTipColor={'#D8B6E3'}
-              filled
-              theme={APP_THEME}
-
-            />
+            <SettingItem icon={LANG} theme={APP_THEME} title={"Setting title"} value={"Value"} />
+            <SettingItem icon={LANG} theme={APP_THEME} title={"Setting title"} value={"Value"} />
+            <SettingItem icon={LANG} theme={APP_THEME} title={"Setting title"} value={"Value"} />
+            <SettingItem icon={LANG} theme={APP_THEME} title={"Setting title"} value={"Value"} />
           </BottomModalBody>
         </BottomoModal>
       </View>
@@ -565,11 +550,11 @@ export default function App() {
       <Header title={'Header title '} height={80} font={{ color: 'white' }} theme={APP_THEME}>
         <HeaderButtonsList>
           <HeaderButton
-            icon={BIN_ICON}
+            icon={DEMO_ICON}
             onPress={() => console.log('pressed')}
           />
           <HeaderButton
-            icon={BIN_ICON}
+            icon={DEMO_ICON}
             onPress={() => console.log('pressed')}
           />
         </HeaderButtonsList>
@@ -619,7 +604,7 @@ export default function App() {
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         <CButtonIcon
           title={'Clickme'}
-          icon={BIN_ICON}
+          icon={DEMO_ICON}
           outlined
           s
           margin={5}
@@ -627,7 +612,7 @@ export default function App() {
         />
         <CButtonIcon
           title={'Clickme'}
-          icon={BIN_ICON}
+          icon={DEMO_ICON}
           outlined
           m
           margin={5}
@@ -635,7 +620,7 @@ export default function App() {
         />
         <CButtonIcon
           title={'Clickme'}
-          icon={BIN_ICON}
+          icon={DEMO_ICON}
           outlined
 
           l
@@ -646,7 +631,7 @@ export default function App() {
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         <CButtonIcon
           title={'Clickme'}
-          icon={BIN_ICON}
+          icon={DEMO_ICON}
           filled
           s
           margin={5}
@@ -655,7 +640,7 @@ export default function App() {
         />
         <CButtonIcon
           title={'Clickme'}
-          icon={BIN_ICON}
+          icon={DEMO_ICON}
           filled
           m
           margin={5}
@@ -663,7 +648,7 @@ export default function App() {
         />
         <CButtonIcon
           title={'Clickme'}
-          icon={BIN_ICON}
+          icon={DEMO_ICON}
           filled
           l
           margin={5}
@@ -673,7 +658,7 @@ export default function App() {
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         <CButtonIcon
           title={'Clickme'}
-          icon={BIN_ICON}
+          icon={DEMO_ICON}
           ghost
           s
           margin={5}
@@ -681,7 +666,7 @@ export default function App() {
         />
         <CButtonIcon
           title={'Clickme'}
-          icon={BIN_ICON}
+          icon={DEMO_ICON}
           ghost
           m
           margin={5}
@@ -689,7 +674,7 @@ export default function App() {
         />
         <CButtonIcon
           title={'Clickme'}
-          icon={BIN_ICON}
+          icon={DEMO_ICON}
           ghost
           l
           margin={5}
