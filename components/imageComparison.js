@@ -51,7 +51,7 @@ export default function imageComparison(props) {
               bottom: -50,
               left: props.width / 2 - 50 / 2,
               width: 50,
-              backgroundColor: props.pickerColor,
+              backgroundColor: props.theme.p.c100,
               borderRadius: 20,
               height: 100,
               zIndex: 20,

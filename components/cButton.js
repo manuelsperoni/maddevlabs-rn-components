@@ -1,8 +1,7 @@
-import { width } from 'dom-helpers';
 import React from 'react';
 import { Image, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
+
 
 export function CButton(props) {
   let styleSize = { padding: 0 };
@@ -26,21 +25,21 @@ export function CButton(props) {
   let styleType = {};
 
   if (props.filled) {
-    styleType.backgroundColor = props.color;
-    styleType.color = 'white';
+    styleType.backgroundColor = props.theme.p.c100;
+    styleType.color = props.theme.w;
   }
   if (props.outlined) {
     styleType.borderWidth = 1;
-    styleType.borderColor = props.color;
-    styleType.color = props.color;
+    styleType.borderColor = props.theme.p.c100;
+    styleType.color = props.theme.p.c100;
   }
   if (props.ghost) {
-    styleType.color = props.color;
+    styleType.color = props.theme.w;
   }
-  let styleCommon = { flex: 0, margin: props.margin };
+  let styleCommon = { flex: 0, margin: props.margin,opacity:props.disabled?0.3:1 };
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity disabled={props.disabled} onPress={props.onPress}>
       <Text style={[styleSize, styleType, styleCommon]}>{props.title}</Text>
     </TouchableOpacity>
   );
@@ -72,20 +71,17 @@ export function CButtonIcon(props) {
   let styleType = {};
 
   if (props.filled) {
-    styleType.backgroundColor = props.color;
+    styleType.backgroundColor = props.theme.p.c100;
     styleType.color = 'white';
   }
   if (props.outlined) {
     styleType.borderWidth = 1;
-    styleType.borderColor = props.color;
-    styleType.color = props.color;
+    styleType.borderColor = props.theme.p.c100;   
   }
-  if (props.ghost) {
-    styleType.color = props.color;
-  }
-  let styleCommon = { flex: 0, margin: props.margin };
+ 
+  let styleCommon = { flex: 0, margin: props.margin,opacity:props.disabled?0.3:1  };
   return (
-    <TouchableOpacity>
+    <TouchableOpacity disabled={props.disabled} onPress={props.onPress}>
       <View style={[styleSize, styleType, styleCommon]}>
         <Image source={props.icon} style={imageSize} />
       </View>

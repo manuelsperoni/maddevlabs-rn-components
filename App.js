@@ -16,23 +16,35 @@ import {
   BottomModalButton,
   BottomModalBody,
 } from './components/bottomModal';
-import { Actionsheet } from 'native-base';
-import { useDisclose } from 'native-base';
+import { theme, useDisclose } from 'native-base';
 import { NativeBaseProvider } from 'native-base';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Image } from 'react-native';
 import { Dialog } from './components/dialog';
 import { Alert } from './components/alert';
 import { Card } from './components/card';
 import { Header, HeaderButton, HeaderButtonsList } from './components/header';
 import { CButton, CButtonIcon } from './components/cButton';
 import { PinchableImage } from './components/pinchableImage';
-const Tab = createMaterialTopTabNavigator();
 const BIN_ICON = require('./assets/bin.png');
-const IMAGE_TEST = require('./assets/test.png');
 const BEFORE_IMAGE = require('./assets/before.png');
 const AFTER_IMAGE = require('./assets/after.png');
 const BODY = require('./assets/body.png');
+
+const APP_THEME = {
+  p :{
+    c100: "#D8B6E3",
+    c200: "#6C617B",
+    c300: "yellow",
+  },
+  s :{
+    c100: "#4A5568",
+    c200: "#1A202C",
+    c300:"#171923",
+  },
+  w : "white",
+  b: "black",
+  g: "green",
+  r:'red'
+}
 
 export default function App() {
   /* Some dummy data for the componments demo*/
@@ -53,7 +65,7 @@ export default function App() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#1A202C',
+        backgroundColor: APP_THEME.s.c300,
       }}
     >
       <ImageComparison
@@ -62,6 +74,7 @@ export default function App() {
         pickerColor={'#D8B6E3'}
         width={300}
         height={400}
+        theme={APP_THEME}
       />
     </View>
   );
@@ -72,26 +85,10 @@ export default function App() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#1A202C',
+        backgroundColor: APP_THEME.s.c300,
       }}
     >
-      <ScrollNumberPicker
-        lowerBound={40}
-        upperBound={100}
-        multipleBigSegment={20}
-        udm={''}
-        scale={0.1}
-        startValue={60}
-        bigSegmentHeight={30}
-        smallSegmentHeight={15}
-        segmentColor={'#4A5568'}
-        segmentThikness={1}
-        spacing={10}
-        mainTipWidth={20}
-        mainTipHeight={80}
-        mainTipColor={'#D8B6E3'}
-        filled
-      />
+     
       <ScrollNumberPicker
         lowerBound={40}
         upperBound={100}
@@ -103,29 +100,15 @@ export default function App() {
         smallSegmentHeight={35}
         segmentColor={'#4A5568'}
         segmentThikness={2}
-        spacing={26}
+        spacing={12}
         mainTipWidth={20}
         mainTipHeight={80}
         mainTipColor={'#D8B6E3'}
         outlined
+        theme={APP_THEME}
+
       />
-      <ScrollNumberPicker
-        lowerBound={40}
-        upperBound={100}
-        multipleBigSegment={10}
-        udm={''}
-        scale={1}
-        startValue={60}
-        bigSegmentHeight={50}
-        smallSegmentHeight={35}
-        segmentColor={'#4A5568'}
-        segmentThikness={2}
-        spacing={10}
-        mainTipWidth={5}
-        mainTipHeight={50}
-        mainTipColor={'#D8B6E3'}
-        outlined
-      />
+    
     </View>
   );
   const { isOpen, onOpen, onClose } = useDisclose();
@@ -133,6 +116,7 @@ export default function App() {
     <View
       style={{
         flex: 1,
+        backgroundColor: APP_THEME.s.c300,
       }}
     >
       <Button
@@ -152,6 +136,8 @@ export default function App() {
           bodyHeight={200}
           state={modalState}
           onClose={setModalState}
+        theme={APP_THEME}
+
         >
           <BottomModalButtonsList headerHeight={60}>
             <BottomModalButton
@@ -184,6 +170,8 @@ export default function App() {
               mainTipHeight={80}
               mainTipColor={'#D8B6E3'}
               filled
+        theme={APP_THEME}
+
             />
           </BottomModalBody>
         </BottomoModal>
@@ -197,10 +185,11 @@ export default function App() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#1A202C',
+        backgroundColor: APP_THEME.s.c300,
       }}
     >
-      <Home />
+       
+      <Home  theme={APP_THEME} />
     </View>
   );
   const Carousel_page = () => (
@@ -209,10 +198,10 @@ export default function App() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#1A202C',
+        backgroundColor: APP_THEME.s.c300,
       }}
     >
-      <Carousel />
+      <Carousel  theme={APP_THEME}/>
     </View>
   );
   const Chart_page = () => (
@@ -221,26 +210,22 @@ export default function App() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#171923',
-      }}
+        backgroundColor: APP_THEME.s.c300,      }}
     >
-      <View style={{ margin: 10 }}>
-        <Button
-          color="#D8B6E3"
-          margin={30}
-          title="Generate random data"
-          onPress={() => {
+    
+<View>
+<CButton title={'Generete random data'} outlined  m margin={15}  theme={APP_THEME} disabled={false}  onPress={() => {
             let y = [];
             for (let index = 0; index < 10; index++) {
               y.push(Math.floor(Math.random() * 200));
             }
             setRandomData(y);
-          }}
-        />
+          }}/>
       </View>
 
-      <Grid position="center" spacing={100} gridColor={'#4A5568'}>
+      <Grid position="center" spacing={100} gridColor={'#4A5568'}  theme={APP_THEME}>
         <Chart
+         theme={APP_THEME}
           maxValue={200}
           height={Dimensions.get('window').height / 7}
           width={Dimensions.get('window').width}
@@ -272,7 +257,7 @@ export default function App() {
             },
           ]}
         />
-      </Grid>
+      </Grid >
       {/* <Grid position="center" spacing={50} color={'#4A5568'}>
         <Chart
           maxValue={200}
@@ -347,21 +332,22 @@ export default function App() {
     <View
       style={{
         flex: 1,
+        backgroundColor: APP_THEME.s.c300,
       }}
     >
-      <Button
-        color="#D8B6E3"
-        title="Open"
-        onPress={() => {
+     
+
+<CButton title={'Open'} outlined  s margin={5}  theme={APP_THEME} onPress={() => {
           setDialogState(true);
-        }}
-      />
+        }}/>         
+
       <View
         style={{
           flex: 1,
         }}
       >
         <Dialog
+         theme={APP_THEME}
           bg={'#1A202C'}
           message="Are you sure to confirm something ?"
           state={dialogState}
@@ -380,21 +366,19 @@ export default function App() {
     <View
       style={{
         flex: 1,
+        backgroundColor: APP_THEME.s.c300,
       }}
     >
-      <Button
-        color="#D8B6E3"
-        title="Open"
-        onPress={() => {
+     <CButton title={'Open'} outlined  s margin={5}  theme={APP_THEME} onPress={() => {
           setDialogState(true);
-        }}
-      />
+        }}/>     
       <View
         style={{
           flex: 1,
         }}
       >
         <Alert
+         theme={APP_THEME}
           bg={'#EA7D7D'}
           title="Ops, something went wrong! "
           message="#Generic errror code 101 "
@@ -410,11 +394,12 @@ export default function App() {
     <View
       style={{
         flex: 1,
-        backgroundColor: '#1A202C',
+        backgroundColor: APP_THEME.s.c300,
       }}
     >
       <ScrollView>
         <Card
+         theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
           progress={10}
@@ -428,6 +413,7 @@ export default function App() {
           cDate={'12/12/2021'}
         />
         <Card
+         theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
           progress={10}
@@ -441,6 +427,7 @@ export default function App() {
           cDate={'12/12/2021'}
         />
         <Card
+         theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
           progress={100}
@@ -461,10 +448,11 @@ export default function App() {
     <View
       style={{
         flex: 1,
-        backgroundColor: '#1A202C',
+        backgroundColor: APP_THEME.s.c300,
+
       }}
     >
-      <Header title={'Header title '} height={80} font={{ color: 'white' }}>
+      <Header title={'Header title '} height={80} font={{ color: 'white' }} theme={APP_THEME}>
         <HeaderButtonsList>
           <HeaderButton
             icon={BIN_ICON}
@@ -483,11 +471,13 @@ export default function App() {
     <View
       style={{
         flex: 1,
-        backgroundColor: '#1A202C',
+        backgroundColor: APP_THEME.s.c300,
+
       }}
     >
       <PinchableImage
-        image={AFTER_IMAGE}
+       theme={APP_THEME}
+        image={BODY}
         width={Dimensions.get('window').width}
         height={(Dimensions.get('window').width * 4) / 3}
       />
@@ -498,48 +488,49 @@ export default function App() {
     <View
       style={{
         flex: 1,
-        backgroundColor: '#1A202C',
+        backgroundColor: APP_THEME.s.c300,
       }}
     >
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-        <CButton title={'Clickme'} outlined color={'#D8B6E3'} s margin={5} />
-        <CButton title={'Clickme'} outlined color={'#D8B6E3'} m margin={5} />
-        <CButton title={'Clickme'} outlined color={'#D8B6E3'} l margin={5} />
+        <CButton title={'Clickme'} outlined  s margin={5}  theme={APP_THEME} disabled={true}/>
+        <CButton title={'Clickme'} outlined  m margin={5}  theme={APP_THEME} disabled={true}/>
+        <CButton title={'Clickme'} outlined  l margin={5}  theme={APP_THEME} disabled={false}/>
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-        <CButton title={'Clickme'} filled color={'#D8B6E3'} s margin={5} />
-        <CButton title={'Clickme'} filled color={'#D8B6E3'} m margin={5} />
-        <CButton title={'Clickme'} filled color={'#D8B6E3'} l margin={5} />
+        <CButton title={'Clickme'} filled s margin={5}  theme={APP_THEME} disabled={false}/>
+        <CButton title={'Clickme'} filled  m margin={5}  theme={APP_THEME} disabled={false}/>
+        <CButton title={'Clickme'} filled  l margin={5}  theme={APP_THEME} disabled={false}/>
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-        <CButton title={'Clickme'} ghost color={'#D8B6E3'} s margin={5} />
-        <CButton title={'Clickme'} ghost color={'#D8B6E3'} m margin={5} />
-        <CButton title={'Clickme'} ghost color={'#D8B6E3'} l margin={5} />
+        <CButton title={'Clickme'} ghost  s margin={5}  theme={APP_THEME} disabled={false}/>
+        <CButton title={'Clickme'} ghost  m margin={5}  theme={APP_THEME} disabled={false}/>
+        <CButton title={'Clickme'} ghost  l margin={5}  theme={APP_THEME} disabled={false}/>
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         <CButtonIcon
           title={'Clickme'}
           icon={BIN_ICON}
-          outlined
-          color={'#D8B6E3'}
+          outlined          
           s
           margin={5}
+          theme={APP_THEME}
         />
         <CButtonIcon
           title={'Clickme'}
           icon={BIN_ICON}
-          outlined
-          color={'#D8B6E3'}
+          outlined         
           m
           margin={5}
+          theme={APP_THEME}
         />
         <CButtonIcon
           title={'Clickme'}
           icon={BIN_ICON}
           outlined
-          color={'#D8B6E3'}
+         
           l
           margin={5}
+          theme={APP_THEME}
         />
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -547,25 +538,26 @@ export default function App() {
           title={'Clickme'}
           icon={BIN_ICON}
           filled
-          color={'#D8B6E3'}
           s
           margin={5}
+          theme={APP_THEME}
+          disabled={true}
         />
         <CButtonIcon
           title={'Clickme'}
           icon={BIN_ICON}
           filled
-          color={'#D8B6E3'}
           m
           margin={5}
+          theme={APP_THEME}
         />
         <CButtonIcon
           title={'Clickme'}
           icon={BIN_ICON}
           filled
-          color={'#D8B6E3'}
           l
           margin={5}
+          theme={APP_THEME}
         />
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -573,43 +565,32 @@ export default function App() {
           title={'Clickme'}
           icon={BIN_ICON}
           ghost
-          color={'#D8B6E3'}
           s
           margin={5}
+          theme={APP_THEME}
         />
         <CButtonIcon
           title={'Clickme'}
           icon={BIN_ICON}
           ghost
-          color={'#D8B6E3'}
           m
           margin={5}
+          theme={APP_THEME}
         />
         <CButtonIcon
           title={'Clickme'}
           icon={BIN_ICON}
           ghost
-          color={'#D8B6E3'}
           l
           margin={5}
+          theme={APP_THEME}
         />
       </View>
     </View>
   );
-  const [showChart, setShowChart] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    true,
-  ]);
+
+  const [component, setComponent] = useState("1")
+  
   return (
     <NativeBaseProvider>
       {/* <NavigationContainer>
@@ -654,245 +635,32 @@ export default function App() {
           backgroundColor: '#171923',
         }}
       >
-        <Button
-          title="Chart"
-          onPress={() =>
-            setShowChart([
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-            ])
-          }
-        />
-        <Button
-          title="Modal"
-          onPress={() =>
-            setShowChart([
-              false,
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-            ])
-          }
-        />
-        <Button
-          title="Home"
-          onPress={() =>
-            setShowChart([
-              false,
-              false,
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-            ])
-          }
-        />
-        <Button
-          title="Comparison"
-          onPress={() =>
-            setShowChart([
-              false,
-              false,
-              false,
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-            ])
-          }
-        />
-        <Button
-          title="Carousel"
-          onPress={() =>
-            setShowChart([
-              false,
-              false,
-              false,
-              false,
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-            ])
-          }
-        />
-        <Button
-          title="Scroller"
-          onPress={() =>
-            setShowChart([
-              false,
-              false,
-              false,
-              false,
-              false,
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-            ])
-          }
-        />
-        <Button
-          title="Dialog"
-          onPress={() =>
-            setShowChart([
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-            ])
-          }
-        />
-        <Button
-          title="Alert"
-          onPress={() =>
-            setShowChart([
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              true,
-              false,
-              false,
-              false,
-            ])
-          }
-        />
-        <Button
-          title="Card"
-          onPress={() =>
-            setShowChart([
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              true,
-              false,
-              false,
-            ])
-          }
-        />
-        <Button
-          title="Header"
-          onPress={() =>
-            setShowChart([
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              true,
-              false,
-              false,
-            ])
-          }
-        />
-        <Button
-          title="Buttons"
-          onPress={() =>
-            setShowChart([
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              true,
-              false,
-            ])
-          }
-        />
-        <Button
-          title="Pinchable"
-          onPress={() =>
-            setShowChart([
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              true,
-            ])
-          }
-        />
+         <CButton title={'Chart'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(1)}/>
+         <CButton title={'BottomoModal'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(2)}/>
+         <CButton title={'Home'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(3)}/>
+         <CButton title={'B&A'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(4)}/>
+         <CButton title={'Carousel'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(5)}/>
+         <CButton title={'Scroller'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(6)}/>
+         <CButton title={'Dialog'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(7)}/>
+         <CButton title={'Alert'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(8)}/>
+         <CButton title={'Card'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(9)}/>
+         <CButton title={'Header'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(10)}/>
+         <CButton title={'Buttons'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(11)}/>
+         <CButton title={'Pinchable'} outlined  s margin={5}  theme={APP_THEME} onPress={()=> setComponent(12)}/>         
+      
       </View>
-      {showChart[0] && Chart_page()}
-      {showChart[1] && BottomoModal_page()}
-      {showChart[2] && Home_page()}
-      {showChart[3] && Comparison_page()}
-      {showChart[4] && Carousel_page()}
-      {showChart[5] && Scroller_page()}
-      {showChart[6] && Dialog_page()}
-      {showChart[7] && Alert_page()}
-      {showChart[8] && Card_page()}
-      {showChart[9] && Header_page()}
-      {showChart[10] && Buttons_page()}
-      {showChart[11] && Pinchable_page()}
+      {component==1 && Chart_page()}
+      {component==2 && BottomoModal_page()}
+      {component==3 && Home_page()}
+      {component==4 && Comparison_page()}
+      {component==5 && Carousel_page()}
+      {component==6 && Scroller_page()}
+      {component==7 && Dialog_page()}
+      {component==8 && Alert_page()}
+      {component==9 && Card_page()}
+      {component==10 && Header_page()}
+      {component==11 && Buttons_page()}
+      {component==12 && Pinchable_page()}
     </NativeBaseProvider>
   );
 }

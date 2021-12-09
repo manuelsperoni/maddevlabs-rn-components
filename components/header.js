@@ -37,7 +37,7 @@ export function Header(props, { navigation }) {
         style={{
           textAlign: 'center',
           flex: 1,
-          color: props.font.color,
+          color: props.theme.w,
           fontSize: 20,
         }}
       >

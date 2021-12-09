@@ -11,15 +11,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const CLOSE_ICON = require('../assets/close.png');
 export function Alert(props) {
-  const bg = props.bg;
   const message = props.message;
   const title = props.title;
-  const state = props.state;
-  const color = props.color;
-  const confirmLabel = props.confirmLabel;
-  const denyLabel = props.denyLabel;
-  const onConfirm = props.onConfirm;
-  const onDeny = props.onDeny;
+  const state = props.state;  
   const font = props.font;
   const dialogOpacity = useSharedValue(0);
   const overlayOpacity = useSharedValue(0);
@@ -90,7 +84,7 @@ export function Alert(props) {
         style={[
           {
             zIndex: 30,
-            backgroundColor: bg,
+            backgroundColor: props.theme.r,
             borderRadius: 20,
             padding: 15,
             zIndex: 100,
@@ -128,7 +122,7 @@ export function Alert(props) {
         <View style={{ paddingBottom: 20 }}>
           <Text
             style={{
-              color: font.color,
+              color: props.theme.w,
               fontSize: font.size,
               fontFamily: font.family,
               paddingBottom: 0,
@@ -140,7 +134,7 @@ export function Alert(props) {
           </Text>
           <Text
             style={{
-              color: font.color,
+              color: props.theme.w,
               fontSize: font.size * 0.8,
               fontFamily: font.family,
               textAlign: 'center',

@@ -13,10 +13,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const CLOSE_ICON = require('../assets/close.png');
 export function BottomoModal(props) {
   const headerHeight = props.headerHeight;
-  const radius = props.radius;
-  const headerBgColor = props.headerBgColor;
-  const bodyBgColor = props.bodyBgColor;
-  // const bodyHeight = props.bodyHeight;
+  const radius = props.radius; 
   const state = props.state;
   const translateYBody = useSharedValue(0);
   const translateYHeader = useSharedValue(0);
@@ -54,7 +51,7 @@ export function BottomoModal(props) {
       }
     );
     translateYHeader.value = withDelay(
-      200,
+      100,
       withTiming(-(headerHeight + bodyHeight), {
         duration: 200,
       })
@@ -66,14 +63,14 @@ export function BottomoModal(props) {
   }
 
   function close() {
-    translateYBody.value = withDelay(200, withTiming(0), {
-      duration: 200,
+    translateYBody.value = withDelay(30, withTiming(0), {
+      duration: 10,
     });
-    translateYHeader.value = withDelay(50, withTiming(0), {
-      duration: 200,
+    translateYHeader.value = withDelay(0, withTiming(0), {
+      duration: 20,
     });
     backOpacity.value = withTiming(0, {
-      duration: 100,
+      duration: 20,
     });
   }
 
@@ -176,7 +173,7 @@ export function BottomoModal(props) {
           {
             position: 'absolute',
             zIndex: 20,
-            backgroundColor: headerBgColor,
+            backgroundColor: props.theme.s.c300,
             height: bodyHeight + headerHeight,
             bottom: -(headerHeight + bodyHeight),
             left: 0,
@@ -199,14 +196,13 @@ export function BottomoModal(props) {
           {
             position: 'absolute',
             zIndex: 30,
-            backgroundColor: bodyBgColor,
+            backgroundColor: props.theme.s.c200,
             bottom: -(headerHeight + bodyHeight),
             left: 0,
             right: 0,
             borderTopLeftRadius: radius,
             borderTopRightRadius: radius,
             padding: 20,
-            // backgroundColor: 'red',
           },
           bodyAnimatedStyle,
         ]}

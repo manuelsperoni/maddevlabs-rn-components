@@ -51,21 +51,21 @@ export default function ScrollNumberPicker(props) {
     smallSegment: {
       width: segmentThikness,
       height: smallSegmentHeight,
-      backgroundColor: segmentColor,
+      backgroundColor: props.theme.s.c100,
       borderRadius: 3,
       marginRight: spacing,
     },
     bigSegment: {
       width: segmentThikness,
       height: bigSegmentHeight,
-      backgroundColor: segmentColor,
+      backgroundColor: props.theme.s.c100,
       borderRadius: 3,
       marginRight: spacing,
     },
     measureValue: {
       fontSize: 30,
       margin: 30,
-      color: 'white',
+      color: props.theme.w
     },
     fixStart: {
       width: Dimensions.get('window').width / 2 - segmentThikness / 2,
@@ -81,10 +81,10 @@ export default function ScrollNumberPicker(props) {
       left: Dimensions.get('window').width / 2 - mainTipWidth / 2,
       width: mainTipWidth,
       height: mainTipHeight,
-      borderColor: mainTipColor,
+      borderColor: props.theme.p.c100,
       borderWidth: outlined ? 2 : 0,
       borderRadius: 10,
-      backgroundColor: filled ? mainTipColor : 'transparent',
+      backgroundColor: filled ? mainTipColor : props.theme.p.c200,
       zIndex: 10,
     },
     scrollWrap: {

@@ -14,7 +14,6 @@ export function Card(props) {
   const progress = props.progress; // % progress
   const margin = props.margin;
   const font = props.font;
-  const color = props.color;
   const onPress = props.onPress;
   const dayLeft = props.dayLeft;
   const cDate = props.cDate;
@@ -36,7 +35,7 @@ export function Card(props) {
       >
         <Text
           style={{
-            color: font.color,
+            color: props.theme.w,
             fontSize: 24,
             margin: 0,
             padding: 0,
@@ -46,10 +45,10 @@ export function Card(props) {
         </Text>
         <Text
           style={{
-            color: font.color,
+            color: props.theme.w,
             margin: 0,
             padding: 5,
-            backgroundColor: color.s100,
+            backgroundColor: props.theme.s.c100,
             borderRadius: 20,
             marginLeft: 10,
             fontSize: 10,
@@ -59,7 +58,7 @@ export function Card(props) {
         </Text>
       </View>
       {/* Main */}
-      <View style={{ borderRadius: 20, backgroundColor: color.p200 }}>
+      <View style={{ borderRadius: 20, backgroundColor:  props.theme.p.c200 }}>
         {/* Image content */}
         <View style={{ flexDirection: 'row' }}>
           <Image
@@ -98,8 +97,7 @@ export function Card(props) {
               width={Dimensions.get('window').width - 2 * margin - 50}
               data={data.y}
               maxDisplayedData={30}
-              fill={'#D8B6E3'}
-              stroke={'#D8B6E3'}
+              theme ={props.theme}
               strokeWidth={2}
               opacityIn
               scaleIn
@@ -120,10 +118,10 @@ export function Card(props) {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ color: font.color, fontWeight: 'bold' }}>
+              <Text style={{ color:  props.theme.w, fontWeight: 'bold' }}>
                 START
               </Text>
-              <Text style={{ color: font.color }}>{data.startW} kg</Text>
+              <Text style={{ color: props.theme.w }}>{data.startW} kg</Text>
             </View>
             <View
               style={{
@@ -132,10 +130,10 @@ export function Card(props) {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ color: font.color, fontWeight: 'bold' }}>
+              <Text style={{ color: props.theme.w, fontWeight: 'bold' }}>
                 ACTUAL
               </Text>
-              <Text style={{ color: font.color }}>{data.actualW} kg</Text>
+              <Text style={{ color:props.theme.w }}>{data.actualW} kg</Text>
             </View>
             <View
               style={{
@@ -144,10 +142,10 @@ export function Card(props) {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ color: font.color, fontWeight: 'bold' }}>
+              <Text style={{ color: props.theme.w, fontWeight: 'bold' }}>
                 DIFF
               </Text>
-              <Text style={{ color: font.color }}>{data.diffW} kg</Text>
+              <Text style={{ color: props.theme.w }}>{data.diffW} kg</Text>
             </View>
           </View>
         </View>
@@ -155,7 +153,7 @@ export function Card(props) {
         <View
           style={{
             height: 40,
-            backgroundColor: color.p200,
+            backgroundColor: props.theme.p.c200,
             borderBottomStartRadius: 20,
             borderBottomEndRadius: 20,
           }}
@@ -167,7 +165,7 @@ export function Card(props) {
               width:
                 (progress / 100) *
                 (Dimensions.get('window').width - 2 * margin),
-              backgroundColor: color.p100,
+              backgroundColor: props.theme.p.c100,
               borderBottomStartRadius: 20,
               borderBottomEndRadius: 20,
               borderTopEndRadius: 20,
@@ -187,7 +185,7 @@ export function Card(props) {
           >
             <Text
               style={{
-                color: font.color,
+                color: props.theme.w,
                 fontSize: 20,
               }}
             >

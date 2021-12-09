@@ -17,11 +17,11 @@ import Animated, {
   scrollTo,
 } from 'react-native-reanimated';
 
-const imageWidth = Dimensions.get('window').width - 100;
+const imageWidth = Dimensions.get('window').width ;
 const spacing = 10;
 const imageDistance = imageWidth + spacing;
 const screenWidth = Dimensions.get('window').width;
-const imageTest = require('../assets/test.png');
+const imageTest = require('../assets/body.png');
 
 export default function Carousel() {
   const translationX = useSharedValue(0);
@@ -49,7 +49,7 @@ export default function Carousel() {
   const card = (
     <View style={style.card}>
       <Image source={imageTest} style={style.image}></Image>
-      <Text style={{ padding: 20, color: 'white', fontSize: 30 }}> Image </Text>
+      {/* <Text style={{ padding: 20, color: 'white', fontSize: 30 }}> Image </Text> */}
     </View>
   );
 
@@ -125,7 +125,7 @@ const style = {
   },
 
   image: {
-    height: 350,
+    height: imageWidth*4/3,
     width: imageWidth,
     margin: 0,
     // backgroundColor: 'yellow',

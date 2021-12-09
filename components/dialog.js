@@ -126,12 +126,12 @@ export function Dialog(props) {
         </View>
         <Text
           style={{
-            color: font.color,
+            color: props.theme.w,
             fontSize: font.size,
             fontFamily: font.family,
             paddingBottom: 20,
             marginRight: 30,
-            // backgroundColor: 'red',
+            
           }}
         >
           {message}
@@ -156,7 +156,7 @@ export function Dialog(props) {
               >
                 <Text
                   style={{
-                    color: font.color,
+                    color: props.theme.w,
                     fontSize: font.size,
                     fontFamily: font.family,
                   }}
@@ -179,7 +179,7 @@ export function Dialog(props) {
               >
                 <Text
                   style={{
-                    color: font.color,
+                    color: props.theme.s.c100,
                     fontSize: font.size,
                     fontFamily: font.family,
                     opacity: 0.5,
