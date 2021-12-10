@@ -17,6 +17,7 @@ export default function imageComparison(props) {
       ctx.startX = x.value;
     },
     onActive: (event, ctx) => {
+      // i could use relative position instead
       console.log(event.absoluteX);
       x.value = ctx.startX + event.translationX;
       runOnJS(setBarXPos)(x.value + props.width / 2); // x value between 0 and imageWidth

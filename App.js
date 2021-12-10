@@ -508,6 +508,7 @@ export default function App() {
           onPress={() => { }}
           dayLeft={10}
           cDate={'12/12/2021'}
+          onSwipe={() => { console.log("changeComponent");/*setComponent(1)*/ }}
         />
         <Card
           theme={APP_THEME}
@@ -522,6 +523,8 @@ export default function App() {
           onPress={() => { }}
           dayLeft={10}
           cDate={'12/12/2021'}
+          onSwipe={() => (console.log("swipeeee end"))}
+
         />
         <Card
           theme={APP_THEME}
@@ -536,6 +539,8 @@ export default function App() {
           onPress={() => { }}
           dayLeft={0}
           cDate={'12/12/2021'}
+          onSwipe={() => (console.log("swipeeee end"))}
+
         />
       </ScrollView>
     </View>
@@ -706,7 +711,7 @@ export default function App() {
 
 
 
-  const [component, setComponent] = useState("1")
+  const [component, setComponent] = useState("9")
 
   return (
     <NativeBaseProvider>
