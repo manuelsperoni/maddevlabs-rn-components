@@ -1,5 +1,6 @@
 import React from 'react';
-import { Dimensions, SafeAreaView, ScrollView, View, Text } from 'react-native';
+import { Dimensions, SafeAreaView, View, Text } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import Home from './components/home';
 import Carousel from './components/carousel';
 import ScrollNumberPicker from './components/scrollNumberPicker';
@@ -194,6 +195,7 @@ export default function App() {
         backgroundColor: APP_THEME.s.c300,
       }}
     >
+
 
       <Home theme={APP_THEME} >
         <Card
@@ -492,7 +494,7 @@ export default function App() {
         backgroundColor: APP_THEME.s.c300,
       }}
     >
-      <ScrollView>
+      <ScrollView style={{ flex: 1 }}>
         <Card
           theme={APP_THEME}
           startImage={BEFORE_IMAGE}
