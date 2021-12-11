@@ -9,9 +9,13 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import { useAnimatedGestureHandler } from 'react-native-reanimated';
+import { runOnJS } from 'react-native-reanimated';
 
 const CLOSE_ICON = require('../assets/close.png');
-export function BottomoModal(props) {
+
+export function Actionsheet(props) {
   const headerHeight = props.headerHeight;
   const radius = props.radius;
   const state = props.state;
@@ -43,55 +47,74 @@ export function BottomoModal(props) {
   });
 
   function open() {
-    translateYBody.value = withDelay(
-      0,
-      withTiming(-(headerHeight + bodyHeight)),
-      {
-        duration: 200,
-      }
-    );
-    translateYHeader.value = withDelay(
-      100,
-      withTiming(-(headerHeight + bodyHeight), {
-        duration: 200,
-      })
-    );
-
+    translateYBody.value = withTiming(-(headerHeight + bodyHeight));
+    translateYHeader.value = withTiming(-(headerHeight + bodyHeight));
     backOpacity.value = withTiming(0.5, {
       duration: 100,
     });
   }
 
   function close() {
-    translateYBody.value = withDelay(30, withTiming(0), {
-      duration: 10,
-    });
-    translateYHeader.value = withDelay(0, withTiming(0), {
-      duration: 20,
-    });
-    backOpacity.value = withTiming(0, {
-      duration: 20,
-    });
+    translateYBody.value = withTiming(0);
+    translateYHeader.value = withTiming(0);
+    backOpacity.value = withTiming(0);
   }
+
+  const eventHandler = useAnimatedGestureHandler({
+    onActive: (event, ctx) => {
+      if (event.translationY != undefined && event.translationY > 0) {
+        translateYBody.value =
+          -(headerHeight + bodyHeight) + event.translationY;
+        translateYHeader.value =
+          -(headerHeight + bodyHeight) + event.translationY;
+      }
+    },
+    onEnd: (event) => {
+      console.log('trasy', event.translationY);
+      if (event.translationY > 100) {
+        runOnJS(props.onClose)('close');
+      } else runOnJS(open)();
+    },
+  });
 
   const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
   const header = (
     <View
       style={{
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
+        flexDirection: 'column',
         height: headerHeight,
-        padding: 10,
+        padding: 0,
       }}
     >
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: 10,
+          marginTop: 10,
+          borderTopLeftRadius: radius,
+          borderTopRightRadius: radius,
+        }}
+      >
+        <View
+          style={{
+            width: 50,
+            height: 5,
+            borderRadius: 20,
+            backgroundColor: props.theme.color.secondary100,
+          }}
+        ></View>
+      </View>
       <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
           flex: 1,
+          marginLeft: 20,
+          marginTop: -10,
         }}
       >
         <View
@@ -103,7 +126,7 @@ export function BottomoModal(props) {
         >
           {props.children[0] /* all the buttons */}
         </View>
-        <TouchableOpacity onPress={() => props.onClose('close')}>
+        {/* <TouchableOpacity onPress={() => props.onClose('close')}>
           <View
             style={{
               padding: 5,
@@ -120,7 +143,7 @@ export function BottomoModal(props) {
               }}
             />
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -138,6 +161,7 @@ export function BottomoModal(props) {
     >
       {/* Back */}
       <Animated.View
+        onPress={() => props.onClose('close')}
         style={[
           {
             position: 'absolute',
@@ -145,7 +169,7 @@ export function BottomoModal(props) {
             right: 0,
             top: 0,
             bottom: 0,
-            backgroundColor: 'black',
+            backgroundColor: 'red',
             zIndex: 10,
           },
           backStyle,
@@ -167,25 +191,27 @@ export function BottomoModal(props) {
         ></AnimatedTouchable> */}
       </Animated.View>
 
-      {/* HEADER */}
-      <Animated.View
-        style={[
-          {
-            position: 'absolute',
-            zIndex: 20,
-            backgroundColor: props.theme.s.c300,
-            height: bodyHeight + headerHeight,
-            bottom: -(headerHeight + bodyHeight),
-            left: 0,
-            right: 0,
-            borderTopLeftRadius: radius,
-            borderTopRightRadius: radius,
-          },
-          headerAnimatedStyle,
-        ]}
-      >
-        {header}
-      </Animated.View>
+      <PanGestureHandler onGestureEvent={eventHandler}>
+        {/* HEADER */}
+        <Animated.View
+          style={[
+            {
+              position: 'absolute',
+              zIndex: 20,
+              backgroundColor: props.theme.s.c300,
+              height: bodyHeight + headerHeight,
+              bottom: -(headerHeight + bodyHeight),
+              left: 0,
+              right: 0,
+              borderTopLeftRadius: radius,
+              borderTopRightRadius: radius,
+            },
+            headerAnimatedStyle,
+          ]}
+        >
+          {header}
+        </Animated.View>
+      </PanGestureHandler>
       {/* BODY */}
       <Animated.View
         onLayout={(event) => {
@@ -213,15 +239,15 @@ export function BottomoModal(props) {
   );
 }
 
-export function BottomModalButtonsList(props) {
+export function ActionsheetButtonsList(props) {
   return props.children;
 }
 
-export function BottomModalBody(props) {
+export function ActionsheetBody(props) {
   return props.children;
 }
 
-export function BottomModalButton(props) {
+export function ActionsheetButton(props) {
   return (
     <TouchableOpacity onPress={() => props.onPress()}>
       <View
@@ -234,8 +260,8 @@ export function BottomModalButton(props) {
         <Image
           source={props.icon}
           style={{
-            width: 20,
-            height: 20,
+            width: 25,
+            height: 25,
           }}
         />
       </View>

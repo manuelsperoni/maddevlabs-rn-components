@@ -1,28 +1,25 @@
 import React from 'react';
 import { Text, View, Image, Dimensions } from 'react-native';
-import imageComparison from './imageComparison';
 import Chart from './chart';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Animated, { interpolate, runOnJS } from 'react-native-reanimated';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import { useAnimatedGestureHandler } from 'react-native-reanimated';
 import { useSharedValue } from 'react-native-reanimated';
-import { withSpring, withTiming } from 'react-native-reanimated';
+import { withTiming } from 'react-native-reanimated';
 import { useAnimatedStyle } from 'react-native-reanimated';
 
-// const CAMERA_ICON = require('../assets/camera.png');
 const DEMO_ICON = require('../assets/camera.png');
 
-const TouchableAnimated = Animated.createAnimatedComponent(TouchableOpacity)
+const TouchableAnimated = Animated.createAnimatedComponent(TouchableOpacity);
 
 export function Card(props) {
   const startImage = props.startImage;
   const endImage = props.endImage;
   const title = props.title;
   const data = props.data;
-  const progress = props.progress; // % progress
+  const progress = props.progress;
   const margin = props.margin;
-  const font = props.font;
   const onPress = props.onPress;
   const dayLeft = props.dayLeft;
   const cDate = props.cDate;
@@ -48,24 +45,88 @@ export function Card(props) {
       borderRadius: 20,
       marginLeft: 10,
       fontSize: 10,
-    }
+    },
+    container: {
+      width: Dimensions.get('window').width - 2 * margin,
+      margin: margin,
+      zIndex: 100,
+    },
+    main: { position: 'absolute', zIndex: 2, top: 0, left: 0 },
+    touchWrap: {
+      width: Dimensions.get('window').width - 2 * margin,
+    },
+    info: {
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
+      marginTop: 20,
+    },
+    infoItem: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    infoItemTitle: { color: props.theme.color.white, fontWeight: 'bold' },
+    infoItemValue: { color: props.theme.color.white },
+    progressBar: {
+      height: 40,
+      backgroundColor: props.theme.p.c200,
+      borderBottomStartRadius: 20,
+      borderBottomEndRadius: 20,
+    },
+    progressBarValue: {
+      height: 40,
+      width: (progress / 100) * (Dimensions.get('window').width - 2 * margin),
+      backgroundColor: props.theme.p.c100,
+      borderBottomStartRadius: 20,
+      borderBottomEndRadius: 20,
+      borderTopEndRadius: 20,
+    },
+    progressBarTextWrap: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: Dimensions.get('window').width - 2 * margin,
+      height: 40,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    progressBarText: {
+      color: props.theme.w,
+      fontSize: 20,
+    },
+    backgroundSwipe: {
+      borderTopEndRadius: 25,
+      borderBottomEndRadius: 25,
+      position: 'absolute',
+      overflow: 'hidden',
+      backgroundColor: props.theme.color.primary100,
+      width: Dimensions.get('window').width - 2 * margin,
+      height: Dimensions.get('window').width - 2 * margin + 40,
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      zIndex: 1,
+    },
+    swipeIcon: { width: 50, height: 50, margin: 25 },
   };
 
   const x = useSharedValue(0);
   const eventHandler = useAnimatedGestureHandler({
-
     onActive: (event, ctx) => {
-      if (event.translationX != undefined && event.translationX < 0 && event.translationX > -100) {
-        console.log("actualvalue", event.translationX)
+      if (
+        event.translationX != undefined &&
+        event.translationX < 0 &&
+        event.translationX > -100
+      ) {
+        console.log('actualvalue', event.translationX);
         x.value = event.translationX;
       }
       if (event.translationX < -100) {
-        runOnJS(props.onSwipe)()
+        runOnJS(props.onSwipe)();
       }
-
     },
     onEnd: () => {
-      x.value = withTiming(0)
+      x.value = withTiming(0);
     },
   });
 
@@ -80,7 +141,7 @@ export function Card(props) {
     return {
       // transform: [{ translateX: x.value }],
       // width: -x.value,
-      opacity: interpolate(x.value, [0, -100], [0, 1])
+      opacity: interpolate(x.value, [0, -100], [0, 1]),
     };
   });
 
@@ -90,36 +151,31 @@ export function Card(props) {
     };
   });
   return (
-
-    <View style={{
-      width: Dimensions.get('window').width - 2 * margin,
-      margin: margin,
-      zIndex: 100,
-    }}>
-
-
+    <View style={style.container}>
       {/* header  */}
       <View style={style.header}>
-        <Text style={style.headerTitle}>
-          {title}
-        </Text>
-        <Text style={style.headerDate}>
-          {cDate}{' '}
-        </Text>
+        <Text style={style.headerTitle}>{title}</Text>
+        <Text style={style.headerDate}>{cDate} </Text>
       </View>
       {/* Main */}
-      <View style={{ width: 400, height: 400 }}>
+      <View style={{ height: 400 }}>
         {/* Main content */}
-        <View style={{ position: 'absolute', zIndex: 2, top: 0, left: 0 }}>
-          <PanGestureHandler onGestureEvent={eventHandler} failOffsetY={[-5, 5]} activeOffsetX={[-5, 5]}>
+        <View style={style.main}>
+          <PanGestureHandler
+            onGestureEvent={eventHandler}
+            failOffsetY={[-5, 5]}
+            activeOffsetX={[-5, 5]}
+          >
             <TouchableAnimated
               onPress={onPress}
-              style={[{
-                width: Dimensions.get('window').width - 2 * margin,
-              }, swipableStyle]
-              }
+              style={[style.touchWrap, swipableStyle]}
             >
-              <View style={{ borderRadius: 20, backgroundColor: props.theme.p.c200 }}>
+              <View
+                style={{
+                  borderRadius: 20,
+                  backgroundColor: props.theme.p.c200,
+                }}
+              >
                 {/* Image content */}
                 <View style={{ flexDirection: 'row' }}>
                   <Image
@@ -150,7 +206,9 @@ export function Card(props) {
                     bottom: 70,
                   }}
                 >
-                  <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                  <View
+                    style={{ flexDirection: 'row', justifyContent: 'center' }}
+                  >
                     <Chart
                       maxValue={200}
                       height={50}
@@ -164,91 +222,28 @@ export function Card(props) {
                       focusData={[]}
                     />
                   </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-evenly',
-                      marginTop: 20,
-                    }}
-                  >
-                    <View
-                      style={{
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Text style={{ color: props.theme.w, fontWeight: 'bold' }}>
-                        START
-                      </Text>
-                      <Text style={{ color: props.theme.w }}>{data.startW} kg</Text>
+                  <View style={style.info}>
+                    <View style={style.infoItem}>
+                      <Text style={style.infoItemTitle}>START</Text>
+                      <Text style={style.infoItemValue}>{data.startW} kg</Text>
                     </View>
-                    <View
-                      style={{
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Text style={{ color: props.theme.w, fontWeight: 'bold' }}>
-                        ACTUAL
-                      </Text>
-                      <Text style={{ color: props.theme.w }}>{data.actualW} kg</Text>
+                    <View style={style.infoItem}>
+                      <Text style={style.infoItemTitle}>ACTUAL</Text>
+                      <Text style={style.infoItemValue}>{data.actualW} kg</Text>
                     </View>
-                    <View
-                      style={{
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Text style={{ color: props.theme.w, fontWeight: 'bold' }}>
-                        DIFF
-                      </Text>
-                      <Text style={{ color: props.theme.w }}>{data.diffW} kg</Text>
+                    <View style={style.infoItem}>
+                      <Text style={style.infoItemTitle}>DIFF</Text>
+                      <Text style={style.infoItemValue}>{data.diffW} kg</Text>
                     </View>
                   </View>
                 </View>
                 {/* Progress bar */}
-                <View
-                  style={{
-                    height: 40,
-                    backgroundColor: props.theme.p.c200,
-                    borderBottomStartRadius: 20,
-                    borderBottomEndRadius: 20,
-                  }}
-                >
+                <View style={style.progressBar}>
                   {/* Actual progress */}
-                  <View
-                    style={{
-                      height: 40,
-                      width:
-                        (progress / 100) *
-                        (Dimensions.get('window').width - 2 * margin),
-                      backgroundColor: props.theme.p.c100,
-                      borderBottomStartRadius: 20,
-                      borderBottomEndRadius: 20,
-                      borderTopEndRadius: 20,
-                    }}
-                  ></View>
+                  <View style={style.progressBarValue}></View>
                   {/* Text indicator wrap */}
-                  <View
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: Dimensions.get('window').width - 2 * margin,
-                      height: 40,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Text
-                      style={{
-                        color: props.theme.w,
-                        fontSize: 20,
-                      }}
-                    >
+                  <View style={style.progressBarTextWrap}>
+                    <Text style={style.progressBarText}>
                       {dayLeft > 0 ? `${dayLeft} days left` : 'Completed'}
                     </Text>
                   </View>
@@ -256,16 +251,15 @@ export function Card(props) {
               </View>
             </TouchableAnimated>
           </PanGestureHandler>
-        </View >
+        </View>
         {/* Delete backgrond */}
-        <Animated.View style={[{ borderTopEndRadius: 25, borderBottomEndRadius: 25, position: 'absolute', overflow: "hidden", backgroundColor: props.theme.color.primary100, width: Dimensions.get('window').width - 2 * margin, height: Dimensions.get('window').width - 2 * margin + 40, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', zIndex: 1 }, deleteStyle]} >
-          <Animated.Image style={[{ width: 50, height: 50, margin: 25 }, cameraIconStyle]} source={DEMO_ICON} />
+        <Animated.View style={[style.backgroundSwipe, deleteStyle]}>
+          <Animated.Image
+            style={[style.swipeIcon, cameraIconStyle]}
+            source={DEMO_ICON}
+          />
         </Animated.View>
       </View>
-    </View >
-
+    </View>
   );
 }
-
-
-
