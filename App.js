@@ -26,6 +26,7 @@ import { CButton, CButtonIcon } from './components/cButton';
 import { PinchableImage } from './components/pinchableImage';
 import { Main } from './components/main';
 import { SettingItem } from './components/settingsItem';
+import { SpinningWheel } from './components/spinningWheel';
 const DEMO_ICON = require('./assets/demoIcon.png');
 const BEFORE_IMAGE = require('./assets/before.png');
 const AFTER_IMAGE = require('./assets/after.png');
@@ -555,6 +556,33 @@ export default function App() {
           theme={APP_THEME}
           disabled={false}
         />
+        <CButton
+          title={'Clickme'}
+          outlined
+          s
+          margin={5}
+          theme={APP_THEME}
+          disabled={true}
+          squared
+        />
+        <CButton
+          title={'Clickme'}
+          outlined
+          m
+          margin={5}
+          theme={APP_THEME}
+          disabled={true}
+          squared
+        />
+        <CButton
+          title={'Clickme'}
+          outlined
+          l
+          margin={5}
+          theme={APP_THEME}
+          disabled={false}
+          squared
+        />
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         <CButton
@@ -580,6 +608,33 @@ export default function App() {
           margin={5}
           theme={APP_THEME}
           disabled={false}
+        />
+        <CButton
+          title={'Clickme'}
+          filled
+          s
+          margin={5}
+          theme={APP_THEME}
+          disabled={false}
+          squared
+        />
+        <CButton
+          title={'Clickme'}
+          filled
+          m
+          margin={5}
+          theme={APP_THEME}
+          disabled={false}
+          squared
+        />
+        <CButton
+          title={'Clickme'}
+          filled
+          l
+          margin={5}
+          theme={APP_THEME}
+          disabled={false}
+          squared
         />
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -632,6 +687,32 @@ export default function App() {
           l
           margin={5}
           theme={APP_THEME}
+        />
+        <CButtonIcon
+          title={'Clickme'}
+          icon={DEMO_ICON}
+          outlined
+          s
+          margin={5}
+          theme={APP_THEME}
+        />
+        <CButtonIcon
+          title={'Clickme'}
+          icon={DEMO_ICON}
+          outlined
+          m
+          margin={5}
+          theme={APP_THEME}
+          squared
+        />
+        <CButtonIcon
+          title={'Clickme'}
+          icon={DEMO_ICON}
+          outlined
+          l
+          margin={5}
+          theme={APP_THEME}
+          squared
         />
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -659,6 +740,34 @@ export default function App() {
           l
           margin={5}
           theme={APP_THEME}
+        />
+        <CButtonIcon
+          title={'Clickme'}
+          icon={DEMO_ICON}
+          filled
+          s
+          margin={5}
+          theme={APP_THEME}
+          disabled={true}
+          squared
+        />
+        <CButtonIcon
+          title={'Clickme'}
+          icon={DEMO_ICON}
+          filled
+          m
+          margin={5}
+          theme={APP_THEME}
+          squared
+        />
+        <CButtonIcon
+          title={'Clickme'}
+          icon={DEMO_ICON}
+          filled
+          l
+          margin={5}
+          theme={APP_THEME}
+          squared
         />
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -723,6 +832,17 @@ export default function App() {
           value={'Value'}
         />
       </Main>
+    </View>
+  );
+
+  const SpinningWheel_page = () => (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: APP_THEME.color.secondary300,
+      }}
+    >
+      <SpinningWheel state={'visible'} />
     </View>
   );
 
@@ -876,6 +996,14 @@ export default function App() {
           theme={APP_THEME}
           onPress={() => setComponent(13)}
         />
+        <CButton
+          title={'SpinWheel'}
+          outlined
+          s
+          margin={5}
+          theme={APP_THEME}
+          onPress={() => setComponent(14)}
+        />
       </View>
       {component == 1 && Chart_page()}
       {component == 2 && Actionsheet_page()}
@@ -890,6 +1018,7 @@ export default function App() {
       {component == 11 && Buttons_page()}
       {component == 12 && Pinchable_page()}
       {component == 13 && Main_page()}
+      {component == 14 && SpinningWheel_page()}
     </NativeBaseProvider>
   );
 }

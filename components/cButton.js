@@ -7,17 +7,17 @@ export function CButton(props) {
 
   if (props.s) {
     styleSize.padding = 6;
-    styleSize.borderRadius = 10;
+    styleSize.borderRadius = props.squared ? 5 : 100;
     styleSize.fontSize = props.theme.font.xs;
   }
   if (props.m) {
     styleSize.padding = 10;
-    styleSize.borderRadius = 15;
+    styleSize.borderRadius = props.squared ? 7.5 : 100;
     styleSize.fontSize = props.theme.font.sm;
   }
   if (props.l) {
     styleSize.padding = 15;
-    styleSize.borderRadius = 30;
+    styleSize.borderRadius = props.squared ? 10 : 100;
     styleSize.fontSize = props.theme.font.md;
   }
 
@@ -54,17 +54,17 @@ export function CButtonIcon(props) {
 
   if (props.s) {
     styleSize.padding = 6;
-    styleSize.borderRadius = 10;
+    styleSize.borderRadius = props.squared ? 5 : 100;
     imageSize = { width: 15, height: 15 };
   }
   if (props.m) {
     styleSize.padding = 10;
-    styleSize.borderRadius = 15;
+    styleSize.borderRadius = props.squared ? 7.5 : 100;
     imageSize = { width: 25, height: 25 };
   }
   if (props.l) {
     styleSize.padding = 15;
-    styleSize.borderRadius = 25;
+    styleSize.borderRadius = props.squared ? 10 : 100;
     imageSize = { width: 40, height: 40 };
   }
 
