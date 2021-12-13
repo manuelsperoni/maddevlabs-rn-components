@@ -27,36 +27,12 @@ import { PinchableImage } from './components/pinchableImage';
 import { Main } from './components/main';
 import { SettingItem } from './components/settingsItem';
 import { SpinningWheel } from './components/spinningWheel';
+import APP_THEME from './theme/theme';
 const DEMO_ICON = require('./assets/demoIcon.png');
 const BEFORE_IMAGE = require('./assets/before.png');
 const AFTER_IMAGE = require('./assets/after.png');
 const BODY = require('./assets/body.png');
 const LANG = require('./assets/iconLang.png');
-
-const APP_THEME = {
-  color: {
-    primary100: '#D8B6E3',
-    primary200: '#6C617B',
-    primary300: 'yellow',
-    secondary100: '#4A5568',
-    secondary200: '#1A202C',
-    secondary300: '#171923',
-    white: 'white',
-    black: 'black',
-    green: 'green',
-    red: 'red',
-  },
-  font: {
-    xxs: 10,
-    xs: 12,
-    sm: 14,
-    md: 16,
-    lg: 18,
-    xl: 20,
-    xxl: 24,
-    family: 'Roboto',
-  },
-};
 
 export default function App() {
   /* Some dummy data for the componments demo*/
@@ -152,15 +128,19 @@ export default function App() {
         >
           <ActionsheetButtonsList headerHeight={60}>
             <ActionsheetButton
-              icon={DEMO_ICON}
+              icon={APP_THEME.icon.default}
               onPress={() => console.log('pressed')}
             />
             <ActionsheetButton
-              icon={DEMO_ICON}
+              icon={APP_THEME.icon.default}
               onPress={() => console.log('pressed')}
             />
             <ActionsheetButton
-              icon={DEMO_ICON}
+              icon={APP_THEME.icon.default}
+              onPress={() => console.log('pressed')}
+            />
+            <ActionsheetButton
+              icon={APP_THEME.icon.default}
               onPress={() => console.log('pressed')}
             />
           </ActionsheetButtonsList>
@@ -496,11 +476,15 @@ export default function App() {
       <Header title={'Header title '} height={80} theme={APP_THEME}>
         <HeaderButtonsList>
           <HeaderButton
-            icon={DEMO_ICON}
+            icon={APP_THEME.icon.default}
             onPress={() => console.log('pressed')}
           />
           <HeaderButton
-            icon={DEMO_ICON}
+            icon={APP_THEME.icon.default}
+            onPress={() => console.log('pressed')}
+          />
+          <HeaderButton
+            icon={APP_THEME.icon.default}
             onPress={() => console.log('pressed')}
           />
         </HeaderButtonsList>
@@ -842,7 +826,7 @@ export default function App() {
         backgroundColor: APP_THEME.color.secondary300,
       }}
     >
-      <SpinningWheel state={'visible'} />
+      <SpinningWheel state={'visible'} theme={APP_THEME} />
     </View>
   );
 

@@ -8,8 +8,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import theme from '../theme/theme';
 
-const CLOSE_ICON = require('../assets/close.png');
 export function Dialog(props) {
   const dialogOpacity = useSharedValue(0);
   const overlayOpacity = useSharedValue(0);
@@ -105,7 +105,7 @@ export function Dialog(props) {
               }}
             >
               <Image
-                source={CLOSE_ICON}
+                source={props.theme.icon.close}
                 style={{
                   width: 20,
                   height: 20,

@@ -13,8 +13,6 @@ import { PanGestureHandler } from 'react-native-gesture-handler';
 import { useAnimatedGestureHandler } from 'react-native-reanimated';
 import { runOnJS } from 'react-native-reanimated';
 
-const CLOSE_ICON = require('../assets/close.png');
-
 export function Actionsheet(props) {
   const translateYBody = useSharedValue(0);
   const translateYHeader = useSharedValue(0);

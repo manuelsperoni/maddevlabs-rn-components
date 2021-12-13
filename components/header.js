@@ -2,8 +2,6 @@ import React from 'react';
 import { Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const BACK_ICON = require('../assets/backArrow.png');
-
 export function Header(props, { navigation }) {
   return (
     <View
@@ -24,7 +22,7 @@ export function Header(props, { navigation }) {
           }}
         >
           <Image
-            source={BACK_ICON}
+            source={props.theme.icon.backArrow}
             style={{
               width: 20,
               height: 20,

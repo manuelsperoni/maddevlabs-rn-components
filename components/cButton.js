@@ -39,6 +39,7 @@ export function CButton(props) {
     flex: 0,
     margin: props.margin,
     opacity: props.disabled ? 0.3 : 1,
+    textAlign: 'center',
   };
 
   return (

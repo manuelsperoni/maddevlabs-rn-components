@@ -8,8 +8,6 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-const SPINNING_WHEEL = require('../assets/theme_loading.gif');
-
 export function SpinningWheel(props) {
   const spinningWheel = useSharedValue(0);
   const overlayOpacity = useSharedValue(0);
@@ -71,7 +69,7 @@ export function SpinningWheel(props) {
         style={[style.overlay, overlayAnimatedStyle]}
       ></Animated.View>
       <Animated.Image
-        source={SPINNING_WHEEL}
+        source={props.theme.icon.spinningWheel}
         style={[spinningWheelAnimatedStyle, style.spinningWheel]}
       />
     </View>
