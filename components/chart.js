@@ -17,7 +17,7 @@ export default function Chart(props) {
   const height = props.height;
   const width = props.width;
   const maxDisplayedData = props.maxDisplayedData;
-  const rawData = props.data; 
+  const rawData = props.data;
   const strokeWidth = props.strokeWidth;
   const focusData = props.focusData;
   const maxValue = props.maxValue;
@@ -59,7 +59,7 @@ export default function Chart(props) {
         >
           <Dash
             style={{ width: width, height: 1 }}
-            dashColor={props.theme.s.c100}
+            dashColor={props.theme.color.secondary100}
             dashThickness={1}
             dashGap={3}
           />
@@ -68,10 +68,10 @@ export default function Chart(props) {
               {
                 position: 'absolute',
                 top: 7,
-                color: props.theme.w,
+                color: props.theme.color.white,
                 paddingVertical: 3,
                 paddingHorizontal: 7,
-                backgroundColor: props.theme.p.c100,
+                backgroundColor: props.theme.color.primary100,
                 borderRadius: 10,
                 fontSize: 12,
                 opacity: 1,
@@ -192,7 +192,11 @@ export default function Chart(props) {
       >
         <Defs>
           <LinearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
-            <Stop offset="0" stopColor={props.theme.p.c200} stopOpacity="1" />
+            <Stop
+              offset="0"
+              stopColor={props.theme.color.primary200}
+              stopOpacity="1"
+            />
             <Stop offset="1" stopOpacity="0" />
           </LinearGradient>
         </Defs>
@@ -204,7 +208,7 @@ export default function Chart(props) {
         />
         <AnimatedPath
           animatedProps={animatedStrokeChart}
-          stroke={props.theme.p.c100}
+          stroke={props.theme.color.primary100}
           vWidth={10}
           strokeWidth={strokeWidth}
         />

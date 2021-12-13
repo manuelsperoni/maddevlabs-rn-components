@@ -13,17 +13,7 @@ const DEMO_ICON = require('../assets/camera.png');
 
 const TouchableAnimated = Animated.createAnimatedComponent(TouchableOpacity);
 
-export function Card(props) {
-  const startImage = props.startImage;
-  const endImage = props.endImage;
-  const title = props.title;
-  const data = props.data;
-  const progress = props.progress;
-  const margin = props.margin;
-  const onPress = props.onPress;
-  const dayLeft = props.dayLeft;
-  const cDate = props.cDate;
-
+export function SwipableCard(props) {
   const style = {
     header: {
       paddingVertical: 10,
@@ -32,28 +22,28 @@ export function Card(props) {
     },
 
     headerTitle: {
-      color: props.theme.w,
-      fontSize: 24,
+      color: props.theme.color.white,
+      fontSize: props.theme.font.xxl,
       margin: 0,
       padding: 0,
     },
     headerDate: {
-      color: props.theme.w,
+      color: props.theme.color.white,
       margin: 0,
       padding: 5,
-      backgroundColor: props.theme.s.c100,
+      backgroundColor: props.theme.color.secondary100,
       borderRadius: 20,
       marginLeft: 10,
       fontSize: 10,
     },
     container: {
-      width: Dimensions.get('window').width - 2 * margin,
-      margin: margin,
+      width: Dimensions.get('window').width - 2 * props.margin,
+      margin: props.margin,
       zIndex: 100,
     },
     main: { position: 'absolute', zIndex: 2, top: 0, left: 0 },
     touchWrap: {
-      width: Dimensions.get('window').width - 2 * margin,
+      width: Dimensions.get('window').width - 2 * props.margin,
     },
     info: {
       flexDirection: 'row',
@@ -65,18 +55,27 @@ export function Card(props) {
       justifyContent: 'center',
       alignItems: 'center',
     },
-    infoItemTitle: { color: props.theme.color.white, fontWeight: 'bold' },
-    infoItemValue: { color: props.theme.color.white },
+    infoItemTitle: {
+      color: props.theme.color.white,
+      fontWeight: 'bold',
+      fontSize: props.theme.font.sm,
+    },
+    infoItemValue: {
+      color: props.theme.color.white,
+      fontSize: props.theme.font.sm,
+    },
     progressBar: {
       height: 40,
-      backgroundColor: props.theme.p.c200,
+      backgroundColor: props.theme.color.primary200,
       borderBottomStartRadius: 20,
       borderBottomEndRadius: 20,
     },
     progressBarValue: {
       height: 40,
-      width: (progress / 100) * (Dimensions.get('window').width - 2 * margin),
-      backgroundColor: props.theme.p.c100,
+      width:
+        (props.progress / 100) *
+        (Dimensions.get('window').width - 2 * props.margin),
+      backgroundColor: props.theme.color.primary100,
       borderBottomStartRadius: 20,
       borderBottomEndRadius: 20,
       borderTopEndRadius: 20,
@@ -85,14 +84,14 @@ export function Card(props) {
       position: 'absolute',
       top: 0,
       left: 0,
-      width: Dimensions.get('window').width - 2 * margin,
+      width: Dimensions.get('window').width - 2 * props.margin,
       height: 40,
       justifyContent: 'center',
       alignItems: 'center',
     },
     progressBarText: {
-      color: props.theme.w,
-      fontSize: 20,
+      color: props.theme.color.white,
+      fontSize: props.theme.font.md,
     },
     backgroundSwipe: {
       borderTopEndRadius: 25,
@@ -100,8 +99,8 @@ export function Card(props) {
       position: 'absolute',
       overflow: 'hidden',
       backgroundColor: props.theme.color.primary100,
-      width: Dimensions.get('window').width - 2 * margin,
-      height: Dimensions.get('window').width - 2 * margin + 40,
+      width: Dimensions.get('window').width - 2 * props.margin,
+      height: Dimensions.get('window').width - 2 * props.margin + 40,
       flexDirection: 'row',
       justifyContent: 'flex-end',
       alignItems: 'center',
@@ -154,8 +153,8 @@ export function Card(props) {
     <View style={style.container}>
       {/* header  */}
       <View style={style.header}>
-        <Text style={style.headerTitle}>{title}</Text>
-        <Text style={style.headerDate}>{cDate} </Text>
+        <Text style={style.headerTitle}>{props.title}</Text>
+        <Text style={style.headerDate}>{props.cDate} </Text>
       </View>
       {/* Main */}
       <View style={{ height: 400 }}>
@@ -167,31 +166,33 @@ export function Card(props) {
             activeOffsetX={[-5, 5]}
           >
             <TouchableAnimated
-              onPress={onPress}
+              onPress={props.onPress}
               style={[style.touchWrap, swipableStyle]}
             >
               <View
                 style={{
                   borderRadius: 20,
-                  backgroundColor: props.theme.p.c200,
+                  backgroundColor: props.theme.color.primary200,
                 }}
               >
                 {/* Image content */}
                 <View style={{ flexDirection: 'row' }}>
                   <Image
-                    source={startImage}
+                    source={props.startImage}
                     style={{
-                      width: (Dimensions.get('window').width - 2 * margin) / 2,
-                      height: Dimensions.get('window').width - 2 * margin,
+                      width:
+                        (Dimensions.get('window').width - 2 * props.margin) / 2,
+                      height: Dimensions.get('window').width - 2 * props.margin,
                       borderTopLeftRadius: 20,
                       opacity: 1,
                     }}
                   />
                   <Image
-                    source={endImage}
+                    source={props.endImage}
                     style={{
-                      width: (Dimensions.get('window').width - 2 * margin) / 2,
-                      height: Dimensions.get('window').width - 2 * margin,
+                      width:
+                        (Dimensions.get('window').width - 2 * props.margin) / 2,
+                      height: Dimensions.get('window').width - 2 * props.margin,
                       //   borderTopRightRadius: 20,
                       borderTopRightRadius: 20,
                       opacity: 1,
@@ -202,7 +203,7 @@ export function Card(props) {
                 <View
                   style={{
                     position: 'absolute',
-                    width: Dimensions.get('window').width - 2 * margin,
+                    width: Dimensions.get('window').width - 2 * props.margin,
                     bottom: 70,
                   }}
                 >
@@ -212,8 +213,10 @@ export function Card(props) {
                     <Chart
                       maxValue={200}
                       height={50}
-                      width={Dimensions.get('window').width - 2 * margin - 50}
-                      data={data.y}
+                      width={
+                        Dimensions.get('window').width - 2 * props.margin - 50
+                      }
+                      data={props.data.y}
                       maxDisplayedData={30}
                       theme={props.theme}
                       strokeWidth={2}
@@ -225,26 +228,34 @@ export function Card(props) {
                   <View style={style.info}>
                     <View style={style.infoItem}>
                       <Text style={style.infoItemTitle}>START</Text>
-                      <Text style={style.infoItemValue}>{data.startW} kg</Text>
+                      <Text style={style.infoItemValue}>
+                        {props.data.startW} kg
+                      </Text>
                     </View>
                     <View style={style.infoItem}>
                       <Text style={style.infoItemTitle}>ACTUAL</Text>
-                      <Text style={style.infoItemValue}>{data.actualW} kg</Text>
+                      <Text style={style.infoItemValue}>
+                        {props.data.actualW} kg
+                      </Text>
                     </View>
                     <View style={style.infoItem}>
                       <Text style={style.infoItemTitle}>DIFF</Text>
-                      <Text style={style.infoItemValue}>{data.diffW} kg</Text>
+                      <Text style={style.infoItemValue}>
+                        {props.data.diffW} kg
+                      </Text>
                     </View>
                   </View>
                 </View>
                 {/* Progress bar */}
                 <View style={style.progressBar}>
-                  {/* Actual progress */}
+                  {/* Actual props.progress */}
                   <View style={style.progressBarValue}></View>
                   {/* Text indicator wrap */}
                   <View style={style.progressBarTextWrap}>
                     <Text style={style.progressBarText}>
-                      {dayLeft > 0 ? `${dayLeft} days left` : 'Completed'}
+                      {props.dayLeft > 0
+                        ? `${props.dayLeft} days left`
+                        : 'Completed'}
                     </Text>
                   </View>
                 </View>

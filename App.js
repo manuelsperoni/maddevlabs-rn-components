@@ -16,18 +16,16 @@ import {
   ActionsheetButtonsList,
   ActionsheetButton,
   ActionsheetBody,
-} from './components/Actionsheet';
-import { theme, useDisclose } from 'native-base';
+} from './components/actionsheet';
 import { NativeBaseProvider } from 'native-base';
 import { Dialog } from './components/dialog';
 import { Alert } from './components/alert';
-import { Card } from './components/card';
+import { SwipableCard } from './components/swipableCard';
 import { Header, HeaderButton, HeaderButtonsList } from './components/header';
 import { CButton, CButtonIcon } from './components/cButton';
 import { PinchableImage } from './components/pinchableImage';
 import { Main } from './components/main';
 import { SettingItem } from './components/settingsItem';
-import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 const DEMO_ICON = require('./assets/demoIcon.png');
 const BEFORE_IMAGE = require('./assets/before.png');
 const AFTER_IMAGE = require('./assets/after.png');
@@ -35,20 +33,6 @@ const BODY = require('./assets/body.png');
 const LANG = require('./assets/iconLang.png');
 
 const APP_THEME = {
-  p: {
-    c100: '#D8B6E3',
-    c200: '#6C617B',
-    c300: 'yellow',
-  },
-  s: {
-    c100: '#4A5568',
-    c200: '#1A202C',
-    c300: '#171923',
-  },
-  w: 'white',
-  b: 'black',
-  g: 'green',
-  r: 'red',
   color: {
     primary100: '#D8B6E3',
     primary200: '#6C617B',
@@ -68,6 +52,7 @@ const APP_THEME = {
     md: 16,
     lg: 18,
     xl: 20,
+    xxl: 24,
     family: 'Roboto',
   },
 };
@@ -91,7 +76,7 @@ export default function App() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
       <ImageComparison
@@ -111,7 +96,7 @@ export default function App() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
       <ScrollNumberPicker
@@ -134,12 +119,12 @@ export default function App() {
       />
     </View>
   );
-  const { isOpen, onOpen, onClose } = useDisclose();
+
   const Actionsheet_page = () => (
     <View
       style={{
         flex: 1,
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
       <CButton
@@ -215,11 +200,11 @@ export default function App() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
       <Home theme={APP_THEME}>
-        <Card
+        <SwipableCard
           theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
@@ -227,13 +212,11 @@ export default function App() {
           title={'Shred summer'}
           data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
           margin={20}
-          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
-          font={{ family: 'Arial', size: 20, color: 'white' }}
           onPress={() => {}}
           dayLeft={10}
           cDate={'12/12/2021'}
         />
-        <Card
+        <SwipableCard
           theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
@@ -241,13 +224,11 @@ export default function App() {
           title={'Shred summer'}
           data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
           margin={20}
-          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
-          font={{ family: 'Arial', size: 20, color: 'white' }}
           onPress={() => {}}
           dayLeft={10}
           cDate={'12/12/2021'}
         />
-        <Card
+        <SwipableCard
           theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
@@ -255,13 +236,11 @@ export default function App() {
           title={'Shred summer'}
           data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
           margin={20}
-          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
-          font={{ family: 'Arial', size: 20, color: 'white' }}
           onPress={() => {}}
           dayLeft={0}
           cDate={'12/12/2021'}
         />
-        <Card
+        <SwipableCard
           theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
@@ -269,13 +248,11 @@ export default function App() {
           title={'Shred summer'}
           data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
           margin={20}
-          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
-          font={{ family: 'Arial', size: 20, color: 'white' }}
           onPress={() => {}}
           dayLeft={10}
           cDate={'12/12/2021'}
         />
-        <Card
+        <SwipableCard
           theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
@@ -283,13 +260,11 @@ export default function App() {
           title={'Shred summer'}
           data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
           margin={20}
-          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
-          font={{ family: 'Arial', size: 20, color: 'white' }}
           onPress={() => {}}
           dayLeft={10}
           cDate={'12/12/2021'}
         />
-        <Card
+        <SwipableCard
           theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
@@ -297,8 +272,6 @@ export default function App() {
           title={'Shred summer'}
           data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
           margin={20}
-          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
-          font={{ family: 'Arial', size: 20, color: 'white' }}
           onPress={() => {}}
           dayLeft={0}
           cDate={'12/12/2021'}
@@ -312,7 +285,7 @@ export default function App() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
       <Carousel theme={APP_THEME} />
@@ -324,7 +297,7 @@ export default function App() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
       <View>
@@ -385,81 +358,13 @@ export default function App() {
           ]}
         />
       </Grid>
-      {/* <Grid position="center" spacing={50} color={'#4A5568'}>
-        <Chart
-          maxValue={200}
-          height={Dimensions.get('window').height / 7}
-          width={Dimensions.get('window').width}
-          data={y}
-          maxDisplayedData={30}
-          fill={'#6C617B'}
-          stroke={'#D8B6E3'}
-          strokeWidth={2}
-          opacityIn
-          scaleIn
-          focusData={[
-            {
-              value: Math.random() * 200,
-              label: 'Start',
-              align: 'left',
-              color: '#4A5568',
-            },
-            {
-              value: Math.random() * 200,
-              label: 'Actual',
-              align: 'left',
-              color: '#D8B6E3',
-            },
-            {
-              value: Math.random() * 200,
-              label: 'End',
-              align: 'right',
-              color: '#4A5568',
-            },
-          ]}
-        />
-      </Grid> */}
-      {/* <Grid position="center" spacing={10} color={'#4A5568'}>
-        <Chart
-          maxValue={200}
-          height={Dimensions.get('window').height / 7}
-          width={Dimensions.get('window').width}
-          data={y}
-          maxDisplayedData={30}
-          fill={'#6C617B'}
-          stroke={'#D8B6E3'}
-          strokeWidth={2}
-          opacityIn
-          scaleIn
-          focusData={[
-            {
-              value: Math.random() * 200,
-              label: 'Start',
-              align: 'left',
-              color: '#4A5568',
-            },
-            {
-              value: Math.random() * 200,
-              label: 'Actual',
-              align: 'left',
-              color: '#D8B6E3',
-            },
-            {
-              value: Math.random() * 200,
-              label: 'End',
-              align: 'right',
-              color: '#4A5568',
-            },
-          ]}
-        />
-      </Grid> */}
     </View>
   );
   const Dialog_page = () => (
     <View
       style={{
         flex: 1,
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
       <CButton
@@ -488,7 +393,6 @@ export default function App() {
           onDeny={() => {}}
           confirmLabel={'Yes'}
           denyLabel={'No'}
-          font={{ family: 'Arial', size: 20, color: 'white' }}
         />
       </View>
     </View>
@@ -498,7 +402,7 @@ export default function App() {
     <View
       style={{
         flex: 1,
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
       <CButton
@@ -523,7 +427,6 @@ export default function App() {
           message="#Generic errror code 101 "
           state={dialogState}
           onClose={setDialogState}
-          font={{ family: 'Arial', size: 20, color: 'white' }}
         />
       </View>
     </View>
@@ -533,11 +436,11 @@ export default function App() {
     <View
       style={{
         flex: 1,
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
       <ScrollView style={{ flex: 1 }}>
-        <Card
+        <SwipableCard
           theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
@@ -545,8 +448,6 @@ export default function App() {
           title={'Shred summer'}
           data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
           margin={20}
-          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
-          font={{ family: 'Arial', size: 20, color: 'white' }}
           onPress={() => {}}
           dayLeft={10}
           cDate={'12/12/2021'}
@@ -554,7 +455,7 @@ export default function App() {
             console.log('changeComponent'); /*setComponent(1)*/
           }}
         />
-        <Card
+        <SwipableCard
           theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
@@ -562,14 +463,12 @@ export default function App() {
           title={'Shred summer'}
           data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
           margin={20}
-          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
-          font={{ family: 'Arial', size: 20, color: 'white' }}
           onPress={() => {}}
           dayLeft={10}
           cDate={'12/12/2021'}
           onSwipe={() => console.log('swipeeee end')}
         />
-        <Card
+        <SwipableCard
           theme={APP_THEME}
           startImage={BEFORE_IMAGE}
           endImage={AFTER_IMAGE}
@@ -577,8 +476,6 @@ export default function App() {
           title={'Shred summer'}
           data={{ y: randomData, startW: 10, actualW: 30, diffW: 3 }}
           margin={20}
-          color={{ p100: '#D8B6E3', p200: '#6C617B', s100: '#4A5568' }}
-          font={{ family: 'Arial', size: 20, color: 'white' }}
           onPress={() => {}}
           dayLeft={0}
           cDate={'12/12/2021'}
@@ -592,15 +489,10 @@ export default function App() {
     <View
       style={{
         flex: 1,
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
-      <Header
-        title={'Header title '}
-        height={80}
-        font={{ color: 'white' }}
-        theme={APP_THEME}
-      >
+      <Header title={'Header title '} height={80} theme={APP_THEME}>
         <HeaderButtonsList>
           <HeaderButton
             icon={DEMO_ICON}
@@ -619,7 +511,7 @@ export default function App() {
     <View
       style={{
         flex: 1,
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
       <PinchableImage
@@ -635,7 +527,7 @@ export default function App() {
     <View
       style={{
         flex: 1,
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -802,7 +694,7 @@ export default function App() {
     <View
       style={{
         flex: 1,
-        backgroundColor: APP_THEME.s.c300,
+        backgroundColor: APP_THEME.color.secondary300,
       }}
     >
       <Main theme={APP_THEME}>

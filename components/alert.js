@@ -1,5 +1,12 @@
 import React from 'react';
-import { Dimensions, View, Button, Text, Image } from 'react-native';
+import {
+  Dimensions,
+  View,
+  Button,
+  Text,
+  Image,
+  ProgressViewIOS,
+} from 'react-native';
 import Animated, {
   useSharedValue,
   withSpring,
@@ -11,15 +18,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const CLOSE_ICON = require('../assets/close.png');
 export function Alert(props) {
-  const message = props.message;
-  const title = props.title;
-  const state = props.state;  
-  const font = props.font;
   const dialogOpacity = useSharedValue(0);
   const overlayOpacity = useSharedValue(0);
-  console.log('ciaone');
 
-  if (state === 'close') {
+  if (props.state === 'close') {
     close();
   } else open();
 
@@ -73,7 +75,7 @@ export function Alert(props) {
             right: 0,
             top: 0,
             bottom: 0,
-            backgroundColor: 'black',
+            backgroundColor: props.theme.color.black,
             zIndex: 10,
           },
           overlayAnimatedStyle,
@@ -84,7 +86,7 @@ export function Alert(props) {
         style={[
           {
             zIndex: 30,
-            backgroundColor: props.theme.r,
+            backgroundColor: props.theme.color.red,
             borderRadius: 20,
             padding: 15,
             zIndex: 100,
@@ -122,26 +124,24 @@ export function Alert(props) {
         <View style={{ paddingBottom: 20 }}>
           <Text
             style={{
-              color: props.theme.w,
-              fontSize: font.size,
-              fontFamily: font.family,
+              color: props.theme.color.white,
+              fontSize: props.theme.font.md,
               paddingBottom: 0,
               fontWeight: 'bold',
               textAlign: 'center',
             }}
           >
-            {title}
+            {props.title}
           </Text>
           <Text
             style={{
-              color: props.theme.w,
-              fontSize: font.size * 0.8,
-              fontFamily: font.family,
+              color: props.theme.color.white,
+              fontSize: props.theme.font.sm,
               textAlign: 'center',
               opacity: 0.7,
             }}
           >
-            {message}
+            {props.message}
           </Text>
         </View>
       </Animated.View>

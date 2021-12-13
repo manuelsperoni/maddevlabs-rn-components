@@ -9,7 +9,6 @@ export function Header(props, { navigation }) {
     <View
       style={{
         height: props.height,
-        // backgroundColor: 'red',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -37,8 +36,8 @@ export function Header(props, { navigation }) {
         style={{
           textAlign: 'center',
           flex: 1,
-          color: props.theme.w,
-          fontSize: 20,
+          color: props.theme.color.white,
+          fontSize: props.theme.font.xl,
         }}
       >
         {props.title}

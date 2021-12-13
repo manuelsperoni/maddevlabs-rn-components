@@ -11,20 +11,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const CLOSE_ICON = require('../assets/close.png');
 export function Dialog(props) {
-  const bg = props.bg;
-  const message = props.message;
-  const state = props.state;
-  const color = props.color;
-  const confirmLabel = props.confirmLabel;
-  const denyLabel = props.denyLabel;
-  const onConfirm = props.onConfirm;
-  const onDeny = props.onDeny;
-  const font = props.font;
   const dialogOpacity = useSharedValue(0);
   const overlayOpacity = useSharedValue(0);
   console.log('ciaone');
 
-  if (state === 'close') {
+  if (props.state === 'close') {
     close();
   } else open();
 
@@ -49,7 +40,6 @@ export function Dialog(props) {
   }
 
   function close() {
-    console.log('opening dialog');
     dialogOpacity.value = withTiming(0, {
       duration: 300,
     });
@@ -89,7 +79,7 @@ export function Dialog(props) {
         style={[
           {
             zIndex: 30,
-            backgroundColor: bg,
+            backgroundColor: props.bg,
             borderRadius: 20,
             padding: 15,
             zIndex: 100,
@@ -126,15 +116,14 @@ export function Dialog(props) {
         </View>
         <Text
           style={{
-            color: props.theme.w,
-            fontSize: font.size,
-            fontFamily: font.family,
+            color: props.theme.color.white,
+            fontSize: props.theme.font.lg,
             paddingBottom: 20,
             marginRight: 30,
             marginLeft: 20,
           }}
         >
-          {message}
+          {props.message}
         </Text>
         <View
           style={{
@@ -143,10 +132,10 @@ export function Dialog(props) {
             alignItems: 'center',
           }}
         >
-          {denyLabel && (
+          {props.denyLabel && (
             <TouchableOpacity
               //   style={{ position: 'absolute', right: 10, top: 10 }}
-              onPress={() => onDeny()}
+              onPress={() => props.onDeny()}
             >
               <View
                 style={{
@@ -156,20 +145,19 @@ export function Dialog(props) {
               >
                 <Text
                   style={{
-                    color: props.theme.w,
-                    fontSize: font.size,
-                    fontFamily: font.family,
+                    color: props.theme.color.white,
+                    fontSize: props.theme.font.lg,
                   }}
                 >
-                  {denyLabel}
+                  {props.denyLabel}
                 </Text>
               </View>
             </TouchableOpacity>
           )}
-          {confirmLabel && (
+          {props.confirmLabel && (
             <TouchableOpacity
               //   style={{ position: 'absolute', right: 10, top: 10 }}
-              onPress={() => onConfirm()}
+              onPress={() => props.onConfirm()}
             >
               <View
                 style={{
@@ -179,13 +167,12 @@ export function Dialog(props) {
               >
                 <Text
                   style={{
-                    color: props.theme.s.c100,
-                    fontSize: font.size,
-                    fontFamily: font.family,
+                    color: props.theme.color.secondary100,
+                    fontSize: props.theme.font.lg,
                     opacity: 0.5,
                   }}
                 >
-                  {confirmLabel}
+                  {props.confirmLabel}
                 </Text>
               </View>
             </TouchableOpacity>

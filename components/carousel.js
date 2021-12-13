@@ -81,10 +81,10 @@ export default function Carousel() {
                 {
                   scale: isInView
                     ? interpolate(
-                      distRemainLeft,
-                      [0, imageDistance * 2.5],
-                      [1, 0.8]
-                    )
+                        distRemainLeft,
+                        [0, imageDistance * 2.5],
+                        [1, 0.8]
+                      )
                     : 1,
                 },
               ],
@@ -93,10 +93,10 @@ export default function Carousel() {
                 {
                   translateY: isInView
                     ? interpolate(
-                      distRemainLeft,
-                      [0, imageDistance * 2.5],
-                      [0, 100]
-                    )
+                        distRemainLeft,
+                        [0, imageDistance * 2.5],
+                        [0, 100]
+                      )
                     : 1,
                 },
               ],
@@ -125,7 +125,7 @@ const style = {
   },
 
   image: {
-    height: imageWidth * 4 / 3,
+    height: (imageWidth * 4) / 3,
     width: imageWidth,
     margin: 0,
     // backgroundColor: 'yellow',

@@ -28,8 +28,6 @@ export default function ScrollNumberPicker(props) {
   const bigSegmentHeight = props.bigSegmentHeight;
   const mainTipHeight = props.mainTipHeight;
   const smallSegmentHeight = props.smallSegmentHeight;
-  const segmentColor = props.segmentColor;
-  const mainTipColor = props.mainTipColor;
   const udm = props.udm;
   const lowerBound = props.lowerBound;
   const upperBound = props.upperBound;
@@ -40,8 +38,6 @@ export default function ScrollNumberPicker(props) {
   const mainTipWidth = props.mainTipWidth;
   const scale = props.scale;
   const startValue = props.startValue;
-  const outlined = props.outlined;
-  const filled = props.filled;
 
   const style = {
     container: {
@@ -51,21 +47,21 @@ export default function ScrollNumberPicker(props) {
     smallSegment: {
       width: segmentThikness,
       height: smallSegmentHeight,
-      backgroundColor: props.theme.s.c100,
+      backgroundColor: props.theme.color.secondary100,
       borderRadius: 3,
       marginRight: spacing,
     },
     bigSegment: {
       width: segmentThikness,
       height: bigSegmentHeight,
-      backgroundColor: props.theme.s.c100,
+      backgroundColor: props.theme.color.secondary100,
       borderRadius: 3,
       marginRight: spacing,
     },
     measureValue: {
       fontSize: 30,
       margin: 30,
-      color: props.theme.w
+      color: props.theme.color.white,
     },
     fixStart: {
       width: Dimensions.get('window').width / 2 - segmentThikness / 2,
@@ -81,10 +77,10 @@ export default function ScrollNumberPicker(props) {
       left: Dimensions.get('window').width / 2 - mainTipWidth / 2,
       width: mainTipWidth,
       height: mainTipHeight,
-      borderColor: props.theme.p.c100,
-      borderWidth: outlined ? 2 : 0,
+      borderColor: props.theme.color.primary100,
+      borderWidth: 2,
       borderRadius: 10,
-      backgroundColor: filled ? mainTipColor : props.theme.p.c200,
+      backgroundColor: props.theme.color.primary200,
       zIndex: 10,
     },
     scrollWrap: {

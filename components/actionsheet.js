@@ -16,15 +16,12 @@ import { runOnJS } from 'react-native-reanimated';
 const CLOSE_ICON = require('../assets/close.png');
 
 export function Actionsheet(props) {
-  const headerHeight = props.headerHeight;
-  const radius = props.radius;
-  const state = props.state;
   const translateYBody = useSharedValue(0);
   const translateYHeader = useSharedValue(0);
   const backOpacity = useSharedValue(0);
   const [bodyHeight, setBodyHeigth] = useState(0);
 
-  if (state === 'close') {
+  if (props.state === 'close') {
     close();
   } else open();
 
@@ -47,8 +44,8 @@ export function Actionsheet(props) {
   });
 
   function open() {
-    translateYBody.value = withTiming(-(headerHeight + bodyHeight));
-    translateYHeader.value = withTiming(-(headerHeight + bodyHeight));
+    translateYBody.value = withTiming(-(props.headerHeight + bodyHeight));
+    translateYHeader.value = withTiming(-(props.headerHeight + bodyHeight));
     backOpacity.value = withTiming(0.5, {
       duration: 100,
     });
@@ -64,9 +61,9 @@ export function Actionsheet(props) {
     onActive: (event, ctx) => {
       if (event.translationY != undefined && event.translationY > 0) {
         translateYBody.value =
-          -(headerHeight + bodyHeight) + event.translationY;
+          -(props.headerHeight + bodyHeight) + event.translationY;
         translateYHeader.value =
-          -(headerHeight + bodyHeight) + event.translationY;
+          -(props.headerHeight + bodyHeight) + event.translationY;
       }
     },
     onEnd: (event) => {
@@ -77,13 +74,11 @@ export function Actionsheet(props) {
     },
   });
 
-  const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
-
   const header = (
     <View
       style={{
         flexDirection: 'column',
-        height: headerHeight,
+        height: props.headerHeight,
         padding: 0,
       }}
     >
@@ -94,8 +89,8 @@ export function Actionsheet(props) {
           alignItems: 'center',
           height: 10,
           marginTop: 10,
-          borderTopLeftRadius: radius,
-          borderTopRightRadius: radius,
+          borderTopLeftRadius: props.radius,
+          borderTopRightRadius: props.radius,
         }}
       >
         <View
@@ -126,24 +121,6 @@ export function Actionsheet(props) {
         >
           {props.children[0] /* all the buttons */}
         </View>
-        {/* <TouchableOpacity onPress={() => props.onClose('close')}>
-          <View
-            style={{
-              padding: 5,
-              // backgroundColor: bodyBgColor,
-              marginLeft: 10,
-              borderRadius: 100,
-            }}
-          >
-            <Image
-              source={CLOSE_ICON}
-              style={{
-                width: 20,
-                height: 20,
-              }}
-            />
-          </View>
-        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -169,27 +146,12 @@ export function Actionsheet(props) {
             right: 0,
             top: 0,
             bottom: 0,
-            backgroundColor: 'red',
+            backgroundColor: props.theme.color.black,
             zIndex: 10,
           },
           backStyle,
         ]}
-      >
-        {/* <AnimatedTouchable
-          onPress={() => close()}
-          style={[
-            {
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-              backgroundColor: 'red',
-              zIndex: 10,
-            },
-          ]}
-        ></AnimatedTouchable> */}
-      </Animated.View>
+      ></Animated.View>
 
       <PanGestureHandler onGestureEvent={eventHandler}>
         {/* HEADER */}
@@ -198,13 +160,13 @@ export function Actionsheet(props) {
             {
               position: 'absolute',
               zIndex: 20,
-              backgroundColor: props.theme.s.c300,
-              height: bodyHeight + headerHeight,
-              bottom: -(headerHeight + bodyHeight),
+              backgroundColor: props.theme.color.secondary300,
+              height: bodyHeight + props.headerHeight,
+              bottom: -(props.headerHeight + bodyHeight),
               left: 0,
               right: 0,
-              borderTopLeftRadius: radius,
-              borderTopRightRadius: radius,
+              borderTopLeftRadius: props.radius,
+              borderTopRightRadius: props.radius,
             },
             headerAnimatedStyle,
           ]}
@@ -222,12 +184,12 @@ export function Actionsheet(props) {
           {
             position: 'absolute',
             zIndex: 30,
-            backgroundColor: props.theme.s.c200,
-            bottom: -(headerHeight + bodyHeight),
+            backgroundColor: props.theme.secondary200,
+            bottom: -(props.headerHeight + bodyHeight),
             left: 0,
             right: 0,
-            borderTopLeftRadius: radius,
-            borderTopRightRadius: radius,
+            borderTopLeftRadius: props.radius,
+            borderTopRightRadius: props.radius,
             padding: 20,
           },
           bodyAnimatedStyle,
