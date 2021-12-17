@@ -1,4 +1,4 @@
-import { View } from 'native-base';
+import { View } from 'react-native';
 import React from 'react';
 
 export function Main(props) {
@@ -9,7 +9,8 @@ export function Main(props) {
         backgroundColor: props.theme.color.secondary200,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
-        paddingTop: 10,
+        paddingTop: 30,
+        paddingHorizontal: 30,
       }}
     >
       {props.children}

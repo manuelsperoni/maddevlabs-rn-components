@@ -17,7 +17,7 @@ import {
   ActionsheetButton,
   ActionsheetBody,
 } from './components/actionsheet';
-import { NativeBaseProvider } from 'native-base';
+import { InputField } from './components/inputField';
 import { Dialog } from './components/dialog';
 import { Alert } from './components/alert';
 import { SwipableCard } from './components/swipableCard';
@@ -28,6 +28,7 @@ import { Main } from './components/main';
 import { SettingItem } from './components/settingsItem';
 import { SpinningWheel } from './components/spinningWheel';
 import APP_THEME from './theme/theme';
+import { CameraView } from './components/cameraView';
 const DEMO_ICON = require('./assets/demoIcon.png');
 const BEFORE_IMAGE = require('./assets/before.png');
 const AFTER_IMAGE = require('./assets/after.png');
@@ -46,6 +47,7 @@ export default function App() {
   const [randomData, setRandomData] = useState(y);
   const [modalState, setModalState] = useState('close');
   const [dialogState, setDialogState] = useState('close');
+  const [demoInputField, setDemoInputField] = useState('fieldValue');
 
   const Comparison_page = () => (
     <View
@@ -830,10 +832,61 @@ export default function App() {
     </View>
   );
 
-  const [component, setComponent] = useState('9');
+  const Camera_page = () => (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: APP_THEME.color.secondary300,
+      }}
+    >
+      <CameraView theme={APP_THEME} />
+    </View>
+  );
+
+  const Input_page = () => (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: APP_THEME.color.secondary300,
+      }}
+    >
+      <Main theme={APP_THEME}>
+        <InputField
+          field={'Fieldname'}
+          value={demoInputField}
+          setField={setDemoInputField}
+          theme={APP_THEME}
+        />
+        <InputField
+          field={'Fieldname'}
+          value={demoInputField}
+          setField={setDemoInputField}
+          theme={APP_THEME}
+        />
+        <InputField
+          field={'Fieldname'}
+          value={demoInputField}
+          setField={setDemoInputField}
+          theme={APP_THEME}
+        />
+
+        <CButton
+          title={'Clickme'}
+          filled
+          l
+          margin={5}
+          theme={APP_THEME}
+          disabled={false}
+          squared
+        />
+      </Main>
+    </View>
+  );
+
+  const [component, setComponent] = useState('16');
 
   return (
-    <NativeBaseProvider>
+    <>
       {/* <NavigationContainer>
         <View style={{ flex: 1, backgroundColor: '#171923' }}>
           <Tab.Navigator
@@ -988,6 +1041,22 @@ export default function App() {
           theme={APP_THEME}
           onPress={() => setComponent(14)}
         />
+        <CButton
+          title={'Camera'}
+          outlined
+          s
+          margin={5}
+          theme={APP_THEME}
+          onPress={() => setComponent(15)}
+        />
+        <CButton
+          title={'Input'}
+          outlined
+          s
+          margin={5}
+          theme={APP_THEME}
+          onPress={() => setComponent(16)}
+        />
       </View>
       {component == 1 && Chart_page()}
       {component == 2 && Actionsheet_page()}
@@ -1003,6 +1072,8 @@ export default function App() {
       {component == 12 && Pinchable_page()}
       {component == 13 && Main_page()}
       {component == 14 && SpinningWheel_page()}
-    </NativeBaseProvider>
+      {component == 15 && Camera_page()}
+      {component == 16 && Input_page()}
+    </>
   );
 }

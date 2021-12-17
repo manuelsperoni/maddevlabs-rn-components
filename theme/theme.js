@@ -28,6 +28,10 @@ export default APP_THEME = {
     spinningWheel: require('./assets/spinningWheel.gif'),
     close: require('./assets/close.png'),
     backArrow: require('./assets/backArrow.png'),
+    camera: require('./assets/camera.png'),
     default: require('./assets/default.png'),
+    cameraInvert: require('./assets/cameraInvert.png'),
+    flashOn: require('./assets/flashOn.png'),
+    flashOff: require('./assets/flashOff.png'),
   },
 };
