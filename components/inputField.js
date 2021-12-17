@@ -11,7 +11,10 @@ export function InputField(props) {
   const style = {
     container: { marginBottom: 20 },
     label: {
-      color: props.theme.color.secondary100,
+      color:
+        props.required && props.value == ''
+          ? props.theme.color.primary100
+          : props.theme.color.secondary100,
       fontSize: props.theme.font.md,
       marginBottom: 10,
     },
@@ -23,7 +26,10 @@ export function InputField(props) {
       paddingVertical: 12,
       paddingHorizontal: 25,
       borderWidth: 1,
-      borderColor: props.theme.color.secondary100,
+      borderColor:
+        props.required && props.value == ''
+          ? props.theme.color.primary100
+          : props.theme.color.secondary100,
       fontSize: props.theme.font.md,
     },
   };

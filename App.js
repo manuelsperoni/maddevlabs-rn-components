@@ -852,10 +852,11 @@ export default function App() {
     >
       <Main theme={APP_THEME}>
         <InputField
-          field={'Fieldname'}
+          field={'Fieldname (required)'}
           value={demoInputField}
           setField={setDemoInputField}
           theme={APP_THEME}
+          required
         />
         <InputField
           field={'Fieldname'}
