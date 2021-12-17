@@ -29,6 +29,7 @@ import { SettingItem } from './components/settingsItem';
 import { SpinningWheel } from './components/spinningWheel';
 import APP_THEME from './theme/theme';
 import { CameraView } from './components/cameraView';
+import { Menu } from './components/menu';
 const DEMO_ICON = require('./assets/demoIcon.png');
 const BEFORE_IMAGE = require('./assets/before.png');
 const AFTER_IMAGE = require('./assets/after.png');
@@ -884,7 +885,48 @@ export default function App() {
     </View>
   );
 
-  const [component, setComponent] = useState('16');
+  const Menu_page = () => (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: APP_THEME.color.secondary300,
+      }}
+    >
+      <Main theme={APP_THEME}>
+        <Menu tab={['First Tab', 'Second Tab', 'Third tab']} theme={APP_THEME}>
+          <CButton
+            title={'1'}
+            filled
+            l
+            margin={5}
+            theme={APP_THEME}
+            disabled={false}
+            squared
+          />
+          <CButton
+            title={'2'}
+            filled
+            l
+            margin={5}
+            theme={APP_THEME}
+            disabled={false}
+            squared
+          />
+          <CButton
+            title={'3'}
+            filled
+            l
+            margin={5}
+            theme={APP_THEME}
+            disabled={false}
+            squared
+          />
+        </Menu>
+      </Main>
+    </View>
+  );
+
+  const [component, setComponent] = useState('17');
 
   return (
     <>
@@ -1058,6 +1100,14 @@ export default function App() {
           theme={APP_THEME}
           onPress={() => setComponent(16)}
         />
+        <CButton
+          title={'Menu'}
+          outlined
+          s
+          margin={5}
+          theme={APP_THEME}
+          onPress={() => setComponent(17)}
+        />
       </View>
       {component == 1 && Chart_page()}
       {component == 2 && Actionsheet_page()}
@@ -1075,6 +1125,7 @@ export default function App() {
       {component == 14 && SpinningWheel_page()}
       {component == 15 && Camera_page()}
       {component == 16 && Input_page()}
+      {component == 17 && Menu_page()}
     </>
   );
 }

@@ -9,7 +9,7 @@ export function Main(props) {
         backgroundColor: props.theme.color.secondary200,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
-        paddingTop: 30,
+        // paddingTop: 20,
         paddingHorizontal: 30,
       }}
     >
