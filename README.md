@@ -5,7 +5,7 @@ This is a simple playground to test some custom components
 ## Included components
 
 - Simple Chart/Grid - chart.js/Grid.js
-  <img src="screenshot/Screenshot_1638475244.png" width="200" />
+  <img src="screenshot/Screenshot_1638475244.png" width="200" /> aaaa
 - Collapsable home - home.js
   <img src="screenshot/Screenshot_1638468588.png" width="200" />
 - Gallery Carousel - carousel.js
