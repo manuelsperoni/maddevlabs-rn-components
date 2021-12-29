@@ -10,7 +10,7 @@ import {
 export function BoilerPlateComponent(props) {
   // Style definition
   const style = {
-    container: {},
+    container: { a: 55 },
   };
 
   return <View style={style.container}></View>;
