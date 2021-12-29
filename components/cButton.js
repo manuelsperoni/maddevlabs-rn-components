@@ -25,7 +25,7 @@ export function CButton(props) {
 
   if (props.filled) {
     styleType.backgroundColor = props.theme.color.primary100;
-    styleType.color = props.theme.w;
+    styleType.color = props.theme.color.white;
   }
   if (props.outlined) {
     styleType.borderWidth = 1;
