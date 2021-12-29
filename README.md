@@ -13,4 +13,4 @@ This is a simple playground to test some custom components
 - Number Scroller picker - scrollNumberPicker.js
 <img src="screenshot/Screenshot_1638468671.png" width="200" />
 
-...more
+...more and more
